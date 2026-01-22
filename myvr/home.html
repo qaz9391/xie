@@ -42,7 +42,7 @@
         @keyframes fadeInList { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* ===== 1. 歡迎封面 ===== */
+        /* ===== 1. 歡迎封面 (背景校門口) ===== */
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 9999; overflow: hidden; 
@@ -62,17 +62,33 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(44,62,80,0.4), rgba(44,62,80,0.8)); z-index: 2;
         }
+        
+        /* 🔥 黑框樣式調整：強制寬度，保持長條形 */
         .welcome-content {
-            position: relative; z-index: 3; text-align: center; color: white; padding: 50px;
+            position: relative; z-index: 3; text-align: center; color: white; 
+            padding: 40px 60px;
             background: rgba(0, 0, 0, 0.6); border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            backdrop-filter: blur(10px); max-width: 900px; animation: contentFloat 6s ease-in-out infinite;
+            backdrop-filter: blur(10px); 
+            
+            /* 這裡設定寬度，讓它變寬 */
+            width: 80%; 
+            max-width: 800px; 
+            min-width: 600px; /* 電腦版最小寬度 */
+            
+            animation: contentFloat 6s ease-in-out infinite;
         }
-        .welcome-content h1 { font-size: 3.5rem; margin-bottom: 25px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); letter-spacing: 3px; font-weight: 700; }
-        .typing-text { font-size: 1.5rem; margin-bottom: 45px; min-height: 1.6em; color: rgba(255,255,255,0.9); font-weight: 400; letter-spacing: 1px; }
+        /* 手機版適應 */
+        @media (max-width: 768px) {
+            .welcome-content { min-width: auto; width: 90%; padding: 30px; }
+            .welcome-content h1 { font-size: 2.5rem; }
+        }
+
+        .welcome-content h1 { font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); letter-spacing: 3px; font-weight: 700; }
+        .typing-text { font-size: 1.2rem; margin-bottom: 30px; min-height: 1.6em; color: rgba(255,255,255,0.9); font-weight: 400; letter-spacing: 1px; }
         .cursor { display: inline-block; width: 3px; height: 1.2em; background-color: var(--primary); margin-left: 8px; animation: blink 1s infinite; vertical-align: middle; }
         .btn-start {
-            padding: 18px 60px; font-size: 1.5rem; background: var(--primary); color: white; 
+            padding: 15px 50px; font-size: 1.3rem; background: var(--primary); color: white; 
             border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; 
             box-shadow: 0 0 20px rgba(0, 184, 148, 0.5);
         }
@@ -120,7 +136,6 @@
         
         .preview-img-container.teacher-mode { width: 200px; height: 200px; border-radius: 50%; border: 6px solid white; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3); margin-top: 20px; }
         .teacher-bg-decoration { position: absolute; top: 30%; left: 50%; width: 400px; height: 400px; background: linear-gradient(120deg, #e0f7fa 0%, #e8f5e9 100%); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity 0.5s; animation: rotateBg 15s linear infinite; }
-        @keyframes rotateBg { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         .teacher-bg-decoration.active { opacity: 1; }
 
         .preview-info { text-align: center; width: 100%; position: relative; z-index: 2; }
@@ -135,7 +150,6 @@
         .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--navy); }
         .logo img { height: 40px; width: auto; }
         
-        /* 語言切換按鈕 */
         .header-actions { display: flex; gap: 15px; align-items: center; }
         .btn-lang { 
             background: var(--navy); color: white; border: none; padding: 8px 15px; border-radius: 20px; 
@@ -152,14 +166,29 @@
         .news-item { margin-right: 50px; display: inline-block; }
         .hero-text { text-align: center; padding: 60px 20px 40px; }
         
-        /* 全景視窗與 Loading */
+        /* 🔥 全景視窗、Loading 與 防誤觸遮罩 */
         .panorama-container { max-width: 1400px; margin: 0 auto 60px; padding: 0 20px; }
         .vr-frame { position: relative; border: 10px solid white; border-radius: 20px; box-shadow: var(--shadow); height: 700px; overflow: hidden; }
         .vr-frame:fullscreen { border: none; border-radius: 0; width: 100vw; height: 100vh; }
+        
         .iframe-loader { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f8f9fa; display: flex; justify-content: center; align-items: center; z-index: 5; transition: opacity 0.5s; }
         .spinner { width: 50px; height: 50px; border: 5px solid #ddd; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        /* 防誤觸遮罩 (Overlay) */
+        .vr-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3); z-index: 8; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer; transition: 0.3s; backdrop-filter: blur(2px);
+        }
+        .vr-overlay:hover { background: rgba(0,0,0,0.5); }
+        .vr-overlay i { font-size: 3rem; color: white; margin-bottom: 15px; animation: pulse 2s infinite; }
+        .vr-overlay span { color: white; font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .vr-overlay.active { opacity: 0; pointer-events: none; }
+
         iframe { width: 100%; height: 100%; border: none; }
+        
         .btn-fullscreen {
             position: absolute; bottom: 20px; right: 20px; 
             width: 45px; height: 45px; background: rgba(0,0,0,0.6); 
@@ -194,9 +223,14 @@
         .stat-number { font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; }
         .stat-label { font-size: 1rem; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
 
-        /* 系所連結 (5個一排) */
-        .dept-section { padding: 30px 5%; max-width: 1200px; margin: 0 auto; }
-        .dept-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        /* 系所連結 (5個一排) - 淺灰背景區塊 */
+        .dept-section { 
+            background: #F8F9FA; 
+            padding: 60px 5%; 
+            margin-bottom: 0; 
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.03); /* 內部陰影增加層次 */
+        }
+        .dept-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; }
         .dept-card { 
             background: white; padding: 20px 10px; border-radius: 12px; text-align: center; 
             text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -220,9 +254,15 @@
         @media (max-width: 992px) { .dept-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (max-width: 600px) { .dept-grid { grid-template-columns: repeat(2, 1fr); } }
 
-        /* 行事曆日曆 (左右兩欄) */
-        .calendar-section { padding: 40px 5%; max-width: 1200px; margin: 0 auto 60px; }
-        .calendar-layout { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+        /* 🔥 行事曆日曆 (白色背景區塊 - 區分開來) */
+        .calendar-section { 
+            background: white; 
+            padding: 80px 5%; 
+            margin: 0; 
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.03); /* 上方陰影區隔 */
+            position: relative; z-index: 1;
+        }
+        .calendar-layout { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
         .calendar-widget {
             flex: 1.5; min-width: 320px;
             background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -263,8 +303,8 @@
         .event-details-panel.active i { color: var(--primary); transform: scale(1.1); }
         .event-date-display { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
 
-        /* 交通地圖 (文字還原版 & 視覺差裱框) */
-        .map-section { background: white; padding: 80px 5%; margin-top: 60px; position: relative; overflow: hidden; }
+        /* 交通地圖 */
+        .map-section { background: #F8F9FA; padding: 80px 5%; margin-top: 0; position: relative; overflow: hidden; }
         .map-card-container {
             max-width: 1200px; margin: 0 auto; 
             display: flex; gap: 40px; flex-wrap: wrap; align-items: center;
@@ -274,7 +314,6 @@
         .map-desc { font-size: 1.1rem; color: #555; margin-bottom: 20px; line-height: 1.6; }
         .info-list p { margin-bottom: 15px; font-size: 1.05rem; color: #444; display: flex; align-items: center; }
         .info-list i { color: var(--primary); width: 30px; text-align: center; font-size: 1.3rem; margin-right: 10px; }
-        
         .google-map { 
             flex: 1.5; min-width: 400px; height: 400px; 
             border-radius: 20px; overflow: hidden; border: 8px solid white; 
@@ -282,11 +321,12 @@
             transform: rotate(-2deg); transition: 0.5s;
         }
         .google-map:hover { transform: rotate(0deg) scale(1.02); } 
+        /* 🔥 修正地圖定位：使用 Embed API 參數 q=明新科技大學 */
         .google-map iframe { width: 100%; height: 100%; border: 0; }
 
         /* 意見回饋 */
-        .feedback-section { background: #F8F9FA; padding: 60px 5%; margin-bottom: 0; }
-        .feedback-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .feedback-section { background: white; padding: 60px 5%; margin-bottom: 0; }
+        .feedback-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; }
         .feedback-container h2 { text-align: center; color: var(--navy); margin-bottom: 30px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--navy); }
@@ -295,12 +335,12 @@
         .btn-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-submit:hover { background: var(--primary-dark); }
 
-        /* 校園聯絡資訊 (移至下方) */
-        .contact-section { background: #fff; padding: 60px 5%; text-align: center; border-top: 1px solid #eee; }
+        /* 校園聯絡資訊 */
+        .contact-section { background: #F8F9FA; padding: 60px 5%; text-align: center; border-top: 1px solid #eee; }
         .contact-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
         .contact-btn { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--navy); transition: 0.3s; width: 100px; }
         .contact-btn:hover { transform: translateY(-5px); color: var(--primary); }
-        .contact-icon { width: 70px; height: 70px; border-radius: 50%; background: #f8f9fa; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 10px; transition: 0.3s; color: #555; box-shadow: 0 5px 10px rgba(0,0,0,0.05); }
+        .contact-icon { width: 70px; height: 70px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 10px; transition: 0.3s; color: #555; box-shadow: 0 5px 10px rgba(0,0,0,0.05); }
         .contact-btn:hover .contact-icon { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(0, 184, 148, 0.4); }
         .contact-btn.yt:hover .contact-icon { background: var(--yt); }
         .contact-btn.fb:hover .contact-icon { background: var(--fb); }
@@ -318,7 +358,7 @@
         <div class="welcome-bg-image"></div>
         <div class="welcome-overlay"></div>
         <div class="welcome-content" id="welcomeContent">
-            <h1 data-i18n="welcome-title">新生校園3D視覺導覽</h1>
+            <h1 data-i18n="welcome-title">視覺導覽</h1>
             <div class="typing-text">
                 <span id="typewriter"></span><span class="cursor"></span>
             </div>
@@ -379,6 +419,11 @@
                     <span class="news-item" data-i18n="news-1">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
                     <span class="news-item" data-i18n="news-2">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
                     <span class="news-item" data-i18n="news-3">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
+                    <span class="news-item" data-i18n="news-4">📢 【教務處】114學年度第2學期選課須知公告，請同學留意選課時間</span>
+                    <span class="news-item" data-i18n="news-5">📢 【學務處】114學年度社團博覽會即將於9/24展開，歡迎踴躍參加</span>
+                    <span class="news-item" data-i18n="news-6">📢 【總務處】校園部分區域進行施工維護，請師生繞道通行</span>
+                    <span class="news-item" data-i18n="news-7">📢 【國際處】海外交換學生計畫說明會將於近期舉辦，詳情請見官網</span>
+                    <span class="news-item" data-i18n="news-8">📢 【體育室】校慶運動會報名開跑，歡迎各系組隊參加</span>
                 </marquee>
             </div>
         </div>
@@ -423,7 +468,7 @@
             <div class="spot-card">
                 <div class="spot-image-box">
                     <span class="spot-tag" data-i18n="tag-life">生活起居</span>
-                    <img src="https://via.placeholder.com/400x250/3498DB/FFFFFF?text=Dorm" alt="宿舍實景">
+                    <img src="images/明新學宛.jpg" alt="宿舍實景">
                 </div>
                 <div class="spot-info">
                     <h3 data-i18n="spot-dorm">新生宿舍</h3>
@@ -434,7 +479,7 @@
             <div class="spot-card">
                 <div class="spot-image-box">
                     <span class="spot-tag" data-i18n="tag-food">飲食便利</span>
-                    <img src="https://via.placeholder.com/400x250/E67E22/FFFFFF?text=Cafeteria" alt="學生餐廳實景">
+                    <img src="images/學生餐廳.jpg" alt="學生餐廳實景">
                 </div>
                 <div class="spot-info">
                     <h3 data-i18n="spot-cafeteria">學生餐廳</h3>
@@ -453,6 +498,10 @@
             <div class="vr-frame" id="panoramaFrame">
                 <div class="iframe-loader" id="vrLoader">
                     <div class="spinner"></div>
+                </div>
+                <div class="vr-overlay" id="vrOverlay" onclick="enableVR()">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span data-i18n="click-to-interact">點擊開始互動</span>
                 </div>
                 <iframe src="output/index.html" allowfullscreen onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
                 <button class="btn-fullscreen" onclick="toggleFullscreen()">
@@ -535,7 +584,7 @@
                 </div>
                 <div class="google-map">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.6441584955744!2d120.99516631537754!3d24.858823953472093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346836c2a4773809%3A0x6239129df42b03b!2z5piO5paw56eR5oqA5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1705934000000!5m2!1szh-TW!2stw" 
+                        src="https://maps.google.com/maps?q=明新科技大學&t=&z=16&ie=UTF8&iwloc=&output=embed" 
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
@@ -607,13 +656,18 @@
         // 語言資料庫
         const i18n = {
             "zh": {
-                "welcome-title": "新生校園3D視覺導覽",
+                "welcome-title": "視覺導覽",
                 "btn-start": "開始探索",
                 "logo-text": "明新科技大學",
                 "news-title": "最新公告",
                 "news-1": "📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀",
                 "news-2": "📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全",
                 "news-3": "📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！",
+                "news-4": "📢 【教務處】114學年度第2學期選課須知公告，請同學留意選課時間",
+                "news-5": "📢 【學務處】114學年度社團博覽會即將於9/24展開，歡迎踴躍參加",
+                "news-6": "📢 【總務處】校園部分區域進行施工維護，請師生繞道通行",
+                "news-7": "📢 【國際處】海外交換學生計畫說明會將於近期舉辦，詳情請見官網",
+                "news-8": "📢 【體育室】校慶運動會報名開跑，歡迎各系組隊參加",
                 "stat-founded": "創校年份",
                 "stat-students": "在校學生",
                 "stat-faculty": "專業師資",
@@ -632,6 +686,7 @@
                 "view-menu": "查看菜單 →",
                 "vr-title": "新生校園3D視覺導覽",
                 "vr-desc": "請在下方視窗操作您的虛擬旅程",
+                "click-to-interact": "點擊開始互動",
                 "dept-title": "系所快速連結",
                 "dept-semi": "半導體學院",
                 "dept-eng": "工程學院",
@@ -671,13 +726,18 @@
                 "preview-desc": "點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。"
             },
             "en": {
-                "welcome-title": "MUST 3D Campus Tour",
+                "welcome-title": "Visual Tour",
                 "btn-start": "Start Tour",
                 "logo-text": "Minghsin Univ. of Sci. & Tech.",
                 "news-title": "News",
                 "news-1": "📢 [Academic Affairs] 114 Academic Year Freshman Handbook is available for download.",
                 "news-2": "📢 [Student Affairs] Winter break is here, please stay safe during your travels.",
                 "news-3": "📢 [Library] 'Library Treasure Hunt' will be held in the first week of school!",
+                "news-4": "📢 [Academic Affairs] Course Selection Guide for 114-2 semester released.",
+                "news-5": "📢 [Student Affairs] Club Expo starts on 9/24, welcome to join!",
+                "news-6": "📢 [General Affairs] Maintenance in progress in some campus areas.",
+                "news-7": "📢 [International Affairs] Overseas Exchange Program info session coming soon.",
+                "news-8": "📢 [PE Office] Registration for School Anniversary Sports Day is open.",
                 "stat-founded": "Founded",
                 "stat-students": "Students",
                 "stat-faculty": "Faculty",
@@ -696,6 +756,7 @@
                 "view-menu": "View Menu →",
                 "vr-title": "3D Virtual Campus Tour",
                 "vr-desc": "Please navigate your virtual journey in the window below",
+                "click-to-interact": "Click to Interact",
                 "dept-title": "Quick Links",
                 "dept-semi": "College of Semiconductor",
                 "dept-eng": "College of Engineering",
@@ -777,6 +838,10 @@
                 }
             }
             type();
+        }
+
+        function enableVR() {
+            document.getElementById('vrOverlay').classList.add('active');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -968,7 +1033,7 @@
         }
 
         // ============================================
-        // 🔥 完整資料庫 (保持不變)
+        // 🔥 教師資料庫 (格式統一)
         // ============================================
         const campusLocations = [
             { id: 1, name: "管理學院", type: "building", typeName: "大樓", desc: "本院以期落實「培育跨域協作、務實創新、全人學習之管理專業人才」為教育目標。", img: "images/管理學院.jpg" },
