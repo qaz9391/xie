@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明新科大管理學院 3D導覽 | MUST Campus Tour</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== 變數設定 ===== */
+        :root {
+            --primary: #00B894;       /* 活力青 */
+            --primary-dark: #008f72;
+            --navy: #2C3E50;          /* 專業深藍 */
+            --red: #E74C3C;           /* 公告紅 */
+            --bg: #F0F2F5;            /* 淺灰底色 */
+            --white: #FFFFFF;
+            --gray-light: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            /* 社群顏色 */
+            --fb: #1877F2;
+            --yt: #FF0000;
+            --ig: #E1306C;
+        }
+
+        /* ===== 基礎設定 ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg);
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        /* ===== 動畫定義 ===== */
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        @keyframes kenBurns { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        @keyframes contentFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        @keyframes fadeInList { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* ===== 1. 歡迎封面 (背景校門口) ===== */
+        #welcome-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 9999; overflow: hidden; 
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            background: #1a1a1a;
+        }
+        .welcome-bg-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('images/校門口.jpg'); 
+            background-size: cover; background-position: center;
+            will-change: transform; 
+            animation: kenBurns 30s infinite alternate linear; 
+            filter: brightness(0.6) blur(2px); z-index: 1;
+        }
+        .welcome-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(44,62,80,0.4), rgba(44,62,80,0.8)); z-index: 2;
+        }
+        .welcome-content {
+            position: relative; z-index: 3; text-align: center; color: white; padding: 50px;
+            background: rgba(0, 0, 0, 0.6); border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px); max-width: 900px; animation: contentFloat 6s ease-in-out infinite;
+        }
+        .welcome-content h1 { font-size: 3.5rem; margin-bottom: 25px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); letter-spacing: 3px; font-weight: 700; }
+        .typing-text { font-size: 1.5rem; margin-bottom: 45px; min-height: 1.6em; color: rgba(255,255,255,0.9); font-weight: 400; letter-spacing: 1px; }
+        .cursor { display: inline-block; width: 3px; height: 1.2em; background-color: var(--primary); margin-left: 8px; animation: blink 1s infinite; vertical-align: middle; }
+        .btn-start {
+            padding: 18px 60px; font-size: 1.5rem; background: var(--primary); color: white; 
+            border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: all 0.3s; 
+            box-shadow: 0 0 20px rgba(0, 184, 148, 0.5);
+        }
+        .btn-start:hover { transform: translateY(-3px); background: var(--primary-dark); box-shadow: 0 10px 30px rgba(0, 184, 148, 0.7); }
+
+        /* ===== 2. 搜尋視窗 ===== */
+        .search-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 2000;
+            display: none; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .search-box {
+            background: white; width: 900px; height: 600px; border-radius: 20px;
+            display: flex; overflow: hidden; transform: scale(0.9); transition: transform 0.3s;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .search-sidebar { width: 40%; background: var(--gray-light); padding: 25px; border-right: 1px solid #eee; display: flex; flex-direction: column; }
+        .search-input-group { position: relative; margin-bottom: 15px; }
+        .search-input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #999; }
+        .search-input { width: 100%; padding: 12px 15px 12px 40px; border: 2px solid #ddd; border-radius: 10px; outline: none; font-size: 1rem; transition: 0.3s; }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1); }
+        
+        .filter-tabs { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; }
+        .filter-btn { padding: 6px 12px; border: 1px solid #ddd; background: white; border-radius: 20px; cursor: pointer; font-size: 0.85rem; color: #666; transition: all 0.2s; }
+        .filter-btn:hover { background: #eee; }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 2px 5px rgba(0, 184, 148, 0.3); }
+
+        .search-results { flex: 1; overflow-y: auto; padding-right: 5px; }
+        .search-results::-webkit-scrollbar { width: 6px; }
+        .search-results::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
+
+        .result-item { padding: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px; border-radius: 12px; margin-bottom: 8px; transition: all 0.2s; border-left: 4px solid transparent; background: white; animation: fadeInList 0.3s ease forwards; }
+        .result-item:hover { background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transform: translateX(5px); }
+        .result-item.active { background: #e6fffa; border-left-color: var(--primary); box-shadow: 0 2px 8px rgba(0, 184, 148, 0.15); }
+        .result-item i { width: 35px; height: 35px; background: #f0f2f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #666; transition: 0.2s; }
+        .result-item.active i { background: var(--primary); color: white; }
+        .result-info { display: flex; flex-direction: column; }
+        .result-name { font-weight: bold; color: var(--navy); font-size: 1rem; }
+        .result-type { font-size: 0.8rem; color: #999; margin-top: 2px; }
+
+        .search-preview { width: 60%; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .preview-img-container { width: 100%; height: 350px; border-radius: 16px; overflow: hidden; margin-bottom: 25px; background: #eee; box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative; z-index: 2; transition: all 0.5s ease; }
+        .preview-img-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        
+        .preview-img-container.teacher-mode { width: 200px; height: 200px; border-radius: 50%; border: 6px solid white; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3); margin-top: 20px; }
+        .teacher-bg-decoration { position: absolute; top: 30%; left: 50%; width: 400px; height: 400px; background: linear-gradient(120deg, #e0f7fa 0%, #e8f5e9 100%); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity 0.5s; animation: rotateBg 15s linear infinite; }
+        .teacher-bg-decoration.active { opacity: 1; }
+
+        .preview-info { text-align: center; width: 100%; position: relative; z-index: 2; }
+        .preview-info h2 { font-size: 1.8rem; margin-bottom: 10px; color: var(--navy); }
+        .preview-info p { color: #666; line-height: 1.6; max-width: 80%; margin: 0 auto; white-space: pre-wrap; font-size: 1.1rem; }
+        .close-search { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; z-index: 100; transition: 0.3s; }
+        .close-search:hover { color: #333; transform: scale(1.1) rotate(90deg); }
+
+        /* ===== 3. 主要介面 ===== */
+        .main-content { opacity: 0; transition: opacity 1s; }
+        header { background: rgba(255, 255, 255, 0.95); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.05); backdrop-filter: blur(10px); }
+        .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--navy); }
+        .logo img { height: 40px; width: auto; }
+        .btn-search-trigger { background: var(--bg); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.3s; }
+        .btn-search-trigger:hover { background: var(--primary); color: white; transform: rotate(15deg); }
+        
+        .news-ticker-container { background: var(--navy); color: white; display: flex; align-items: center; font-size: 0.9rem; position: relative; z-index: 90; }
+        .news-title { background: var(--red); padding: 8px 15px; font-weight: bold; flex-shrink: 0; }
+        .news-content { flex-grow: 1; padding: 8px 10px; overflow: hidden; white-space: nowrap; }
+        .news-item { margin-right: 50px; display: inline-block; }
+        .hero-text { text-align: center; padding: 60px 20px 40px; }
+        
+        /* 全景視窗與 Loading */
+        .panorama-container { max-width: 1400px; margin: 0 auto 60px; padding: 0 20px; }
+        .vr-frame { position: relative; border: 10px solid white; border-radius: 20px; box-shadow: var(--shadow); height: 700px; overflow: hidden; }
+        .vr-frame:fullscreen { border: none; border-radius: 0; width: 100vw; height: 100vh; }
+        .iframe-loader { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #f8f9fa; display: flex; justify-content: center; align-items: center; z-index: 5; transition: opacity 0.5s; }
+        .spinner { width: 50px; height: 50px; border: 5px solid #ddd; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        iframe { width: 100%; height: 100%; border: none; }
+        .btn-fullscreen {
+            position: absolute; bottom: 20px; right: 20px; 
+            width: 45px; height: 45px; background: rgba(0,0,0,0.6); 
+            border-radius: 50%; border: 2px solid white; color: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10; transition: 0.3s;
+        }
+        .btn-fullscreen:hover { background: var(--primary); transform: scale(1.1); }
+
+        /* 景點卡片 */
+        .spots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 60px; padding: 0 20px; }
+        .spot-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.4s ease; cursor: pointer; }
+        .spot-card:hover { transform: translateY(-10px); box-shadow: 0 20px 30px rgba(0,0,0,0.1); }
+        .spot-image-box { height: 200px; position: relative; overflow: hidden; }
+        .spot-image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .spot-card:hover .spot-image-box img { transform: scale(1.1); }
+        .spot-tag { position: absolute; top: 15px; right: 15px; background: rgba(0, 184, 148, 0.9); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .spot-info { padding: 25px; }
+        .spot-info h3 { color: var(--navy); margin-bottom: 10px; font-size: 1.3rem; }
+        .spot-info p { color: #888; font-size: 0.9rem; line-height: 1.6; }
+        .btn-link { display: inline-block; margin-top: 15px; color: var(--primary); font-weight: bold; text-decoration: none; }
+
+        /* 通用標題 */
+        .section-header { text-align: center; margin-bottom: 50px; position: relative; }
+        .section-header h2 { font-size: 2.2rem; color: var(--navy); font-weight: 700; margin-bottom: 15px; }
+        .section-header::after { content: ''; display: block; width: 60px; height: 4px; background: var(--primary); margin: 0 auto; border-radius: 2px; }
+
+        /* 學校數據區塊 */
+        .stats-section { background: var(--navy); color: white; padding: 60px 5%; margin-bottom: 60px; }
+        .stats-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center; }
+        .stat-item i { font-size: 3rem; color: var(--primary); margin-bottom: 15px; opacity: 0.8; }
+        .stat-number { font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; }
+        .stat-label { font-size: 1rem; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
+
+        /* 系所連結 (5個一排) */
+        .dept-section { padding: 30px 5%; max-width: 1200px; margin: 0 auto; }
+        .dept-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        .dept-card { 
+            background: white; padding: 20px 10px; border-radius: 12px; text-align: center; 
+            text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s;
+            border-bottom: 3px solid transparent; position: relative; overflow: hidden;
+        }
+        .dept-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--primary), #0984e3);
+            transform: scaleX(0); transition: 0.4s; transform-origin: left;
+        }
+        .dept-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .dept-card:hover::before { transform: scaleX(1); }
+        .dept-icon { 
+            width: 50px; height: 50px; background: #e6fffa; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; color: var(--primary); margin-bottom: 10px; transition: 0.4s;
+        }
+        .dept-card:hover .dept-icon { background: var(--primary); color: white; transform: rotateY(180deg); }
+        .dept-name { font-size: 0.95rem; color: var(--navy); font-weight: bold; letter-spacing: 1px; }
+        @media (max-width: 992px) { .dept-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .dept-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        /* 行事曆日曆 (左右兩欄) */
+        .calendar-section { padding: 40px 5%; max-width: 1200px; margin: 0 auto 60px; }
+        .calendar-layout { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+        .calendar-widget {
+            flex: 1.5; min-width: 320px;
+            background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+        .calendar-header {
+            background: var(--navy); color: white; padding: 15px 25px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .calendar-header h3 { font-size: 1.3rem; margin: 0; }
+        .calendar-nav button {
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            width: 30px; height: 30px; border-radius: 50%; cursor: pointer; transition: 0.3s;
+        }
+        .calendar-nav button:hover { background: var(--primary); }
+        .calendar-grid { padding: 15px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
+        .calendar-day-name { font-weight: bold; color: #888; padding-bottom: 5px; font-size: 0.85rem; }
+        .calendar-day {
+            height: 60px; border-radius: 8px; border: 1px solid #f8f8f8;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-size: 0.9rem; color: #333; position: relative; transition: 0.2s; cursor: default;
+        }
+        .calendar-day:hover { background: #f9f9f9; border-color: var(--primary); }
+        .calendar-day.empty { background: transparent; border: none; cursor: default; }
+        
+        /* 🔥 今天 (Today) 的樣式 */
+        .calendar-day.today { 
+            background: var(--primary); color: white; 
+            border-color: var(--primary); font-weight: bold; 
+            box-shadow: 0 4px 10px rgba(0, 184, 148, 0.4);
+        }
+        
+        .calendar-day.has-event { cursor: pointer; background: #fff5f5; border-color: #ffcccc; }
+        .calendar-day.has-event:hover { background: #ffebeb; transform: scale(1.05); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .event-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; margin-top: 4px; }
+
+        .event-details-panel {
+            flex: 1; min-width: 280px; min-height: 380px;
+            background: white; border-radius: 20px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eee;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .event-details-panel i { font-size: 3rem; color: #ddd; margin-bottom: 15px; transition: 0.3s; }
+        .event-details-panel h4 { font-size: 1.5rem; color: var(--navy); margin-bottom: 10px; }
+        .event-details-panel p { color: #666; line-height: 1.6; }
+        .event-details-panel.active i { color: var(--primary); transform: scale(1.1); }
+        .event-date-display { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
+
+        /* 交通地圖 (文字還原版 & 視覺差裱框) */
+        .map-section { background: white; padding: 80px 5%; margin-top: 60px; position: relative; overflow: hidden; }
+        .map-card-container {
+            max-width: 1200px; margin: 0 auto; 
+            display: flex; gap: 40px; flex-wrap: wrap; align-items: center;
+        }
+        .map-info { flex: 1; min-width: 300px; background: transparent; padding: 0; }
+        .map-info h2 { font-size: 2.2rem; margin-bottom: 25px; color: var(--navy); font-weight: bold; border-left: 5px solid var(--primary); padding-left: 15px; }
+        .map-desc { font-size: 1.1rem; color: #555; margin-bottom: 20px; line-height: 1.6; }
+        .info-list p { margin-bottom: 15px; font-size: 1.05rem; color: #444; display: flex; align-items: center; }
+        .info-list i { color: var(--primary); width: 30px; text-align: center; font-size: 1.3rem; margin-right: 10px; }
+        
+        .google-map { 
+            flex: 1.5; min-width: 400px; height: 400px; 
+            border-radius: 20px; overflow: hidden; border: 8px solid white; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); 
+            transform: rotate(-2deg); transition: 0.5s;
+        }
+        .google-map:hover { transform: rotate(0deg) scale(1.02); } 
+        .google-map iframe { width: 100%; height: 100%; border: 0; }
+
+        /* 意見回饋 */
+        .feedback-section { background: #F8F9FA; padding: 60px 5%; margin-bottom: 0; }
+        .feedback-container { max-width: 800px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .feedback-container h2 { text-align: center; color: var(--navy); margin-bottom: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--navy); }
+        .form-control { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; font-size: 1rem; transition: 0.3s; }
+        .form-control:focus { border-color: var(--primary); outline: none; }
+        .btn-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { background: var(--primary-dark); }
+
+        /* 校園聯絡資訊 (移至下方) */
+        .contact-section { background: #fff; padding: 60px 5%; text-align: center; border-top: 1px solid #eee; }
+        .contact-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+        .contact-btn { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--navy); transition: 0.3s; width: 100px; }
+        .contact-btn:hover { transform: translateY(-5px); color: var(--primary); }
+        .contact-icon { width: 70px; height: 70px; border-radius: 50%; background: #f8f9fa; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 10px; transition: 0.3s; color: #555; box-shadow: 0 5px 10px rgba(0,0,0,0.05); }
+        .contact-btn:hover .contact-icon { background: var(--primary); color: white; box-shadow: 0 10px 20px rgba(0, 184, 148, 0.4); }
+        .contact-btn.yt:hover .contact-icon { background: var(--yt); }
+        .contact-btn.fb:hover .contact-icon { background: var(--fb); }
+        .contact-btn.ig:hover .contact-icon { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .contact-btn.web:hover .contact-icon { background: var(--navy); }
+
+        footer { background: var(--navy); color: white; padding: 40px 0; text-align: center; margin-top: 0; }
+        .team-title { color: var(--primary); font-size: 1.4rem; margin-bottom: 10px; letter-spacing: 2px; font-weight: bold; }
+        .footer-copyright { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 20px; padding-top: 20px; font-size: 0.9rem; color: #ccc; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-screen">
+        <div class="welcome-bg-image"></div>
+        <div class="welcome-overlay"></div>
+        <div class="welcome-content" id="welcomeContent">
+            <h1>新生校園3D視覺導覽</h1>
+            <div class="typing-text">
+                <span id="typewriter"></span><span class="cursor"></span>
+            </div>
+            <button class="btn-start" onclick="enterSite()">
+                <i class="fas fa-play-circle"></i> 開始探索
+            </button>
+        </div>
+    </div>
+
+    <div class="search-modal" id="searchModal">
+        <div class="search-box">
+            <i class="fas fa-times close-search" onclick="closeSearch()"></i>
+            <div class="search-sidebar">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="搜尋名稱、老師、房號..." onkeyup="filterLocations(this.value)">
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" onclick="filterType('all')">全部</button>
+                    <button class="filter-btn" onclick="filterType('building')">大樓</button>
+                    <button class="filter-btn" onclick="filterType('admin')">處室</button>
+                    <button class="filter-btn" onclick="filterType('teacher')">教師</button>
+                    <button class="filter-btn" onclick="filterType('classroom')">教室</button>
+                </div>
+                <div class="search-results" id="resultsList"></div>
+            </div>
+            <div class="search-preview">
+                <div class="teacher-bg-decoration" id="teacherBg"></div>
+                <div class="preview-img-container" id="previewContainer">
+                    <img id="previewImg" src="images/校園平面圖.jpg" alt="預覽圖">
+                </div>
+                <div class="preview-info">
+                    <h2 id="previewTitle">請選擇地點</h2>
+                    <p id="previewDesc">點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <header>
+            <div class="logo">
+                <img src="images/明新校徽.jpg" alt="Logo">
+                明新科技大學
+            </div>
+            <button class="btn-search-trigger" onclick="openSearch()" title="搜尋地點"><i class="fas fa-search"></i></button>
+        </header>
+
+        <div class="news-ticker-container">
+            <div class="news-title">最新公告</div>
+            <div class="news-content">
+                <marquee scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+                    <span class="news-item">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
+                    <span class="news-item">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
+                    <span class="news-item">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
+                </marquee>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <i class="fas fa-university"></i>
+                    <div class="stat-number">1965</div>
+                    <div class="stat-label">創校年份</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <div class="stat-number">9,000+</div>
+                    <div class="stat-label">在校學生</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">專業師資</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-globe-asia"></i>
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">專業學院</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spots-grid">
+            <div class="spot-card">
+                <div class="spot-image-box">
+                    <span class="spot-tag">必訪熱點</span>
+                    <img src="images/圖書館.jpg" alt="圖書館實景">
+                </div>
+                <div class="spot-info">
+                    <h3>圖書館</h3>
+                    <p>擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。</p>
+                    <a href="#" class="btn-link">查看位置 →</a>
+                </div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-image-box">
+                    <span class="spot-tag">生活起居</span>
+                    <img src="https://via.placeholder.com/400x250/3498DB/FFFFFF?text=Dorm" alt="宿舍實景">
+                </div>
+                <div class="spot-info">
+                    <h3>新生宿舍</h3>
+                    <p>舒適安全的住宿環境，配備交誼廳與洗衣間，讓你快速融入群體生活。</p>
+                    <a href="#" class="btn-link">查看房型 →</a>
+                </div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-image-box">
+                    <span class="spot-tag">飲食便利</span>
+                    <img src="https://via.placeholder.com/400x250/E67E22/FFFFFF?text=Cafeteria" alt="學生餐廳實景">
+                </div>
+                <div class="spot-info">
+                    <h3>學生餐廳</h3>
+                    <p>提供多樣化的餐飲選擇，自助餐、麵食與異國料理，滿足學生的味蕾。</p>
+                    <a href="#" class="btn-link">查看菜單 →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-text">
+            <h1>新生校園3D視覺導覽</h1>
+            <p>請在下方視窗操作您的虛擬旅程</p>
+        </div>
+
+        <div class="panorama-container">
+            <div class="vr-frame" id="panoramaFrame">
+                <div class="iframe-loader" id="vrLoader">
+                    <div class="spinner"></div>
+                </div>
+                <iframe src="output/index.html" allowfullscreen onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
+                <button class="btn-fullscreen" onclick="toggleFullscreen()">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="dept-section">
+            <div class="section-header">
+                <h2>系所快速連結</h2>
+            </div>
+            <div class="dept-grid">
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=36" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-microchip"></i></div>
+                    <div class="dept-name">半導體學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=41" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-tools"></i></div>
+                    <div class="dept-name">工程學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=45" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="dept-name">管理學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=59" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-pen-nib"></i></div>
+                    <div class="dept-name">人文與設計學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=1241" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-language"></i></div>
+                    <div class="dept-name">雙語教育中心</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <div class="section-header">
+                <h2>重要行事曆 (114學年度)</h2>
+            </div>
+            <div class="calendar-layout">
+                <div class="calendar-widget">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                        </div>
+                        <h3 id="currentMonthLabel"></h3> <div class="calendar-nav">
+                            <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-name">日</div>
+                        <div class="calendar-day-name">一</div>
+                        <div class="calendar-day-name">二</div>
+                        <div class="calendar-day-name">三</div>
+                        <div class="calendar-day-name">四</div>
+                        <div class="calendar-day-name">五</div>
+                        <div class="calendar-day-name">六</div>
+                        </div>
+                </div>
+                <div class="event-details-panel" id="eventPanel">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4>請點選日期</h4>
+                    <p>選擇左側有標記紅點的日期<br>查看當日詳細活動資訊。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div class="map-card-container">
+                <div class="map-info">
+                    <h2>交通位置</h2>
+                    <p class="map-desc">歡迎蒞臨明新科技大學，我們位於新豐火車站附近，交通便利。</p>
+                    <div class="info-list">
+                        <p><i class="fas fa-map-marker-alt"></i> 地址：304新竹縣新豐鄉新興路1號</p>
+                        <p><i class="fas fa-phone"></i> 電話：03 559 3142</p>
+                        <p><i class="fas fa-train"></i> 火車：搭乘至「新豐車站」，步行約 10 分鐘即可抵達。</p>
+                    </div>
+                </div>
+                <div class="google-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.6441584955744!2d120.99516631537754!3d24.858823953472093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346836c2a4773809%3A0x6239129df42b03b!2z5piO5paw56eR5oqA5aSn5a24!5e0!3m2!1szh-TW!2stw!4v1705934000000!5m2!1szh-TW!2stw" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="feedback-section">
+            <div class="feedback-container">
+                <h2><i class="fas fa-paper-plane"></i> 意見回饋</h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label>您的姓名</label>
+                        <input type="text" name="name" class="form-control" required placeholder="請輸入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>電子郵件</label>
+                        <input type="email" name="email" class="form-control" required placeholder="請輸入 Email">
+                    </div>
+                    <div class="form-group">
+                        <label>內容說明</label>
+                        <textarea name="message" class="form-control" rows="5" required placeholder="請輸入您的寶貴意見..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">送出意見</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="section-header">
+                <h2>校園聯絡資訊</h2>
+            </div>
+            <div class="contact-links">
+                <a href="https://www.must.edu.tw/" target="_blank" class="contact-btn web">
+                    <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                    <span>校園網站</span>
+                </a>
+                <a href="tel:035593142" class="contact-btn">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <span>電話聯繫</span>
+                </a>
+                <a href="https://www.youtube.com/channel/UCoAT1ZVoLvA_DGXffBIqIgA" target="_blank" class="contact-btn yt">
+                    <div class="contact-icon"><i class="fab fa-youtube"></i></div>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://www.facebook.com/mustminghsin" target="_blank" class="contact-btn fb">
+                    <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/mustminghsin/" target="_blank" class="contact-btn ig">
+                    <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://goo.gl/maps/y1z2w3x4" target="_blank" class="contact-btn">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <span>地址導航</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="team-title">專題網頁製作</div>
+            <div class="footer-copyright">
+                © 2026 校園導覽專題小組 (謝嘉哲、陳亭蓁、陳俊安). All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textToType = "探索校園角落 • 搜尋系館位置 • 體驗沈浸式實境";
+            const typeWriterElement = document.getElementById('typewriter');
+            let typeIndex = 0;
+            function typeWriter() {
+                if (typeIndex < textToType.length) {
+                    typeWriterElement.innerHTML += textToType.charAt(typeIndex);
+                    typeIndex++;
+                    setTimeout(typeWriter, 50); 
+                }
+            }
+            setTimeout(typeWriter, 500);
+
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const welcomeContent = document.getElementById('welcomeContent');
+            const bgImage = document.querySelector('.welcome-bg-image');
+            let request = null;
+            welcomeScreen.addEventListener('mousemove', (e) => {
+                if (!request) {
+                    request = requestAnimationFrame(() => {
+                        const x = (window.innerWidth - e.pageX * 2) / 100;
+                        const y = (window.innerHeight - e.pageY * 2) / 100;
+                        welcomeContent.style.transform = `translate(${x}px, ${y}px)`;
+                        bgImage.style.transform = `scale(1.1) translate(${-x/2}px, ${-y/2}px)`; 
+                        request = null;
+                    });
+                }
+            });
+        });
+
+        // 全螢幕功能
+        function toggleFullscreen() {
+            const elem = document.getElementById("panoramaFrame");
+            const btnIcon = document.querySelector(".btn-fullscreen i");
+
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) { /* Safari */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE11 */
+                    elem.msRequestFullscreen();
+                }
+                btnIcon.classList.remove("fa-expand");
+                btnIcon.classList.add("fa-compress");
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+                btnIcon.classList.remove("fa-compress");
+                btnIcon.classList.add("fa-expand");
+            }
+        }
+
+        // 行事曆資料
+        const eventsData = {
+            "2025-08-01": "114學年度第1學期開始",
+            "2025-08-18": "雙主修與輔系申請 (至9/12)",
+            "2025-08-30": "新生宿舍入住日 (至8/31)",
+            "2025-09-04": "全校教師研習會 / 新生定向輔導",
+            "2025-09-08": "開學日 (正式上課)",
+            "2025-09-24": "社團博覽會",
+            "2025-09-29": "補假一日 (教師節)",
+            "2025-10-10": "國慶日放假一日",
+            "2025-10-18": "校慶 / 全校運動會",
+            "2025-11-03": "期中考暨展演週 (至11/9)",
+            "2025-12-25": "行憲紀念日放假一日",
+            "2026-01-01": "開國紀念日放假一日",
+            "2026-01-05": "期末考暨展演週 (至1/11)",
+            "2026-01-10": "學生宿舍清空關閉週 (至1/11)",
+            "2026-01-31": "第1學期結束",
+            "2026-02-01": "114學年度第2學期開始",
+            "2026-02-14": "農曆春節 (至2/22)",
+            "2026-02-28": "和平紀念日 / 宿舍入住日",
+            "2026-03-02": "開學日",
+            "2026-04-03": "兒童節補假",
+            "2026-04-04": "兒童節",
+            "2026-04-05": "清明節",
+            "2026-04-27": "期中考暨展演週 (至5/3)",
+            "2026-06-13": "畢業典禮",
+            "2026-06-19": "端午節放假",
+            "2026-06-29": "期末考暨展演週 (至7/5)"
+        };
+
+        // 🔥 自動抓取今天日期
+        const today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth() + 1;
+
+        function renderCalendar(year, month) {
+            const grid = document.querySelector('.calendar-grid');
+            const monthLabel = document.getElementById('currentMonthLabel');
+            while(grid.children.length > 7) { grid.removeChild(grid.lastChild); }
+            monthLabel.innerText = `${year}年 ${month}月`;
+
+            const jsMonth = month - 1; 
+            const firstDay = new Date(year, jsMonth, 1).getDay(); 
+            const daysInMonth = new Date(year, jsMonth + 1, 0).getDate(); 
+
+            // 取得真實今天
+            const realToday = new Date();
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day empty';
+                grid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const cell = document.createElement('div');
+                cell.className = 'calendar-day';
+                cell.innerHTML = `<span>${day}</span>`;
+
+                // 🔥 判斷是否為今天
+                if (day === realToday.getDate() && month === (realToday.getMonth() + 1) && year === realToday.getFullYear()) {
+                    cell.classList.add('today');
+                }
+
+                if (eventsData[dateKey]) {
+                    cell.classList.add('has-event');
+                    const dot = document.createElement('div');
+                    dot.className = 'event-dot';
+                    cell.appendChild(dot);
+                    cell.onclick = () => showEventDetails(dateKey, eventsData[dateKey]);
+                }
+                grid.appendChild(cell);
+            }
+        }
+
+        function showEventDetails(date, title) {
+            const panel = document.getElementById('eventPanel');
+            panel.classList.add('active');
+            panel.style.opacity = 0;
+            setTimeout(() => {
+                panel.innerHTML = `
+                    <div class="event-date-display">${date}</div>
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>${title}</h4>
+                    <p>學校重要活動日程</p>
+                `;
+                panel.style.opacity = 1;
+            }, 200);
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 12) { currentMonth = 1; currentYear++; } 
+            else if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+            renderCalendar(currentYear, currentMonth);
+        }
+
+        renderCalendar(currentYear, currentMonth);
+
+        const form = document.getElementById('feedbackForm');
+        // 請確認這個網址是你正確部署的 GAS 網址
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzw6l7lfhms_C3oh6gA7FFPc76XspAfW6KQxbrz7ONL6QeEBEVbDpPw1Rbf99-qTbgU/exec';
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-submit');
+            btn.innerText = '傳送中...';
+            btn.disabled = true;
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
+
+            fetch(scriptURL, { 
+                method: 'POST', body: JSON.stringify(data), mode: 'no-cors', headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => {
+                alert('感謝您的回饋！我們已收到您的意見。');
+                form.reset();
+                btn.innerText = '送出意見';
+                btn.disabled = false;
+            })
+            .catch(error => {
+                alert('發送失敗，請稍後再試！');
+                btn.innerText = '送出意見';
+                btn.disabled = false;
+            });
+        });
+
+        function enterSite() {
+            const screen = document.getElementById('welcome-screen');
+            const main = document.getElementById('mainContent');
+            screen.style.opacity = '0';
+            main.style.opacity = '1';
+            setTimeout(() => { screen.style.visibility = 'hidden'; }, 800);
+        }
+
+        // ============================================
+        // 🔥 教師資料庫 (格式統一)
+        // ============================================
+        const campusLocations = [
+            { id: 1, name: "管理學院", type: "building", typeName: "大樓", desc: "本院以期落實「培育跨域協作、務實創新、全人學習之管理專業人才」為教育目標。", img: "images/管理學院.jpg" },
+            { id: 2, name: "圖書館", type: "building", typeName: "大樓", desc: "圖書館不僅是藏書的地方，更是您探索知識、激發創意與放鬆身心的空間。", img: "images/圖書館.jpg" },
+            { id: 3, name: "A205 語言實驗室", type: "classroom", typeName: "教室", desc: "位於行政大樓二樓。", img: "images/a205.jpg" },
+            { id: 4, name: "學務處", type: "admin", typeName: "處室", desc: "行政大樓一樓，負責學生事務。", img: "images/office_student.jpg" },
+            { id: 5, name: "明明樓", type: "building", typeName: "大樓", desc: "各類選修課程主要上課地點。", img: "images/building_1.jpg" },
+            { id: 6, name: "第二男子宿舍", type: "dorm", typeName: "宿舍", desc: "校園後門，環境清幽。", img: "images/dorm_2.jpg" },
+
+            // --- 工業工程管理系 ---
+            { id: 101, name: "李得盛 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 805 室\njeff@must.edu.tw\n分機 3234", img: "images/李得盛.jpg" },
+            { id: 102, name: "林於杏 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 826 室\nbrianlin@must.edu.tw\n分機 3229", img: "images/林於杏.jpg" },
+            { id: 103, name: "王妙伶 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 833 室\nwml@must.edu.tw\n分機 3228", img: "images/王妙伶.jpg" },
+            { id: 104, name: "馬心怡 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 834 室\nhsma@must.edu.tw\n分機 3230", img: "images/馬心怡.jpg" },
+            { id: 105, name: "許耀文 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 813 室\navinhsu@must.edu.tw\n分機 3217", img: "images/許耀文.jpg" },
+            { id: 106, name: "王彥文 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 821 室\nywwang@must.edu.tw\n分機 3224", img: "images/王彥文.jpg" },
+            { id: 107, name: "張子筠 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 837 室\ntychang@must.edu.tw\n分機 3215", img: "images/張子筠.jpg" },
+            { id: 108, name: "鍾宜展 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 823 室\nycchung@must.edu.tw\n分機 3226", img: "images/鍾宜展.jpg" },
+            { id: 109, name: "楊昌哲 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 816 室\ncjyang@must.edu.tw\n分機 3227", img: "images/楊昌哲.jpg" },
+            { id: 110, name: "吳庭瑜 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 831 室\ntywu@must.edu.tw\n分機 3218", img: "images/吳庭瑜.jpg" },
+            { id: 111, name: "江支璋 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 818 室\nsmjoseph@must.edu.tw\n分機 3219", img: "images/江支璋.jpg" },
+            { id: 112, name: "林伶恩 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 836 室\nlillian@must.edu.tw\n分機 3235", img: "images/林伶恩.jpg" },
+            { id: 113, name: "許世洲 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 835 室\nfate@must.edu.tw\n分機 3214", img: "images/許世洲.jpg" },
+            { id: 114, name: "薄有為 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 825 室\npoyuway@must.edu.tw\n分機 3220", img: "images/薄有為.jpg" },
+            { id: 115, name: "張民昌 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 838 室\ncmc@must.edu.tw\n分機 3236", img: "images/張民昌.jpg" },
+            { id: 116, name: "馬珊蒂 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 830 室\nmashanti1980@gmail.com\n分機 3213", img: "images/馬珊蒂.jpg" },
+            { id: 117, name: "彭晟瑋 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 805 室", img: "images/彭晟瑋.jpg" },
+
+            // --- 資訊管理系 ---
+            { id: 201, name: "葉慈章 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 412 / 3 樓\ncheer@must.edu.tw\n分機 3430 / 3447", img: "images/葉慈章.jpg" },
+            { id: 202, name: "帥嘉珍 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R322\njjshuai@must.edu.tw\n分機 3451", img: "images/帥嘉珍.jpg" },
+            { id: 203, name: "應大中 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R323\ntcying@must.edu.tw\n分機 3452", img: "images/應大中.jpg" },
+            { id: 204, name: "陳玉專 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R327\ncardy@must.edu.tw\n分機 3456", img: "images/陳玉專.jpg" },
+            { id: 205, name: "李政穎 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R320\nalvin@must.edu.tw\n分機 3449", img: "images/李政穎.jpg" },
+            { id: 206, name: "陳建志 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R319\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志.jpg" },
+            { id: 207, name: "邱川峰 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R326\ncfchiu@must.edu.tw\n分機 3455", img: "images/邱川峰.jpg" },
+            { id: 208, name: "詹森仁 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R418\nsrchan@must.edu.tw\n分機 3586", img: "images/詹森仁.jpg" },
+            { id: 209, name: "李佩君 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R328\npjlee@must.edu.tw\n分機 3457", img: "images/李佩君.jpg" },
+            { id: 210, name: "黃夙賢 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R325\nshhuang@must.edu.tw\n分機 3454", img: "images/黃夙賢.jpg" },
+            { id: 211, name: "鄭姍姍 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R415\nyes5433@must.edu.tw\n分機 3580", img: "images/鄭姍姍.jpg" },
+            { id: 212, name: "彭美惠 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R329\nclare@must.edu.tw\n分機 3458", img: "images/彭美惠.jpg" },
+            { id: 213, name: "賴彥如 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管理大樓 4 樓 R417\npeng1204@must.edu.tw\n分機 3232", img: "images/賴彥如.jpg" },
+            { id: 214, name: "陳奎伯 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R428\nkbchen@must.edu.tw\n分機 3576", img: "images/陳奎伯.jpg" },
+            { id: 215, name: "張東文 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R324\ntungwen@must.edu.tw\n分機 3453", img: "images/張東文.jpg" },
+            { id: 216, name: "林思蘭 老師", type: "teacher", typeName: "系辦公室", desc: "資訊管理系 系辦\n管院 4 樓 R411\nshih@must.edu.tw\n分機 3431", img: "images/林思蘭.jpg" },
+            { id: 217, name: "莊杰茹 老師", type: "teacher", typeName: "系辦公室", desc: "資訊管理系 系辦\n管院 4 樓 R411\nruby@must.edu.tw\n分機 3433", img: "images/莊杰茹.jpg" },
+
+            // --- 行銷與流通系 ---
+            { id: 301, name: "鍾政偉 老師", type: "teacher", typeName: "系辦公室", desc: "行銷與流通系 系辦\n管理學院 6 樓\nalexccw@must.edu.tw\n分機 3500", img: "images/鍾政偉.jpg" },
+            { id: 302, name: "沈聰益 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 631 室\ntsungyi@must.edu.tw\n分機 3521", img: "images/沈聰益.jpg" },
+            { id: 303, name: "朱希亮 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 622 室\nchu@must.edu.tw\n分機 3509", img: "images/朱希亮.jpg" },
+            { id: 304, name: "楊明錞 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 623 室\nyang@must.edu.tw\n分機 3519", img: "images/楊明錞.jpg" },
+            { id: 305, name: "蔡瑤玉 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 628 室\nyauyuh@must.edu.tw\n分機 3510", img: "images/蔡瑤玉.jpg" },
+            { id: 306, name: "杜怡嫻 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 630 室\ntna838@hotmail.com\n分機 3511", img: "images/杜怡嫻.jpg" },
+            { id: 307, name: "湯寶裳 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 625 室\nps.tang@must.edu.tw\n分機 1871", img: "images/湯寶裳.jpg" },
+            { id: 308, name: "高國檳 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 633 室\nbenny@must.edu.tw\n分機 3506", img: "images/高國檳.jpg" },
+            { id: 309, name: "張哲維 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院 636 室\ndavychang0327@must.edu.tw\n分機 3520", img: "images/張哲維.jpg" },
+            { id: 310, name: "邱勇嘉 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 634 室\nmk04271@must.edu.tw\n分機 3515", img: "images/邱勇嘉.jpg" },
+            { id: 311, name: "何庭瑜 老師", type: "teacher", typeName: "系辦公室", desc: "行銷與流通系 系辦\n管理學院 6 樓\ntingyu@must.edu.tw\n分機 3501", img: "images/何庭瑜.jpg" },
+
+            // --- 企業管理系 ---
+            { id: 401, name: "吳芸嫻 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 6 樓 626\nj1414@must.edu.tw\n分機 1702", img: "images/吳芸嫻.jpg" },
+            { id: 402, name: "張敏玟 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院大樓 533 室\nsophie.chang@must.edu.tw\n分機 1828", img: "images/張敏玟.jpg" },
+            { id: 403, name: "陳建志 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 319 室\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志_企管.jpg" },
+            { id: 404, name: "林淑瑛 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 732 室\nsylin@must.edu.tw\n分機 1892", img: "images/林淑瑛.jpg" },
+            { id: 405, name: "林淑芬 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 717 室\nlsf@must.edu.tw\n分機 1887", img: "images/林淑芬.jpg" },
+            { id: 406, name: "李明煌 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 731 室\nminglee@must.edu.tw\n分機 1891", img: "images/李明煌.jpg" },
+            { id: 407, name: "范芝萍 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 729 室\ncpfan@must.edu.tw\n分機 1889", img: "images/范芝萍.jpg" },
+            { id: 408, name: "詹雅娟 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 726 室\nya100@must.edu.tw\n分機 1878", img: "images/詹雅娟.jpg" },
+            { id: 409, name: "郭釗安 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 728 室\ncakuo@must.edu.tw\n分機 1876", img: "images/郭釗安.jpg" },
+            { id: 410, name: "洪瑩書 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 733 室\nyingshu@must.edu.tw\n分機 1893", img: "images/洪瑩書.jpg" },
+            { id: 411, name: "陳淑芬 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理大樓 713 室\nlita@must.edu.tw\n03-621-7879", img: "images/陳淑芬.jpg" },
+        ];
+
+        let currentFilter = 'all'; 
+        const modal = document.getElementById('searchModal');
+        const resultsList = document.getElementById('resultsList');
+        const previewImg = document.getElementById('previewImg');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewDesc = document.getElementById('previewDesc');
+        const previewContainer = document.getElementById('previewContainer'); 
+        const teacherBg = document.getElementById('teacherBg'); 
+
+        function openSearch() {
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.style.opacity = '1'; modal.querySelector('.search-box').style.transform = 'scale(1)'; }, 10);
+            renderList(campusLocations); 
+            resetFilters(); 
+        }
+
+        function closeSearch() {
+            modal.style.opacity = '0';
+            modal.querySelector('.search-box').style.transform = 'scale(0.9)';
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
+
+        window.onclick = function(e) { if (e.target == modal) closeSearch(); }
+
+        function filterType(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            let filteredData = campusLocations;
+            if (type !== 'all') {
+                filteredData = campusLocations.filter(item => item.type === type);
+            }
+            renderList(filteredData);
+        }
+        
+        function resetFilters() {
+            currentFilter = 'all';
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.filter-btn:first-child').classList.add('active');
+        }
+
+        function filterLocations(text) {
+            let baseData = campusLocations;
+            if (currentFilter !== 'all') {
+                baseData = campusLocations.filter(item => item.type === currentFilter);
+            }
+            const finalData = baseData.filter(loc => 
+                loc.name.includes(text) || 
+                loc.desc.includes(text) || 
+                loc.typeName.includes(text)
+            );
+            renderList(finalData);
+        }
+
+        function renderList(data) {
+            resultsList.innerHTML = '';
+            if (data.length === 0) { resultsList.innerHTML = '<div style="padding:20px; text-align:center; color:#999;">查無資料</div>'; return; }
+            
+            data.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.style.animationDelay = `${index * 0.02}s`; 
+
+                let icon = 'fas fa-map-marker-alt';
+                if(item.type === 'classroom') icon = 'fas fa-chalkboard-teacher';
+                if(item.type === 'admin') icon = 'fas fa-briefcase';
+                if(item.type === 'teacher') icon = 'fas fa-user-tie'; 
+                if(item.type === 'building') icon = 'fas fa-building';
+                if(item.type === 'dorm') icon = 'fas fa-bed';
+
+                div.innerHTML = `
+                    <i class="${icon}"></i> 
+                    <div class="result-info">
+                        <span class="result-name">${item.name}</span>
+                        <span class="result-type">${item.typeName || '地點'}</span>
+                    </div>
+                `;
+                
+                div.onclick = () => {
+                    document.querySelectorAll('.result-item').forEach(el => el.classList.remove('active'));
+                    div.classList.add('active');
+                    updatePreview(item);
+                };
+                resultsList.appendChild(div);
+            });
+        }
+
+        function updatePreview(item) {
+            previewImg.style.opacity = '0'; 
+            
+            // 判斷是否為教師，切換顯示樣式
+            if (item.type === 'teacher') {
+                previewContainer.classList.add('teacher-mode'); 
+                teacherBg.classList.add('active'); 
+            } else {
+                previewContainer.classList.remove('teacher-mode'); 
+                teacherBg.classList.remove('active'); 
+            }
+
+            setTimeout(() => {
+                previewImg.src = item.img;
+                previewImg.onerror = function() { this.src = 'https://via.placeholder.com/600x400?text=No+Image'; };
+                previewTitle.innerText = item.name;
+
+                // 自動將 Email 轉換成可點擊的連結
+                let formattedDesc = item.desc.replace(
+                    /([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/g,
+                    '<a href="mailto:$1" style="color:var(--primary); text-decoration:underline; font-weight:bold;">$1</a>'
+                );
+
+                previewDesc.innerHTML = formattedDesc;
+                previewImg.style.opacity = '1'; 
+            }, 200);
+        }
+    </script>
+
+</body>
+</html>
