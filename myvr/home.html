@@ -42,7 +42,7 @@
         @keyframes fadeInList { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* ===== 1. 歡迎封面 (背景校門口) ===== */
+        /* ===== 1. 歡迎封面 ===== */
         #welcome-screen {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 9999; overflow: hidden; 
@@ -120,6 +120,7 @@
         
         .preview-img-container.teacher-mode { width: 200px; height: 200px; border-radius: 50%; border: 6px solid white; box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3); margin-top: 20px; }
         .teacher-bg-decoration { position: absolute; top: 30%; left: 50%; width: 400px; height: 400px; background: linear-gradient(120deg, #e0f7fa 0%, #e8f5e9 100%); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: translate(-50%, -50%); z-index: 1; opacity: 0; transition: opacity 0.5s; animation: rotateBg 15s linear infinite; }
+        @keyframes rotateBg { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         .teacher-bg-decoration.active { opacity: 1; }
 
         .preview-info { text-align: center; width: 100%; position: relative; z-index: 2; }
@@ -133,6 +134,15 @@
         header { background: rgba(255, 255, 255, 0.95); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.05); backdrop-filter: blur(10px); }
         .logo { font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px; color: var(--navy); }
         .logo img { height: 40px; width: auto; }
+        
+        /* 語言切換按鈕 */
+        .header-actions { display: flex; gap: 15px; align-items: center; }
+        .btn-lang { 
+            background: var(--navy); color: white; border: none; padding: 8px 15px; border-radius: 20px; 
+            cursor: pointer; font-size: 0.9rem; font-weight: bold; transition: 0.3s; display: flex; align-items: center; gap: 5px;
+        }
+        .btn-lang:hover { background: var(--primary); }
+
         .btn-search-trigger { background: var(--bg); border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.3s; }
         .btn-search-trigger:hover { background: var(--primary); color: white; transform: rotate(15deg); }
         
@@ -237,18 +247,10 @@
         }
         .calendar-day:hover { background: #f9f9f9; border-color: var(--primary); }
         .calendar-day.empty { background: transparent; border: none; cursor: default; }
-        
-        /* 🔥 今天 (Today) 的樣式 */
-        .calendar-day.today { 
-            background: var(--primary); color: white; 
-            border-color: var(--primary); font-weight: bold; 
-            box-shadow: 0 4px 10px rgba(0, 184, 148, 0.4);
-        }
-        
+        .calendar-day.today { background: var(--primary); color: white; border-color: var(--primary); font-weight: bold; box-shadow: 0 4px 10px rgba(0, 184, 148, 0.4); }
         .calendar-day.has-event { cursor: pointer; background: #fff5f5; border-color: #ffcccc; }
         .calendar-day.has-event:hover { background: #ffebeb; transform: scale(1.05); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         .event-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; margin-top: 4px; }
-
         .event-details-panel {
             flex: 1; min-width: 280px; min-height: 380px;
             background: white; border-radius: 20px; padding: 30px;
@@ -316,12 +318,12 @@
         <div class="welcome-bg-image"></div>
         <div class="welcome-overlay"></div>
         <div class="welcome-content" id="welcomeContent">
-            <h1>新生校園3D視覺導覽</h1>
+            <h1 data-i18n="welcome-title">新生校園3D視覺導覽</h1>
             <div class="typing-text">
                 <span id="typewriter"></span><span class="cursor"></span>
             </div>
             <button class="btn-start" onclick="enterSite()">
-                <i class="fas fa-play-circle"></i> 開始探索
+                <i class="fas fa-play-circle"></i> <span data-i18n="btn-start">開始探索</span>
             </button>
         </div>
     </div>
@@ -332,14 +334,14 @@
             <div class="search-sidebar">
                 <div class="search-input-group">
                     <i class="fas fa-search"></i>
-                    <input type="text" class="search-input" placeholder="搜尋名稱、老師、房號..." onkeyup="filterLocations(this.value)">
+                    <input type="text" class="search-input" placeholder="搜尋名稱、老師、房號..." data-i18n-placeholder="search-placeholder" onkeyup="filterLocations(this.value)">
                 </div>
                 <div class="filter-tabs">
-                    <button class="filter-btn active" onclick="filterType('all')">全部</button>
-                    <button class="filter-btn" onclick="filterType('building')">大樓</button>
-                    <button class="filter-btn" onclick="filterType('admin')">處室</button>
-                    <button class="filter-btn" onclick="filterType('teacher')">教師</button>
-                    <button class="filter-btn" onclick="filterType('classroom')">教室</button>
+                    <button class="filter-btn active" onclick="filterType('all')" data-i18n="filter-all">全部</button>
+                    <button class="filter-btn" onclick="filterType('building')" data-i18n="filter-building">大樓</button>
+                    <button class="filter-btn" onclick="filterType('admin')" data-i18n="filter-admin">處室</button>
+                    <button class="filter-btn" onclick="filterType('teacher')" data-i18n="filter-teacher">教師</button>
+                    <button class="filter-btn" onclick="filterType('classroom')" data-i18n="filter-classroom">教室</button>
                 </div>
                 <div class="search-results" id="resultsList"></div>
             </div>
@@ -349,8 +351,8 @@
                     <img id="previewImg" src="images/校園平面圖.jpg" alt="預覽圖">
                 </div>
                 <div class="preview-info">
-                    <h2 id="previewTitle">請選擇地點</h2>
-                    <p id="previewDesc">點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。</p>
+                    <h2 id="previewTitle" data-i18n="preview-title">請選擇地點</h2>
+                    <p id="previewDesc" data-i18n="preview-desc">點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。</p>
                 </div>
             </div>
         </div>
@@ -360,18 +362,23 @@
         <header>
             <div class="logo">
                 <img src="images/明新校徽.jpg" alt="Logo">
-                明新科技大學
+                <span data-i18n="logo-text">明新科技大學</span>
             </div>
-            <button class="btn-search-trigger" onclick="openSearch()" title="搜尋地點"><i class="fas fa-search"></i></button>
+            <div class="header-actions">
+                <button class="btn-lang" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i> <span id="langLabel">English</span>
+                </button>
+                <button class="btn-search-trigger" onclick="openSearch()" title="搜尋地點"><i class="fas fa-search"></i></button>
+            </div>
         </header>
 
         <div class="news-ticker-container">
-            <div class="news-title">最新公告</div>
+            <div class="news-title" data-i18n="news-title">最新公告</div>
             <div class="news-content">
                 <marquee scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
-                    <span class="news-item">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
-                    <span class="news-item">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
-                    <span class="news-item">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
+                    <span class="news-item" data-i18n="news-1">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
+                    <span class="news-item" data-i18n="news-2">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
+                    <span class="news-item" data-i18n="news-3">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
                 </marquee>
             </div>
         </div>
@@ -381,22 +388,22 @@
                 <div class="stat-item">
                     <i class="fas fa-university"></i>
                     <div class="stat-number">1965</div>
-                    <div class="stat-label">創校年份</div>
+                    <div class="stat-label" data-i18n="stat-founded">創校年份</div>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-user-graduate"></i>
                     <div class="stat-number">9,000+</div>
-                    <div class="stat-label">在校學生</div>
+                    <div class="stat-label" data-i18n="stat-students">在校學生</div>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <div class="stat-number">500+</div>
-                    <div class="stat-label">專業師資</div>
+                    <div class="stat-label" data-i18n="stat-faculty">專業師資</div>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-globe-asia"></i>
                     <div class="stat-number">6</div>
-                    <div class="stat-label">專業學院</div>
+                    <div class="stat-label" data-i18n="stat-colleges">專業學院</div>
                 </div>
             </div>
         </div>
@@ -404,42 +411,42 @@
         <div class="spots-grid">
             <div class="spot-card">
                 <div class="spot-image-box">
-                    <span class="spot-tag">必訪熱點</span>
+                    <span class="spot-tag" data-i18n="tag-hot">必訪熱點</span>
                     <img src="images/圖書館.jpg" alt="圖書館實景">
                 </div>
                 <div class="spot-info">
-                    <h3>圖書館</h3>
-                    <p>擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。</p>
-                    <a href="#" class="btn-link">查看位置 →</a>
+                    <h3 data-i18n="spot-library">圖書館</h3>
+                    <p data-i18n="spot-library-desc">擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。</p>
+                    <a href="#" class="btn-link" data-i18n="view-location">查看位置 →</a>
                 </div>
             </div>
             <div class="spot-card">
                 <div class="spot-image-box">
-                    <span class="spot-tag">生活起居</span>
+                    <span class="spot-tag" data-i18n="tag-life">生活起居</span>
                     <img src="https://via.placeholder.com/400x250/3498DB/FFFFFF?text=Dorm" alt="宿舍實景">
                 </div>
                 <div class="spot-info">
-                    <h3>新生宿舍</h3>
-                    <p>舒適安全的住宿環境，配備交誼廳與洗衣間，讓你快速融入群體生活。</p>
-                    <a href="#" class="btn-link">查看房型 →</a>
+                    <h3 data-i18n="spot-dorm">新生宿舍</h3>
+                    <p data-i18n="spot-dorm-desc">舒適安全的住宿環境，配備交誼廳與洗衣間，讓你快速融入群體生活。</p>
+                    <a href="#" class="btn-link" data-i18n="view-room">查看房型 →</a>
                 </div>
             </div>
             <div class="spot-card">
                 <div class="spot-image-box">
-                    <span class="spot-tag">飲食便利</span>
+                    <span class="spot-tag" data-i18n="tag-food">飲食便利</span>
                     <img src="https://via.placeholder.com/400x250/E67E22/FFFFFF?text=Cafeteria" alt="學生餐廳實景">
                 </div>
                 <div class="spot-info">
-                    <h3>學生餐廳</h3>
-                    <p>提供多樣化的餐飲選擇，自助餐、麵食與異國料理，滿足學生的味蕾。</p>
-                    <a href="#" class="btn-link">查看菜單 →</a>
+                    <h3 data-i18n="spot-cafeteria">學生餐廳</h3>
+                    <p data-i18n="spot-cafeteria-desc">提供多樣化的餐飲選擇，自助餐、麵食與異國料理，滿足學生的味蕾。</p>
+                    <a href="#" class="btn-link" data-i18n="view-menu">查看菜單 →</a>
                 </div>
             </div>
         </div>
 
         <div class="hero-text">
-            <h1>新生校園3D視覺導覽</h1>
-            <p>請在下方視窗操作您的虛擬旅程</p>
+            <h1 data-i18n="vr-title">新生校園3D視覺導覽</h1>
+            <p data-i18n="vr-desc">請在下方視窗操作您的虛擬旅程</p>
         </div>
 
         <div class="panorama-container">
@@ -456,35 +463,35 @@
 
         <div class="dept-section">
             <div class="section-header">
-                <h2>系所快速連結</h2>
+                <h2 data-i18n="dept-title">系所快速連結</h2>
             </div>
             <div class="dept-grid">
                 <a href="https://acade.must.edu.tw/index.aspx?UnitID=36" target="_blank" class="dept-card">
                     <div class="dept-icon"><i class="fas fa-microchip"></i></div>
-                    <div class="dept-name">半導體學院</div>
+                    <div class="dept-name" data-i18n="dept-semi">半導體學院</div>
                 </a>
                 <a href="https://acade.must.edu.tw/index.aspx?UnitID=41" target="_blank" class="dept-card">
                     <div class="dept-icon"><i class="fas fa-tools"></i></div>
-                    <div class="dept-name">工程學院</div>
+                    <div class="dept-name" data-i18n="dept-eng">工程學院</div>
                 </a>
                 <a href="https://acade.must.edu.tw/index.aspx?UnitID=45" target="_blank" class="dept-card">
                     <div class="dept-icon"><i class="fas fa-briefcase"></i></div>
-                    <div class="dept-name">管理學院</div>
+                    <div class="dept-name" data-i18n="dept-manage">管理學院</div>
                 </a>
                 <a href="https://acade.must.edu.tw/index.aspx?UnitID=59" target="_blank" class="dept-card">
                     <div class="dept-icon"><i class="fas fa-pen-nib"></i></div>
-                    <div class="dept-name">人文與設計學院</div>
+                    <div class="dept-name" data-i18n="dept-design">人文與設計學院</div>
                 </a>
                 <a href="https://acade.must.edu.tw/index.aspx?UnitID=1241" target="_blank" class="dept-card">
                     <div class="dept-icon"><i class="fas fa-language"></i></div>
-                    <div class="dept-name">雙語教育中心</div>
+                    <div class="dept-name" data-i18n="dept-bilingual">雙語教育中心</div>
                 </a>
             </div>
         </div>
 
         <div class="calendar-section">
             <div class="section-header">
-                <h2>重要行事曆 (114學年度)</h2>
+                <h2 data-i18n="calendar-title">重要行事曆 (114學年度)</h2>
             </div>
             <div class="calendar-layout">
                 <div class="calendar-widget">
@@ -492,24 +499,25 @@
                         <div class="calendar-nav">
                             <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
                         </div>
-                        <h3 id="currentMonthLabel"></h3> <div class="calendar-nav">
+                        <h3 id="currentMonthLabel"></h3>
+                        <div class="calendar-nav">
                             <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
                         </div>
                     </div>
                     <div class="calendar-grid">
-                        <div class="calendar-day-name">日</div>
-                        <div class="calendar-day-name">一</div>
-                        <div class="calendar-day-name">二</div>
-                        <div class="calendar-day-name">三</div>
-                        <div class="calendar-day-name">四</div>
-                        <div class="calendar-day-name">五</div>
-                        <div class="calendar-day-name">六</div>
-                        </div>
+                        <div class="calendar-day-name" data-i18n="sun">日</div>
+                        <div class="calendar-day-name" data-i18n="mon">一</div>
+                        <div class="calendar-day-name" data-i18n="tue">二</div>
+                        <div class="calendar-day-name" data-i18n="wed">三</div>
+                        <div class="calendar-day-name" data-i18n="thu">四</div>
+                        <div class="calendar-day-name" data-i18n="fri">五</div>
+                        <div class="calendar-day-name" data-i18n="sat">六</div>
+                    </div>
                 </div>
                 <div class="event-details-panel" id="eventPanel">
                     <i class="fas fa-calendar-check"></i>
-                    <h4>請點選日期</h4>
-                    <p>選擇左側有標記紅點的日期<br>查看當日詳細活動資訊。</p>
+                    <h4 data-i18n="select-date">請點選日期</h4>
+                    <p data-i18n="select-date-desc">選擇左側有標記紅點的日期<br>查看當日詳細活動資訊。</p>
                 </div>
             </div>
         </div>
@@ -517,12 +525,12 @@
         <div class="map-section">
             <div class="map-card-container">
                 <div class="map-info">
-                    <h2>交通位置</h2>
-                    <p class="map-desc">歡迎蒞臨明新科技大學，我們位於新豐火車站附近，交通便利。</p>
+                    <h2 data-i18n="map-title">交通位置</h2>
+                    <p class="map-desc" data-i18n="map-desc">歡迎蒞臨明新科技大學，我們位於新豐火車站附近，交通便利。</p>
                     <div class="info-list">
-                        <p><i class="fas fa-map-marker-alt"></i> 地址：304新竹縣新豐鄉新興路1號</p>
-                        <p><i class="fas fa-phone"></i> 電話：03 559 3142</p>
-                        <p><i class="fas fa-train"></i> 火車：搭乘至「新豐車站」，步行約 10 分鐘即可抵達。</p>
+                        <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="address">地址：304新竹縣新豐鄉新興路1號</span></p>
+                        <p><i class="fas fa-phone"></i> <span data-i18n="phone">電話：03 559 3142</span></p>
+                        <p><i class="fas fa-train"></i> <span data-i18n="train">火車：搭乘至「新豐車站」，步行約 10 分鐘即可抵達。</span></p>
                     </div>
                 </div>
                 <div class="google-map">
@@ -536,37 +544,37 @@
 
         <div class="feedback-section">
             <div class="feedback-container">
-                <h2><i class="fas fa-paper-plane"></i> 意見回饋</h2>
+                <h2><i class="fas fa-paper-plane"></i> <span data-i18n="feedback-title">意見回饋</span></h2>
                 <form id="feedbackForm">
                     <div class="form-group">
-                        <label>您的姓名</label>
-                        <input type="text" name="name" class="form-control" required placeholder="請輸入姓名">
+                        <label data-i18n="form-name">您的姓名</label>
+                        <input type="text" name="name" class="form-control" required placeholder="請輸入姓名" data-i18n-placeholder="ph-name">
                     </div>
                     <div class="form-group">
-                        <label>電子郵件</label>
-                        <input type="email" name="email" class="form-control" required placeholder="請輸入 Email">
+                        <label data-i18n="form-email">電子郵件</label>
+                        <input type="email" name="email" class="form-control" required placeholder="請輸入 Email" data-i18n-placeholder="ph-email">
                     </div>
                     <div class="form-group">
-                        <label>內容說明</label>
-                        <textarea name="message" class="form-control" rows="5" required placeholder="請輸入您的寶貴意見..."></textarea>
+                        <label data-i18n="form-msg">內容說明</label>
+                        <textarea name="message" class="form-control" rows="5" required placeholder="請輸入您的寶貴意見..." data-i18n-placeholder="ph-msg"></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">送出意見</button>
+                    <button type="submit" class="btn-submit" data-i18n="btn-submit">送出意見</button>
                 </form>
             </div>
         </div>
 
         <div class="contact-section">
             <div class="section-header">
-                <h2>校園聯絡資訊</h2>
+                <h2 data-i18n="contact-title">校園聯絡資訊</h2>
             </div>
             <div class="contact-links">
                 <a href="https://www.must.edu.tw/" target="_blank" class="contact-btn web">
                     <div class="contact-icon"><i class="fas fa-globe"></i></div>
-                    <span>校園網站</span>
+                    <span data-i18n="contact-web">校園網站</span>
                 </a>
                 <a href="tel:035593142" class="contact-btn">
                     <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-                    <span>電話聯繫</span>
+                    <span data-i18n="contact-tel">電話聯繫</span>
                 </a>
                 <a href="https://www.youtube.com/channel/UCoAT1ZVoLvA_DGXffBIqIgA" target="_blank" class="contact-btn yt">
                     <div class="contact-icon"><i class="fab fa-youtube"></i></div>
@@ -582,32 +590,197 @@
                 </a>
                 <a href="https://goo.gl/maps/y1z2w3x4" target="_blank" class="contact-btn">
                     <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <span>地址導航</span>
+                    <span data-i18n="contact-addr">地址導航</span>
                 </a>
             </div>
         </div>
 
         <footer>
-            <div class="team-title">專題網頁製作</div>
-            <div class="footer-copyright">
+            <div class="team-title" data-i18n="footer-title">專題網頁製作</div>
+            <div class="footer-copyright" data-i18n="footer-cr">
                 © 2026 校園導覽專題小組 (謝嘉哲、陳亭蓁、陳俊安). All Rights Reserved.
             </div>
         </footer>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const textToType = "探索校園角落 • 搜尋系館位置 • 體驗沈浸式實境";
-            const typeWriterElement = document.getElementById('typewriter');
-            let typeIndex = 0;
-            function typeWriter() {
-                if (typeIndex < textToType.length) {
-                    typeWriterElement.innerHTML += textToType.charAt(typeIndex);
-                    typeIndex++;
-                    setTimeout(typeWriter, 50); 
+        // 語言資料庫
+        const i18n = {
+            "zh": {
+                "welcome-title": "新生校園3D視覺導覽",
+                "btn-start": "開始探索",
+                "logo-text": "明新科技大學",
+                "news-title": "最新公告",
+                "news-1": "📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀",
+                "news-2": "📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全",
+                "news-3": "📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！",
+                "stat-founded": "創校年份",
+                "stat-students": "在校學生",
+                "stat-faculty": "專業師資",
+                "stat-colleges": "專業學院",
+                "tag-hot": "必訪熱點",
+                "spot-library": "圖書館",
+                "spot-library-desc": "擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。",
+                "view-location": "查看位置 →",
+                "tag-life": "生活起居",
+                "spot-dorm": "新生宿舍",
+                "spot-dorm-desc": "舒適安全的住宿環境，配備交誼廳與洗衣間，讓你快速融入群體生活。",
+                "view-room": "查看房型 →",
+                "tag-food": "飲食便利",
+                "spot-cafeteria": "學生餐廳",
+                "spot-cafeteria-desc": "提供多樣化的餐飲選擇，自助餐、麵食與異國料理，滿足學生的味蕾。",
+                "view-menu": "查看菜單 →",
+                "vr-title": "新生校園3D視覺導覽",
+                "vr-desc": "請在下方視窗操作您的虛擬旅程",
+                "dept-title": "系所快速連結",
+                "dept-semi": "半導體學院",
+                "dept-eng": "工程學院",
+                "dept-manage": "管理學院",
+                "dept-design": "人文與設計學院",
+                "dept-bilingual": "雙語教育中心",
+                "calendar-title": "重要行事曆 (114學年度)",
+                "sun": "日", "mon": "一", "tue": "二", "wed": "三", "thu": "四", "fri": "五", "sat": "六",
+                "select-date": "請點選日期",
+                "select-date-desc": "選擇左側有標記紅點的日期<br>查看當日詳細活動資訊。",
+                "map-title": "交通位置",
+                "map-desc": "歡迎蒞臨明新科技大學，我們位於新豐火車站附近，交通便利。",
+                "address": "地址：304新竹縣新豐鄉新興路1號",
+                "phone": "電話：03 559 3142",
+                "train": "火車：搭乘至「新豐車站」，步行約 10 分鐘即可抵達。",
+                "feedback-title": "意見回饋",
+                "form-name": "您的姓名",
+                "ph-name": "請輸入姓名",
+                "form-email": "電子郵件",
+                "ph-email": "請輸入 Email",
+                "form-msg": "內容說明",
+                "ph-msg": "請輸入您的寶貴意見...",
+                "btn-submit": "送出意見",
+                "contact-title": "校園聯絡資訊",
+                "contact-web": "校園網站",
+                "contact-tel": "電話聯繫",
+                "contact-addr": "地址導航",
+                "footer-title": "專題網頁製作",
+                "footer-cr": "© 2026 校園導覽專題小組 (謝嘉哲、陳亭蓁、陳俊安). All Rights Reserved.",
+                "search-placeholder": "搜尋名稱、老師、房號...",
+                "filter-all": "全部",
+                "filter-building": "大樓",
+                "filter-admin": "處室",
+                "filter-teacher": "教師",
+                "filter-classroom": "教室",
+                "preview-title": "請選擇地點",
+                "preview-desc": "點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。"
+            },
+            "en": {
+                "welcome-title": "MUST 3D Campus Tour",
+                "btn-start": "Start Tour",
+                "logo-text": "Minghsin Univ. of Sci. & Tech.",
+                "news-title": "News",
+                "news-1": "📢 [Academic Affairs] 114 Academic Year Freshman Handbook is available for download.",
+                "news-2": "📢 [Student Affairs] Winter break is here, please stay safe during your travels.",
+                "news-3": "📢 [Library] 'Library Treasure Hunt' will be held in the first week of school!",
+                "stat-founded": "Founded",
+                "stat-students": "Students",
+                "stat-faculty": "Faculty",
+                "stat-colleges": "Colleges",
+                "tag-hot": "Hot Spot",
+                "spot-library": "Library",
+                "spot-library-desc": "A modern space for reading and studying with a rich collection of books.",
+                "view-location": "View Location →",
+                "tag-life": "Living",
+                "spot-dorm": "Freshman Dorm",
+                "spot-dorm-desc": "Safe and comfortable accommodation with lounges and laundry facilities.",
+                "view-room": "View Rooms →",
+                "tag-food": "Food",
+                "spot-cafeteria": "Cafeteria",
+                "spot-cafeteria-desc": "Offers a variety of dining options including buffet, noodles, and exotic cuisine.",
+                "view-menu": "View Menu →",
+                "vr-title": "3D Virtual Campus Tour",
+                "vr-desc": "Please navigate your virtual journey in the window below",
+                "dept-title": "Quick Links",
+                "dept-semi": "College of Semiconductor",
+                "dept-eng": "College of Engineering",
+                "dept-manage": "College of Management",
+                "dept-design": "College of Humanities & Design",
+                "dept-bilingual": "Bilingual Education Center",
+                "calendar-title": "Academic Calendar (114 Year)",
+                "sun": "Sun", "mon": "Mon", "tue": "Tue", "wed": "Wed", "thu": "Thu", "fri": "Fri", "sat": "Sat",
+                "select-date": "Select a Date",
+                "select-date-desc": "Click on a date with a red dot<br>to view event details.",
+                "map-title": "Location",
+                "map-desc": "Welcome to MUST. We are located near Xinfeng Train Station with convenient transportation.",
+                "address": "Address: No. 1, Xinxing Rd., Xinfeng Township, Hsinchu County 304",
+                "phone": "Phone: 03 559 3142",
+                "train": "Train: Take train to 'Xinfeng Station', walk for about 10 mins.",
+                "feedback-title": "Feedback",
+                "form-name": "Your Name",
+                "ph-name": "Enter your name",
+                "form-email": "Email",
+                "ph-email": "Enter your email",
+                "form-msg": "Message",
+                "ph-msg": "Enter your valuable feedback...",
+                "btn-submit": "Submit",
+                "contact-title": "Contact Info",
+                "contact-web": "Website",
+                "contact-tel": "Phone",
+                "contact-addr": "Navigation",
+                "footer-title": "Project Website",
+                "footer-cr": "© 2026 Campus Tour Project Team (Jiazhe Xie, Tingzhen Chen, Junan Chen). All Rights Reserved.",
+                "search-placeholder": "Search name, teacher, room...",
+                "filter-all": "All",
+                "filter-building": "Building",
+                "filter-admin": "Office",
+                "filter-teacher": "Teacher",
+                "filter-classroom": "Classroom",
+                "preview-title": "Select Location",
+                "preview-desc": "Click the list on the left to view 3D photos and contact info."
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.getElementById('langLabel').innerText = currentLang === 'zh' ? 'English' : '繁體中文';
+            
+            // 更新所有有 data-i18n 屬性的文字
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.innerText = i18n[currentLang][key];
+                }
+            });
+
+            // 更新 placeholder
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[currentLang][key]) {
+                    el.placeholder = i18n[currentLang][key];
+                }
+            });
+
+            // 更新打字機文字
+            typeWriterText = currentLang === 'zh' ? "探索校園角落 • 搜尋系館位置 • 體驗沈浸式實境" : "Explore Campus • Find Locations • Immersive Experience";
+            resetTypewriter();
+        }
+
+        let typeWriterText = "探索校園角落 • 搜尋系館位置 • 體驗沈浸式實境";
+        
+        function resetTypewriter() {
+            const el = document.getElementById('typewriter');
+            el.innerHTML = '';
+            let i = 0;
+            function type() {
+                if (i < typeWriterText.length) {
+                    el.innerHTML += typeWriterText.charAt(i);
+                    i++;
+                    setTimeout(type, 50);
                 }
             }
-            setTimeout(typeWriter, 500);
+            type();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            resetTypewriter();
 
             const welcomeScreen = document.getElementById('welcome-screen');
             const welcomeContent = document.getElementById('welcomeContent');
@@ -684,7 +857,7 @@
             "2026-06-29": "期末考暨展演週 (至7/5)"
         };
 
-        // 🔥 自動抓取今天日期
+        // 自動抓取今天日期
         const today = new Date();
         let currentYear = today.getFullYear();
         let currentMonth = today.getMonth() + 1;
@@ -693,13 +866,18 @@
             const grid = document.querySelector('.calendar-grid');
             const monthLabel = document.getElementById('currentMonthLabel');
             while(grid.children.length > 7) { grid.removeChild(grid.lastChild); }
-            monthLabel.innerText = `${year}年 ${month}月`;
+            
+            // 處理月份標題的多語言
+            if (currentLang === 'zh') {
+                monthLabel.innerText = `${year}年 ${month}月`;
+            } else {
+                const enMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                monthLabel.innerText = `${enMonths[month-1]} ${year}`;
+            }
 
             const jsMonth = month - 1; 
             const firstDay = new Date(year, jsMonth, 1).getDay(); 
             const daysInMonth = new Date(year, jsMonth + 1, 0).getDate(); 
-
-            // 取得真實今天
             const realToday = new Date();
 
             for (let i = 0; i < firstDay; i++) {
@@ -714,7 +892,6 @@
                 cell.className = 'calendar-day';
                 cell.innerHTML = `<span>${day}</span>`;
 
-                // 🔥 判斷是否為今天
                 if (day === realToday.getDate() && month === (realToday.getMonth() + 1) && year === realToday.getFullYear()) {
                     cell.classList.add('today');
                 }
@@ -739,7 +916,7 @@
                     <div class="event-date-display">${date}</div>
                     <i class="fas fa-calendar-alt"></i>
                     <h4>${title}</h4>
-                    <p>學校重要活動日程</p>
+                    <p>${currentLang === 'zh' ? '學校重要活動日程' : 'Important School Event'}</p>
                 `;
                 panel.style.opacity = 1;
             }, 200);
@@ -755,12 +932,11 @@
         renderCalendar(currentYear, currentMonth);
 
         const form = document.getElementById('feedbackForm');
-        // 請確認這個網址是你正確部署的 GAS 網址
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzw6l7lfhms_C3oh6gA7FFPc76XspAfW6KQxbrz7ONL6QeEBEVbDpPw1Rbf99-qTbgU/exec';
         form.addEventListener('submit', e => {
             e.preventDefault();
             const btn = document.querySelector('.btn-submit');
-            btn.innerText = '傳送中...';
+            btn.innerText = '...';
             btn.disabled = true;
 
             const formData = new FormData(form);
@@ -771,14 +947,14 @@
                 method: 'POST', body: JSON.stringify(data), mode: 'no-cors', headers: { 'Content-Type': 'application/json' }
             })
             .then(response => {
-                alert('感謝您的回饋！我們已收到您的意見。');
+                alert(currentLang === 'zh' ? '感謝您的回饋！' : 'Thank you for your feedback!');
                 form.reset();
-                btn.innerText = '送出意見';
+                btn.innerText = currentLang === 'zh' ? '送出意見' : 'Submit';
                 btn.disabled = false;
             })
             .catch(error => {
-                alert('發送失敗，請稍後再試！');
-                btn.innerText = '送出意見';
+                alert('Error!');
+                btn.innerText = currentLang === 'zh' ? '送出意見' : 'Submit';
                 btn.disabled = false;
             });
         });
@@ -792,7 +968,7 @@
         }
 
         // ============================================
-        // 🔥 教師資料庫 (格式統一)
+        // 🔥 完整資料庫 (保持不變)
         // ============================================
         const campusLocations = [
             { id: 1, name: "管理學院", type: "building", typeName: "大樓", desc: "本院以期落實「培育跨域協作、務實創新、全人學習之管理專業人才」為教育目標。", img: "images/管理學院.jpg" },
@@ -827,7 +1003,7 @@
             { id: 203, name: "應大中 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R323\ntcying@must.edu.tw\n分機 3452", img: "images/應大中.jpg" },
             { id: 204, name: "陳玉專 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R327\ncardy@must.edu.tw\n分機 3456", img: "images/陳玉專.jpg" },
             { id: 205, name: "李政穎 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R320\nalvin@must.edu.tw\n分機 3449", img: "images/李政穎.jpg" },
-            { id: 206, name: "陳建志 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R319\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志.jpg" },
+            { id: 206, name: "陳建志 老師 (資管)", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R319\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志.jpg" },
             { id: 207, name: "邱川峰 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R326\ncfchiu@must.edu.tw\n分機 3455", img: "images/邱川峰.jpg" },
             { id: 208, name: "詹森仁 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R418\nsrchan@must.edu.tw\n分機 3586", img: "images/詹森仁.jpg" },
             { id: 209, name: "李佩君 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R328\npjlee@must.edu.tw\n分機 3457", img: "images/李佩君.jpg" },
@@ -856,7 +1032,7 @@
             // --- 企業管理系 ---
             { id: 401, name: "吳芸嫻 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 6 樓 626\nj1414@must.edu.tw\n分機 1702", img: "images/吳芸嫻.jpg" },
             { id: 402, name: "張敏玟 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院大樓 533 室\nsophie.chang@must.edu.tw\n分機 1828", img: "images/張敏玟.jpg" },
-            { id: 403, name: "陳建志 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 319 室\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志_企管.jpg" },
+            { id: 403, name: "陳建志 老師 (企管)", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 319 室\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志_企管.jpg" },
             { id: 404, name: "林淑瑛 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 732 室\nsylin@must.edu.tw\n分機 1892", img: "images/林淑瑛.jpg" },
             { id: 405, name: "林淑芬 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 717 室\nlsf@must.edu.tw\n分機 1887", img: "images/林淑芬.jpg" },
             { id: 406, name: "李明煌 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 731 室\nminglee@must.edu.tw\n分機 1891", img: "images/李明煌.jpg" },
