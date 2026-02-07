@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生餐廳 | Food Forum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/cafeteria_page.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+</head>
+
+<body>
+
+    <header class="page-header">
+        <a href="home.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> 返回導覽
+        </a>
+        <h1>學生餐廳</h1>
+    </header>
+
+    <div class="container">
+        <!-- Store List Section -->
+        <section>
+            <h2 style="color: #2c3e50; border-left: 5px solid #00B894; padding-left: 15px; margin-bottom: 20px;">
+                精選店家
+            </h2>
+            <div id="shopList" class="shop-grid">
+                <!-- Loading State -->
+                <div class="loading-spinner" style="text-align: center; grid-column: 1/-1; padding: 50px;">
+                    <i class="fas fa-spinner fa-spin fa-3x" style="color: #00B894;"></i>
+                    <p>載入店家資訊中...</p>
+                </div>
+            </div>
+    </div>
+
+    <div class="container">
+        <!-- Food Forum Section -->
+        <section class="forum-section">
+            <div class="forum-title">
+                <i class="fas fa-comments"></i> 美食討論區
+            </div>
+
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+                分享你的用餐心得或是推薦美食！
+            </p>
+
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <input type="text" id="commentUser" placeholder="暱稱 (選填)">
+                <textarea id="commentContent" placeholder="分享你的用餐心得或是推薦美食..."></textarea>
+                <button class="btn-submit" id="btnSubmitComment">
+                    發送留言 <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <!-- Comment List -->
+            <div id="commentList" class="comment-list">
+                <!-- Comments will be loaded here -->
+                <div style="text-align: center; color: #999;">尚未有留言，搶頭香！</div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Debug Output -->
+    <div id="debugConsole"
+        style="display:none; padding:10px; background:#333; color:#0f0; font-family:monospace; margin:20px; border-radius:10px; font-size:12px;">
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/cafeteria.js?v=12"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,2449 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明新科大管理學院 3D導覽 | MUST Campus Tour</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/cafeteria.css">
+
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+
+    <style>
+        /* ===== 變數設定 ===== */
+        :root {
+            --primary: #00B894;
+            /* 活力青 */
+            --primary-dark: #008f72;
+            --navy: #2C3E50;
+            /* 專業深藍 */
+            --red: #E74C3C;
+            /* 公告紅 */
+            --bg: #F0F2F5;
+            /* 淺灰底色 */
+            --white: #FFFFFF;
+            --gray-light: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            /* 社群顏色 */
+            --fb: #1877F2;
+            --yt: #FF0000;
+            --ig: #E1306C;
+        }
+
+        /* 🔥 Card Interaction Upgrades */
+        .spot-card.special-interactive {
+            cursor: pointer;
+            position: relative;
+            transform-origin: center;
+        }
+
+        .spot-card.special-interactive:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 184, 148, 0.25);
+            border: 2px solid var(--primary);
+        }
+
+        .spot-card.special-interactive .spot-image-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 184, 148, 0.8), transparent);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .spot-card.special-interactive:hover .spot-image-box::after {
+            opacity: 1;
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            opacity: 0;
+            z-index: 5;
+            transition: 0.4s;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .spot-card.special-interactive:hover .card-overlay {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .action-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: white;
+            background: var(--primary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .spot-card.special-interactive:hover .action-btn {
+            background: var(--navy);
+            transform: scale(1.1);
+        }
+
+        /* ===== 基礎設定 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg);
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        /* ===== 動畫定義 ===== */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes contentFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInList {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ===== 1. 歡迎封面 (背景校門口) ===== */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            background: #1a1a1a;
+        }
+
+        .welcome-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/校門口.jpg');
+            background-size: cover;
+            background-position: center;
+            will-change: transform;
+            animation: kenBurns 30s infinite alternate linear;
+            filter: brightness(0.6) blur(2px);
+            z-index: 1;
+        }
+
+        .welcome-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(44, 62, 80, 0.4), rgba(44, 62, 80, 0.8));
+            z-index: 2;
+        }
+
+        /* 🔥 黑框樣式調整：強制寬度，保持長條形 */
+        .welcome-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: white;
+            padding: 40px 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+
+            /* 這裡設定寬度，讓它變寬 */
+            width: 80%;
+            max-width: 800px;
+            min-width: 600px;
+            /* 電腦版最小寬度 */
+
+            animation: contentFloat 6s ease-in-out infinite;
+        }
+
+        /* 手機版適應 */
+        @media (max-width: 768px) {
+            .welcome-content {
+                min-width: auto;
+                width: 90%;
+                padding: 30px;
+            }
+
+            .welcome-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .welcome-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            min-height: 1.6em;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: var(--primary);
+            margin-left: 8px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        .btn-start {
+            padding: 15px 50px;
+            font-size: 1.3rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(0, 184, 148, 0.5);
+        }
+
+        .btn-start:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.7);
+        }
+
+        /* ===== 2. 搜尋視窗 ===== */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .search-box {
+            background: white;
+            width: 900px;
+            height: 600px;
+            border-radius: 20px;
+            display: flex;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .search-sidebar {
+            width: 40%;
+            background: var(--gray-light);
+            padding: 25px;
+            border-right: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 184, 148, 0.1);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: #eee;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 2px 5px rgba(0, 184, 148, 0.3);
+        }
+
+        .search-results {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .search-results::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .search-results::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 3px;
+        }
+
+        .result-item {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+            background: white;
+            animation: fadeInList 0.3s ease forwards;
+        }
+
+        .result-item:hover {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transform: translateX(5px);
+        }
+
+        .result-item.active {
+            background: #e6fffa;
+            border-left-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 184, 148, 0.15);
+        }
+
+        .result-item i {
+            width: 35px;
+            height: 35px;
+            background: #f0f2f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            transition: 0.2s;
+        }
+
+        .result-item.active i {
+            background: var(--primary);
+            color: white;
+        }
+
+        .result-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-name {
+            font-weight: bold;
+            color: var(--navy);
+            font-size: 1rem;
+        }
+
+        .result-type {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .search-preview {
+            width: 60%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-img-container {
+            width: 100%;
+            height: 350px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background: #eee;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+
+        .preview-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .preview-img-container.teacher-mode {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);
+            margin-top: 20px;
+        }
+
+        .teacher-bg-decoration {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(120deg, #e0f7fa 0%, #e8f5e9 100%);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+            animation: rotateBg 15s linear infinite;
+        }
+
+        .teacher-bg-decoration.active {
+            opacity: 1;
+        }
+
+        .preview-info {
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .preview-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+
+        .preview-info p {
+            color: #666;
+            line-height: 1.6;
+            max-width: 80%;
+            margin: 0 auto;
+            white-space: pre-wrap;
+            font-size: 1.1rem;
+        }
+
+        .close-search {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            z-index: 100;
+            transition: 0.3s;
+        }
+
+        .close-search:hover {
+            color: #333;
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* ===== 3. 主要介面 ===== */
+        .main-content {
+            opacity: 1;
+            /* Changed from 0 to 1 for immediate visibility */
+            /* transition: opacity 1s; Removed transition */
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--navy);
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-lang {
+            background: var(--navy);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-lang:hover {
+            background: var(--primary);
+        }
+
+        .btn-search-trigger {
+            background: var(--bg);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: var(--navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .btn-search-trigger:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(15deg);
+        }
+
+        .news-ticker-container {
+            background: var(--navy);
+            color: white;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 90;
+        }
+
+        .news-title {
+            background: var(--red);
+            padding: 8px 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .news-content {
+            flex-grow: 1;
+            padding: 8px 10px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .news-item {
+            margin-right: 50px;
+            display: inline-block;
+        }
+
+        .hero-text {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        /* 🔥 全景視窗、Loading 與 防誤觸遮罩 */
+        .panorama-container {
+            max-width: 1400px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .vr-frame {
+            position: relative;
+            border: 10px solid white;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            height: 700px;
+            overflow: hidden;
+        }
+
+        .vr-frame:fullscreen {
+            border: none;
+            border-radius: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .iframe-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            transition: opacity 0.5s;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ddd;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 防誤觸遮罩 (Overlay) */
+        .vr-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(2px);
+        }
+
+        .vr-overlay:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .vr-overlay i {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        .vr-overlay span {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .vr-overlay.active {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-fullscreen {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            border: 2px solid white;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: 0.3s;
+        }
+
+        .btn-fullscreen:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* 景點卡片 */
+        .spots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .spot-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .spot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .spot-image-box {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .spot-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .spot-card:hover .spot-image-box img {
+            transform: scale(1.1);
+        }
+
+        .spot-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 184, 148, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .spot-info {
+            padding: 25px;
+        }
+
+        .spot-info h3 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .spot-info p {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* 通用標題 */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* 學校數據區塊 */
+        .stats-section {
+            background: var(--navy);
+            color: white;
+            padding: 60px 5%;
+            margin-bottom: 60px;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+        }
+
+        /* 系所連結 (5個一排) - 淺灰背景區塊 */
+        .dept-section {
+            background: #F8F9FA;
+            padding: 60px 5%;
+            margin-bottom: 0;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.03);
+            /* 內部陰影增加層次 */
+        }
+
+        .dept-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dept-card {
+            background: white;
+            padding: 20px 10px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), #0984e3);
+            transform: scaleX(0);
+            transition: 0.4s;
+            transform-origin: left;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .dept-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .dept-icon {
+            width: 50px;
+            height: 50px;
+            background: #e6fffa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            transition: 0.4s;
+        }
+
+        .dept-card:hover .dept-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .dept-name {
+            font-size: 0.95rem;
+            color: var(--navy);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 992px) {
+            .dept-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dept-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* 🔥 行事曆日曆 (白色背景區塊 - 區分開來) */
+        .calendar-section {
+            background: white;
+            padding: 80px 5%;
+            margin: 0;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.03);
+            /* 上方陰影區隔 */
+            position: relative;
+            z-index: 1;
+        }
+
+        .calendar-layout {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .calendar-widget {
+            flex: 1.5;
+            min-width: 320px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+        }
+
+        .calendar-header {
+            background: var(--navy);
+            color: white;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .calendar-header h3 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .calendar-nav button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .calendar-nav button:hover {
+            background: var(--primary);
+        }
+
+        .calendar-grid {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .calendar-day-name {
+            font-weight: bold;
+            color: #888;
+            padding-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .calendar-day {
+            height: 60px;
+            border-radius: 8px;
+            border: 1px solid #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #333;
+            position: relative;
+            transition: 0.2s;
+            cursor: default;
+        }
+
+        .calendar-day:hover {
+            background: #f9f9f9;
+            border-color: var(--primary);
+        }
+
+        .calendar-day.empty {
+            background: transparent;
+            border: none;
+            cursor: default;
+        }
+
+        .calendar-day.today {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 184, 148, 0.4);
+        }
+
+        .calendar-day.has-event {
+            cursor: pointer;
+            background: #fff5f5;
+            border-color: #ffcccc;
+        }
+
+        .calendar-day.has-event:hover {
+            background: #ffebeb;
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+
+        .event-details-panel {
+            flex: 1;
+            min-width: 280px;
+            min-height: 380px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .event-details-panel i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .event-details-panel h4 {
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .event-details-panel p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .event-details-panel.active i {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .event-date-display {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* 交通地圖 */
+        .map-section {
+            background: #F8F9FA;
+            padding: 80px 5%;
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-card-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .map-info {
+            flex: 1;
+            min-width: 300px;
+            background: transparent;
+            padding: 0;
+        }
+
+        .map-info h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--navy);
+            font-weight: bold;
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .map-desc {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .info-list p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            color: #444;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-list i {
+            color: var(--primary);
+            width: 30px;
+            text-align: center;
+            font-size: 1.3rem;
+            margin-right: 10px;
+        }
+
+        .google-map {
+            flex: 1.5;
+            min-width: 400px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 8px solid white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: rotate(-2deg);
+            transition: 0.5s;
+        }
+
+        .google-map:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* 🔥 修正地圖定位：使用 Embed API 參數 q=明新科技大學 */
+        .google-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* VR Forum Section (was Feedback Section) */
+        .feedback-section {
+            background: white;
+            padding: 60px 5%;
+            margin-bottom: 0;
+        }
+
+        .feedback-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .feedback-container h2 {
+            text-align: center;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--navy);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        /* 校園聯絡資訊 */
+        .contact-section {
+            background: #F8F9FA;
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--navy);
+            transition: 0.3s;
+            width: 100px;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px);
+            color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            transition: 0.3s;
+            color: #555;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-btn:hover .contact-icon {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 184, 148, 0.4);
+        }
+
+        .contact-btn.yt:hover .contact-icon {
+            background: var(--yt);
+        }
+
+        .contact-btn.fb:hover .contact-icon {
+            background: var(--fb);
+        }
+
+        .contact-btn.ig:hover .contact-icon {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .contact-btn.web:hover .contact-icon {
+            background: var(--navy);
+        }
+
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .team-title {
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .footer-copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="search-modal" id="searchModal">
+        <div class="search-box">
+            <i class="fas fa-times close-search" onclick="closeSearch()"></i>
+            <div class="search-sidebar">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="搜尋名稱、老師、房號..."
+                        data-i18n-placeholder="search-placeholder" onkeyup="filterLocations(this.value)">
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-btn active" onclick="filterType('all')" data-i18n="filter-all">全部</button>
+                    <button class="filter-btn" onclick="filterType('building')" data-i18n="filter-building">大樓</button>
+                    <button class="filter-btn" onclick="filterType('admin')" data-i18n="filter-admin">處室</button>
+                    <button class="filter-btn" onclick="filterType('teacher')" data-i18n="filter-teacher">教師</button>
+                    <button class="filter-btn" onclick="filterType('classroom')"
+                        data-i18n="filter-classroom">教室</button>
+                </div>
+                <div class="search-results" id="resultsList"></div>
+            </div>
+            <div class="search-preview">
+                <div class="teacher-bg-decoration" id="teacherBg"></div>
+                <div class="preview-img-container" id="previewContainer">
+                    <img id="previewImg" src="images/校園平面圖.jpg" alt="預覽圖">
+                </div>
+                <div class="preview-info">
+                    <h2 id="previewTitle" data-i18n="preview-title">請選擇地點</h2>
+                    <p id="previewDesc" data-i18n="preview-desc">點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="main-content" id="mainContent">
+        <header>
+            <div class="logo">
+                <img src="images/明新校徽.jpg" alt="Logo">
+                <span data-i18n="logo-text">明新科技大學</span>
+            </div>
+            <div class="header-actions">
+                <button class="btn-lang" onclick="toggleLanguage()">
+                    <i class="fas fa-globe"></i> <span id="langLabel">English</span>
+                </button>
+                <button class="btn-search-trigger" onclick="openSearch()" title="搜尋地點"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </header>
+
+        <div class="news-ticker-container">
+            <div class="news-title" data-i18n="news-title">最新公告</div>
+            <div class="news-content">
+                <marquee scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
+                    <span class="news-item" data-i18n="news-1">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
+                    <span class="news-item" data-i18n="news-2">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
+                    <span class="news-item" data-i18n="news-3">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
+                    <span class="news-item" data-i18n="news-4">📢 【教務處】114學年度第2學期選課須知公告，請同學留意選課時間</span>
+                    <span class="news-item" data-i18n="news-5">📢 【學務處】114學年度社團博覽會即將於9/24展開，歡迎踴躍參加</span>
+                    <span class="news-item" data-i18n="news-6">📢 【總務處】校園部分區域進行施工維護，請師生繞道通行</span>
+                    <span class="news-item" data-i18n="news-7">📢 【國際處】海外交換學生計畫說明會將於近期舉辦，詳情請見官網</span>
+                    <span class="news-item" data-i18n="news-8">📢 【體育室】校慶運動會報名開跑，歡迎各系組隊參加</span>
+                </marquee>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <i class="fas fa-university"></i>
+                    <div class="stat-number">1965</div>
+                    <div class="stat-label" data-i18n="stat-founded">創校年份</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <div class="stat-number">9,000+</div>
+                    <div class="stat-label" data-i18n="stat-students">在校學生</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label" data-i18n="stat-faculty">專業師資</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-globe-asia"></i>
+                    <div class="stat-number">6</div>
+                    <div class="stat-label" data-i18n="stat-colleges">專業學院</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-text">
+            <h1 data-i18n="vr-title">新生校園3D視覺導覽</h1>
+            <p data-i18n="vr-desc">請在下方視窗操作您的虛擬旅程</p>
+        </div>
+
+        <div class="panorama-container">
+            <div class="vr-frame" id="panoramaFrame">
+                <div class="iframe-loader" id="vrLoader">
+                    <div class="spinner"></div>
+                </div>
+                <div class="vr-overlay" id="vrOverlay" onclick="enableVR()">
+                    <i class="fas fa-hand-pointer"></i>
+                    <span data-i18n="click-to-interact">點擊開始互動</span>
+                </div>
+                <iframe src="output/index.html" allowfullscreen
+                    onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
+                <button class="btn-fullscreen" onclick="toggleFullscreen()">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="spots-grid">
+            <div class="spot-card">
+                <div class="spot-image-box">
+                    <span class="spot-tag" data-i18n="tag-hot">必訪熱點</span>
+                    <img src="images/圖書館.jpg" alt="圖書館實景">
+                </div>
+                <div class="spot-info">
+                    <h3 data-i18n="spot-library">圖書館</h3>
+                    <p data-i18n="spot-library-desc">擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。</p>
+                    <a href="#" class="btn-link" data-i18n="view-location">查看位置 →</a>
+                </div>
+            </div>
+            <div class="spot-card">
+                <div class="spot-image-box">
+                    <span class="spot-tag" data-i18n="tag-life">生活起居</span>
+                    <img src="images/明新學宛.jpg" alt="宿舍實景">
+                </div>
+                <div class="spot-info">
+                    <h3 data-i18n="spot-dorm">新生宿舍</h3>
+                    <p data-i18n="spot-dorm-desc">舒適安全的住宿環境，配備交誼廳與洗衣間，讓你快速融入群體生活。</p>
+                    <a href="#" class="btn-link" data-i18n="view-room">查看房型 →</a>
+                </div>
+            </div>
+            <!-- 交互設計優化：整張卡片都可點擊 (Whole Card Clickable) -->
+            <a href="cafeteria.html" class="spot-card special-interactive"
+                style="display:block; text-decoration:none; color:inherit;">
+                <div class="spot-image-box">
+                    <span class="spot-tag" data-i18n="tag-food">飲食便利</span>
+                    <img src="images/學生餐廳.jpg" alt="學生餐廳實景">
+                    <!-- Add an overlay text for better CTA -->
+                    <div class="card-overlay"><i class="fas fa-utensils"></i> 點擊進入點餐</div>
+                </div>
+                <div class="spot-info">
+                    <h3 data-i18n="spot-cafeteria">學生餐廳</h3>
+                    <p data-i18n="spot-cafeteria-desc">提供多樣化的餐飲選擇，自助餐、麵食與異國料理，滿足學生的味蕾。</p>
+                    <span class="action-btn" data-i18n="view-menu">查看菜單 →</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="dept-section">
+            <div class="section-header">
+                <h2 data-i18n="dept-title">系所快速連結</h2>
+            </div>
+            <div class="dept-grid">
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=36" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-microchip"></i></div>
+                    <div class="dept-name" data-i18n="dept-semi">半導體學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=41" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-tools"></i></div>
+                    <div class="dept-name" data-i18n="dept-eng">工程學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=45" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="dept-name" data-i18n="dept-manage">管理學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=59" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-pen-nib"></i></div>
+                    <div class="dept-name" data-i18n="dept-design">人文與設計學院</div>
+                </a>
+                <a href="https://acade.must.edu.tw/index.aspx?UnitID=1241" target="_blank" class="dept-card">
+                    <div class="dept-icon"><i class="fas fa-language"></i></div>
+                    <div class="dept-name" data-i18n="dept-bilingual">雙語教育中心</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <div class="section-header">
+                <h2 data-i18n="calendar-title">重要行事曆 (114學年度)</h2>
+            </div>
+            <div class="calendar-layout">
+                <div class="calendar-widget">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                        </div>
+                        <h3 id="currentMonthLabel"></h3>
+                        <div class="calendar-nav">
+                            <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-name" data-i18n="sun">日</div>
+                        <div class="calendar-day-name" data-i18n="mon">一</div>
+                        <div class="calendar-day-name" data-i18n="tue">二</div>
+                        <div class="calendar-day-name" data-i18n="wed">三</div>
+                        <div class="calendar-day-name" data-i18n="thu">四</div>
+                        <div class="calendar-day-name" data-i18n="fri">五</div>
+                        <div class="calendar-day-name" data-i18n="sat">六</div>
+                    </div>
+                </div>
+                <div class="event-details-panel" id="eventPanel">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4 data-i18n="select-date">請點選日期</h4>
+                    <p data-i18n="select-date-desc">選擇左側有標記紅點的日期<br>查看當日詳細活動資訊。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-section">
+            <div class="map-card-container">
+                <div class="map-info">
+                    <h2 data-i18n="map-title">交通位置</h2>
+                    <p class="map-desc" data-i18n="map-desc">歡迎蒞臨明新科技大學，我們位於新豐火車站附近，交通便利。</p>
+                    <div class="info-list">
+                        <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="address">地址：304新竹縣新豐鄉新興路1號</span></p>
+                        <p><i class="fas fa-phone"></i> <span data-i18n="phone">電話：03 559 3142</span></p>
+                        <p><i class="fas fa-train"></i> <span data-i18n="train">火車：搭乘至「新豐車站」，步行約 10 分鐘即可抵達。</span></p>
+                    </div>
+                </div>
+                <div class="google-map">
+                    <iframe src="https://maps.google.com/maps?q=明新科技大學&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%"
+                        height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- VR Forum Section (Replaced Feedback) -->
+        <div class="feedback-section">
+            <div class="feedback-container">
+                <h2><i class="fas fa-vr-cardboard"></i> <span>3D導覽論壇</span></h2>
+                <p style="text-align: center; color: #666; margin-bottom: 25px;">
+                    分享您的3D導覽體驗、提出建議，或是與其他同學討論校園景點特色！
+                </p>
+
+                <!-- Comment Form -->
+                <div class="form-group">
+                    <label>您的暱稱 (選填)</label>
+                    <input type="text" id="vrForumUser" class="form-control" placeholder="請輸入暱稱">
+                </div>
+                <div class="form-group">
+                    <label>分享您的想法</label>
+                    <textarea id="vrForumContent" class="form-control" rows="4"
+                        placeholder="分享您的3D導覽體驗、建議或心得..."></textarea>
+                </div>
+                <button class="btn-submit" id="btnSubmitVRComment">
+                    發送留言 <i class="fas fa-paper-plane"></i>
+                </button>
+
+                <!-- Comment List -->
+                <div style="margin-top: 40px;">
+                    <h3
+                        style="color: var(--navy); margin-bottom: 20px; border-left: 4px solid var(--primary); padding-left: 15px;">
+                        <i class="fas fa-comments"></i> 討論區
+                    </h3>
+                    <div id="vrCommentList" style="max-height: 600px; overflow-y: auto;">
+                        <div style="text-align: center; color: #999; padding: 30px;">尚未有留言，搶頭香！</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="section-header">
+                <h2 data-i18n="contact-title">校園聯絡資訊</h2>
+            </div>
+            <div class="contact-links">
+                <a href="https://www.must.edu.tw/" target="_blank" class="contact-btn web">
+                    <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                    <span data-i18n="contact-web">校園網站</span>
+                </a>
+                <a href="tel:035593142" class="contact-btn">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <span data-i18n="contact-tel">電話聯繫</span>
+                </a>
+                <a href="https://www.youtube.com/channel/UCoAT1ZVoLvA_DGXffBIqIgA" target="_blank"
+                    class="contact-btn yt">
+                    <div class="contact-icon"><i class="fab fa-youtube"></i></div>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://www.facebook.com/mustminghsin" target="_blank" class="contact-btn fb">
+                    <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.instagram.com/mustminghsin/" target="_blank" class="contact-btn ig">
+                    <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://goo.gl/maps/y1z2w3x4" target="_blank" class="contact-btn">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <span data-i18n="contact-addr">地址導航</span>
+                </a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="team-title" data-i18n="footer-title">專題網頁製作</div>
+            <div class="footer-copyright" data-i18n="footer-cr">
+                © 2026 校園導覽專題小組 (謝嘉哲、陳亭蓁、陳俊安). All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 語言資料庫
+        const i18n = {
+            "zh": {
+                "welcome-title": "視覺導覽",
+                "btn-start": "開始探索",
+                "logo-text": "明新科技大學",
+                "news-title": "最新公告",
+                "news-1": "📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀",
+                "news-2": "📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全",
+                "news-3": "📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！",
+                "news-4": "📢 【教務處】114學年度第2學期選課須知公告，請同學留意選課時間",
+                "news-5": "📢 【學務處】114學年度社團博覽會即將於9/24展開，歡迎踴躍參加",
+                "news-6": "📢 【總務處】校園部分區域進行施工維護，請師生繞道通行",
+                "news-7": "📢 【國際處】海外交換學生計畫說明會將於近期舉辦，詳情請見官網",
+                "news-8": "📢 【體育室】校慶運動會報名開跑，歡迎各系組隊參加",
+                "stat-founded": "創校年份",
+                "stat-students": "在校學生",
+                "stat-faculty": "專業師資",
+                "stat-colleges": "專業學院",
+                "tag-hot": "必訪熱點",
+                "spot-library": "圖書館",
+                "spot-library-desc": "擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。",
+                "view-location": "查看位置 →",
+                "tag-life": "生活起居",
+                "spot-dorm": "新生宿舍",
+                "spot-dorm-desc": "舒適安全的住宿環境，配備交誼廳與洗衣間，讓你快速融入群體生活。",
+                "view-room": "查看房型 →",
+                "tag-food": "飲食便利",
+                "spot-cafeteria": "學生餐廳",
+                "spot-cafeteria-desc": "提供多樣化的餐飲選擇，自助餐、麵食與異國料理，滿足學生的味蕾。",
+                "view-menu": "查看菜單 →",
+                "vr-title": "新生校園3D視覺導覽",
+                "vr-desc": "請在下方視窗操作您的虛擬旅程",
+                "click-to-interact": "點擊開始互動",
+                "dept-title": "系所快速連結",
+                "dept-semi": "半導體學院",
+                "dept-eng": "工程學院",
+                "dept-manage": "管理學院",
+                "dept-design": "人文與設計學院",
+                "dept-bilingual": "雙語教育中心",
+                "calendar-title": "重要行事曆 (114學年度)",
+                "sun": "日", "mon": "一", "tue": "二", "wed": "三", "thu": "四", "fri": "五", "sat": "六",
+                "select-date": "請點選日期",
+                "select-date-desc": "選擇左側有標記紅點的日期<br>查看當日詳細活動資訊。",
+                "map-title": "交通位置",
+                "map-desc": "歡迎蒞臨明新科技大學，我們位於新豐火車站附近，交通便利。",
+                "address": "地址：304新竹縣新豐鄉新興路1號",
+                "phone": "電話：03 559 3142",
+                "train": "火車：搭乘至「新豐車站」，步行約 10 分鐘即可抵達。",
+                "contact-title": "校園聯絡資訊",
+                "contact-web": "校園網站",
+                "contact-tel": "電話聯繫",
+                "contact-addr": "地址導航",
+                "footer-title": "專題網頁製作",
+                "footer-cr": "© 2026 校園導覽專題小組 (謝嘉哲、陳亭蓁、陳俊安). All Rights Reserved.",
+                "search-placeholder": "搜尋名稱、老師、房號...",
+                "filter-all": "全部",
+                "filter-building": "大樓",
+                "filter-admin": "處室",
+                "filter-teacher": "教師",
+                "filter-classroom": "教室",
+                "preview-title": "請選擇地點",
+                "preview-desc": "點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。"
+            },
+            "en": {
+                "welcome-title": "Visual Tour",
+                "btn-start": "Start Tour",
+                "logo-text": "Minghsin Univ. of Sci. & Tech.",
+                "news-title": "News",
+                "news-1": "📢 [Academic Affairs] 114 Academic Year Freshman Handbook is available for download.",
+                "news-2": "📢 [Student Affairs] Winter break is here, please stay safe during your travels.",
+                "news-3": "📢 [Library] 'Library Treasure Hunt' will be held in the first week of school!",
+                "news-4": "📢 [Academic Affairs] Course Selection Guide for 114-2 semester released.",
+                "news-5": "📢 [Student Affairs] Club Expo starts on 9/24, welcome to join!",
+                "news-6": "📢 [General Affairs] Maintenance in progress in some campus areas.",
+                "news-7": "📢 [International Affairs] Overseas Exchange Program info session coming soon.",
+                "news-8": "📢 [PE Office] Registration for School Anniversary Sports Day is open.",
+                "stat-founded": "Founded",
+                "stat-students": "Students",
+                "stat-faculty": "Faculty",
+                "stat-colleges": "Colleges",
+                "tag-hot": "Hot Spot",
+                "spot-library": "Library",
+                "spot-library-desc": "A modern space for reading and studying with a rich collection of books.",
+                "view-location": "View Location →",
+                "tag-life": "Living",
+                "spot-dorm": "Freshman Dorm",
+                "spot-dorm-desc": "Safe and comfortable accommodation with lounges and laundry facilities.",
+                "view-room": "View Rooms →",
+                "tag-food": "Food",
+                "spot-cafeteria": "Cafeteria",
+                "spot-cafeteria-desc": "Offers a variety of dining options including buffet, noodles, and exotic cuisine.",
+                "view-menu": "View Menu →",
+                "vr-title": "3D Virtual Campus Tour",
+                "vr-desc": "Please navigate your virtual journey in the window below",
+                "click-to-interact": "Click to Interact",
+                "dept-title": "Quick Links",
+                "dept-semi": "College of Semiconductor",
+                "dept-eng": "College of Engineering",
+                "dept-manage": "College of Management",
+                "dept-design": "College of Humanities & Design",
+                "dept-bilingual": "Bilingual Education Center",
+                "calendar-title": "Academic Calendar (114 Year)",
+                "sun": "Sun", "mon": "Mon", "tue": "Tue", "wed": "Wed", "thu": "Thu", "fri": "Fri", "sat": "Sat",
+                "select-date": "Select a Date",
+                "select-date-desc": "Click on a date with a red dot<br>to view event details.",
+                "map-title": "Location",
+                "map-desc": "Welcome to MUST. We are located near Xinfeng Train Station with convenient transportation.",
+                "address": "Address: No. 1, Xinxing Rd., Xinfeng Township, Hsinchu County 304",
+                "phone": "Phone: 03 559 3142",
+                "train": "Train: Take train to 'Xinfeng Station', walk for about 10 mins.",
+                "contact-title": "Contact Info",
+                "contact-web": "Website",
+                "contact-tel": "Phone",
+                "contact-addr": "Navigation",
+                "footer-title": "Project Website",
+                "footer-cr": "© 2026 Campus Tour Project Team (Jiazhe Xie, Tingzhen Chen, Junan Chen). All Rights Reserved.",
+                "search-placeholder": "Search name, teacher, room...",
+                "filter-all": "All",
+                "filter-building": "Building",
+                "filter-admin": "Office",
+                "filter-teacher": "Teacher",
+                "filter-classroom": "Classroom",
+                "preview-title": "Select Location",
+                "preview-desc": "Click the list on the left to view 3D photos and contact info."
+            }
+        };
+
+        let currentLang = 'zh';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            document.getElementById('langLabel').innerText = currentLang === 'zh' ? 'English' : '繁體中文';
+
+            // 更新所有有 data-i18n 屬性的文字
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.innerText = i18n[currentLang][key];
+                }
+            });
+
+            // 更新 placeholder
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[currentLang][key]) {
+                    el.placeholder = i18n[currentLang][key];
+                }
+            });
+
+            // 更新打字機文字
+            typeWriterText = currentLang === 'zh' ? "探索校園角落 • 搜尋系館位置 • 體驗沈浸式實境" : "Explore Campus • Find Locations • Immersive Experience";
+            resetTypewriter();
+        }
+
+        function enableVR() {
+            document.getElementById('vrOverlay').classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Removed welcome screen logic
+        });
+
+        // 全螢幕功能
+        function toggleFullscreen() {
+            const elem = document.getElementById("panoramaFrame");
+            const btnIcon = document.querySelector(".btn-fullscreen i");
+
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) { /* Safari */
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) { /* IE11 */
+                    elem.msRequestFullscreen();
+                }
+                btnIcon.classList.remove("fa-expand");
+                btnIcon.classList.add("fa-compress");
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { /* Safari */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE11 */
+                    document.msExitFullscreen();
+                }
+                btnIcon.classList.remove("fa-compress");
+                btnIcon.classList.add("fa-expand");
+            }
+        }
+
+        // 行事曆資料
+        const eventsData = {
+            "2025-08-01": "114學年度第1學期開始",
+            "2025-08-18": "雙主修與輔系申請 (至9/12)",
+            "2025-08-30": "新生宿舍入住日 (至8/31)",
+            "2025-09-04": "全校教師研習會 / 新生定向輔導",
+            "2025-09-08": "開學日 (正式上課)",
+            "2025-09-24": "社團博覽會",
+            "2025-09-29": "補假一日 (教師節)",
+            "2025-10-10": "國慶日放假一日",
+            "2025-10-18": "校慶 / 全校運動會",
+            "2025-11-03": "期中考暨展演週 (至11/9)",
+            "2025-12-25": "行憲紀念日放假一日",
+            "2026-01-01": "開國紀念日放假一日",
+            "2026-01-05": "期末考暨展演週 (至1/11)",
+            "2026-01-10": "學生宿舍清空關閉週 (至1/11)",
+            "2026-01-31": "第1學期結束",
+            "2026-02-01": "114學年度第2學期開始",
+            "2026-02-14": "農曆春節 (至2/22)",
+            "2026-02-28": "和平紀念日 / 宿舍入住日",
+            "2026-03-02": "開學日",
+            "2026-04-03": "兒童節補假",
+            "2026-04-04": "兒童節",
+            "2026-04-05": "清明節",
+            "2026-04-27": "期中考暨展演週 (至5/3)",
+            "2026-06-13": "畢業典禮",
+            "2026-06-19": "端午節放假",
+            "2026-06-29": "期末考暨展演週 (至7/5)"
+        };
+
+        // 自動抓取今天日期
+        const today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth() + 1;
+
+        function renderCalendar(year, month) {
+            const grid = document.querySelector('.calendar-grid');
+            const monthLabel = document.getElementById('currentMonthLabel');
+            while (grid.children.length > 7) { grid.removeChild(grid.lastChild); }
+
+            // 處理月份標題的多語言
+            if (currentLang === 'zh') {
+                monthLabel.innerText = `${year}年 ${month}月`;
+            } else {
+                const enMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                monthLabel.innerText = `${enMonths[month - 1]} ${year}`;
+            }
+
+            const jsMonth = month - 1;
+            const firstDay = new Date(year, jsMonth, 1).getDay();
+            const daysInMonth = new Date(year, jsMonth + 1, 0).getDate();
+            const realToday = new Date();
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day empty';
+                grid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateKey = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const cell = document.createElement('div');
+                cell.className = 'calendar-day';
+                cell.innerHTML = `<span>${day}</span>`;
+
+                if (day === realToday.getDate() && month === (realToday.getMonth() + 1) && year === realToday.getFullYear()) {
+                    cell.classList.add('today');
+                }
+
+                if (eventsData[dateKey]) {
+                    cell.classList.add('has-event');
+                    const dot = document.createElement('div');
+                    dot.className = 'event-dot';
+                    cell.appendChild(dot);
+                    cell.onclick = () => showEventDetails(dateKey, eventsData[dateKey]);
+                }
+                grid.appendChild(cell);
+            }
+        }
+
+        function showEventDetails(date, title) {
+            const panel = document.getElementById('eventPanel');
+            panel.classList.add('active');
+            panel.style.opacity = 0;
+            setTimeout(() => {
+                panel.innerHTML = `
+                    <div class="event-date-display">${date}</div>
+                    <i class="fas fa-calendar-alt"></i>
+                    <h4>${title}</h4>
+                    <p>${currentLang === 'zh' ? '學校重要活動日程' : 'Important School Event'}</p>
+                `;
+                panel.style.opacity = 1;
+            }, 200);
+        }
+
+        function changeMonth(delta) {
+            currentMonth += delta;
+            if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+            else if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+            renderCalendar(currentYear, currentMonth);
+        }
+
+        renderCalendar(currentYear, currentMonth);
+
+        // ============================================
+        // 🔥 教師資料庫 (格式統一)
+        // ============================================
+        const campusLocations = [
+            { id: 1, name: "管理學院", type: "building", typeName: "大樓", desc: "本院以期落實「培育跨域協作、務實創新、全人學習之管理專業人才」為教育目標。", img: "images/管理學院.jpg" },
+            { id: 2, name: "圖書館", type: "building", typeName: "大樓", desc: "圖書館不僅是藏書的地方，更是您探索知識、激發創意與放鬆身心的空間。", img: "images/圖書館.jpg" },
+            { id: 3, name: "A205 語言實驗室", type: "classroom", typeName: "教室", desc: "位於行政大樓二樓。", img: "images/a205.jpg" },
+            { id: 4, name: "學務處", type: "admin", typeName: "處室", desc: "行政大樓一樓，負責學生事務。", img: "images/office_student.jpg" },
+            { id: 5, name: "明明樓", type: "building", typeName: "大樓", desc: "各類選修課程主要上課地點。", img: "images/building_1.jpg" },
+            { id: 6, name: "第二男子宿舍", type: "dorm", typeName: "宿舍", desc: "校園後門，環境清幽。", img: "images/dorm_2.jpg" }
+
+            // 註：老師資料已移至資料庫（teachers 表），透過 loadTeachersFromDatabase() 動態載入
+        ];
+
+        // ============================================
+        // 🔥 Supabase 初始化與老師資料庫載入
+        // ============================================
+        let supabaseClient;
+        let teachersData = [];  // 將從資料庫載入
+        let teachersLoaded = false;
+
+        // 初始化 Supabase
+        if (window.supabase && window.CONFIG) {
+            supabaseClient = window.supabase.createClient(
+                window.CONFIG.SUPABASE_URL,
+                window.CONFIG.SUPABASE_KEY
+            );
+            console.log('[Home] Supabase initialized for teachers');
+        }
+
+        // 從資料庫載入老師資料
+        async function loadTeachersFromDatabase() {
+            if (teachersLoaded) {
+                console.log('[Home] Teachers already loaded from database');
+                return;
+            }
+
+            if (!supabaseClient) {
+                console.error('[Home] Supabase client not initialized');
+                alert('系統初始化失敗，請重新整理頁面');
+                return;
+            }
+
+            try {
+                console.log('[Home] Fetching teachers from database...');
+
+                // 顯示載入中狀態
+                resultsList.innerHTML = '<div style="padding:40px; text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--primary);"></i><p style="margin-top:15px; color:#666;">載入老師資料中...</p></div>';
+
+                const { data: teachers, error } = await supabaseClient
+                    .from('teachers')
+                    .select('*')
+                    .order('department')
+                    .order('id');
+
+                if (error) {
+                    console.error('[Home] Teachers fetch error:', error);
+                    resultsList.innerHTML = '<div style="padding:40px; text-align:center; color:red;"><i class="fas fa-exclamation-circle" style="font-size:2rem;"></i><p style="margin-top:15px;">載入失敗：' + error.message + '</p></div>';
+                    return;
+                }
+
+                console.log('[Home] Teachers loaded successfully:', teachers?.length || 0);
+
+                if (!teachers || teachers.length === 0) {
+                    resultsList.innerHTML = '<div style="padding:40px; text-align:center; color:#999;"><i class="fas fa-user-slash" style="font-size:2rem;"></i><p style="margin-top:15px;">目前沒有老師資料</p></div>';
+                    return;
+                }
+
+                // 將資料庫格式轉換為原有格式（保持相容性）
+                teachersData = teachers.map(t => ({
+                    id: t.id,
+                    name: t.name,
+                    type: t.type,
+                    typeName: t.type_name,
+                    desc: t.description,
+                    img: t.image_url
+                }));
+
+                teachersLoaded = true;
+
+                // 合併校園地點和老師資料
+                const allData = [...campusLocations, ...teachersData];
+                renderList(allData);
+
+            } catch (e) {
+                console.error('[Home] Exception loading teachers:', e);
+                resultsList.innerHTML = '<div style="padding:40px; text-align:center; color:red;"><i class="fas fa-exclamation-circle" style="font-size:2rem;"></i><p style="margin-top:15px;">發生錯誤：' + e.message + '</p></div>';
+            }
+        }
+
+        let currentFilter = 'all';
+        const modal = document.getElementById('searchModal');
+        const resultsList = document.getElementById('resultsList');
+        const previewImg = document.getElementById('previewImg');
+        const previewTitle = document.getElementById('previewTitle');
+        const previewDesc = document.getElementById('previewDesc');
+        const previewContainer = document.getElementById('previewContainer');
+        const teacherBg = document.getElementById('teacherBg');
+
+        function openSearch() {
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.style.opacity = '1'; modal.querySelector('.search-box').style.transform = 'scale(1)'; }, 10);
+
+            // 載入老師資料（如果尚未載入）
+            if (!teachersLoaded) {
+                loadTeachersFromDatabase();
+            } else {
+                const allData = [...campusLocations, ...teachersData];
+                renderList(allData);
+            }
+
+            resetFilters();
+        }
+
+        function closeSearch() {
+            modal.style.opacity = '0';
+            modal.querySelector('.search-box').style.transform = 'scale(0.9)';
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
+
+        window.onclick = function (e) { if (e.target == modal) closeSearch(); }
+
+        function filterType(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // 合併所有資料
+            const allData = [...campusLocations, ...teachersData];
+            let filteredData = allData;
+            if (type !== 'all') {
+                filteredData = allData.filter(item => item.type === type);
+            }
+            renderList(filteredData);
+        }
+
+        function resetFilters() {
+            currentFilter = 'all';
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.filter-btn:first-child').classList.add('active');
+        }
+
+        function filterLocations(text) {
+            // 合併所有資料
+            const allData = [...campusLocations, ...teachersData];
+            let baseData = allData;
+            if (currentFilter !== 'all') {
+                baseData = allData.filter(item => item.type === currentFilter);
+            }
+            const finalData = baseData.filter(loc =>
+                loc.name.includes(text) ||
+                loc.desc.includes(text) ||
+                loc.typeName.includes(text)
+            );
+            renderList(finalData);
+        }
+
+        function renderList(data) {
+            resultsList.innerHTML = '';
+            if (data.length === 0) { resultsList.innerHTML = '<div style="padding:20px; text-align:center; color:#999;">查無資料</div>'; return; }
+
+            data.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'result-item';
+                div.style.animationDelay = `${index * 0.02}s`;
+
+                let icon = 'fas fa-map-marker-alt';
+                if (item.type === 'classroom') icon = 'fas fa-chalkboard-teacher';
+                if (item.type === 'admin') icon = 'fas fa-briefcase';
+                if (item.type === 'teacher') icon = 'fas fa-user-tie';
+                if (item.type === 'building') icon = 'fas fa-building';
+                if (item.type === 'dorm') icon = 'fas fa-bed';
+
+                div.innerHTML = `
+                    <i class="${icon}"></i> 
+                    <div class="result-info">
+                        <span class="result-name">${item.name}</span>
+                        <span class="result-type">${item.typeName || '地點'}</span>
+                    </div>
+                `;
+
+                div.onclick = () => {
+                    document.querySelectorAll('.result-item').forEach(el => el.classList.remove('active'));
+                    div.classList.add('active');
+                    updatePreview(item);
+                };
+                resultsList.appendChild(div);
+            });
+        }
+
+        function updatePreview(item) {
+            previewImg.style.opacity = '0';
+
+            // 判斷是否為教師，切換顯示樣式
+            if (item.type === 'teacher') {
+                previewContainer.classList.add('teacher-mode');
+                teacherBg.classList.add('active');
+            } else {
+                previewContainer.classList.remove('teacher-mode');
+                teacherBg.classList.remove('active');
+            }
+
+            setTimeout(() => {
+                previewImg.src = item.img;
+                previewImg.onerror = function () { this.src = 'https://via.placeholder.com/600x400?text=No+Image'; };
+                previewTitle.innerText = item.name;
+
+                // 將 literal \n 字符轉換為 <br> 標籤
+                let descWithBreaks = item.desc.replace(/\\n/g, '<br>');
+
+                // 自動將 Email 轉換成可點擊的連結
+                let formattedDesc = descWithBreaks.replace(
+                    /([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/g,
+                    '<a href="mailto:$1" style="color:var(--primary); text-decoration:underline; font-weight:bold;">$1</a>'
+                );
+
+                previewDesc.innerHTML = formattedDesc;
+                previewImg.style.opacity = '1';
+            }, 200);
+        }
+    </script>
+
+    <!-- Supabase & VR Forum Logic -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script>
+        // VR Forum Functionality with Pin Feature
+        document.addEventListener('DOMContentLoaded', async function () {
+            const vrCommentList = document.getElementById('vrCommentList');
+            const btnSubmitVR = document.getElementById('btnSubmitVRComment');
+
+            if (!vrCommentList || !btnSubmitVR) return; // Elements not found
+
+            // Check dependencies
+            if (!window.supabase || !window.CONFIG) {
+                console.error('[VR Forum] Dependencies not loaded');
+                return;
+            }
+
+            // Initialize Supabase
+            const supabase = window.supabase.createClient(
+                window.CONFIG.SUPABASE_URL,
+                window.CONFIG.SUPABASE_KEY
+            );
+
+            // Load comments
+            async function loadVRComments() {
+                try {
+                    const { data: comments, error } = await supabase
+                        .from('vr_comments')
+                        .select('*')
+                        .order('is_pinned', { ascending: false })
+                        .order('created_at', { ascending: false })
+                        .limit(20);
+
+                    if (error) {
+                        console.error('[VR Forum] Load error:', error);
+                        vrCommentList.innerHTML = '<div style="text-align: center; color: #999; padding: 30px;">載入失敗</div>';
+                        return;
+                    }
+
+                    if (!comments || comments.length === 0) {
+                        vrCommentList.innerHTML = '<div style="text-align: center; color: #999; padding: 30px;">尚未有留言，搶頭香！</div>';
+                    } else {
+                        vrCommentList.innerHTML = '';
+                        comments.forEach(c => {
+                            const div = document.createElement('div');
+                            const isPinned = c.is_pinned || false;
+                            const bgColor = isPinned ? 'linear-gradient(135deg, #fffbea 0%, #fff8dc 100%)' : '#f8f9fa';
+                            const borderColor = isPinned ? '#f39c12' : 'var(--primary)';
+
+                            div.style.cssText = `background: ${bgColor}; padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid ${borderColor}; position: relative;`;
+                            const dateStr = new Date(c.created_at).toLocaleString('zh-TW');
+                            const user = c.user_name || '訪客';
+                            const pinIcon = isPinned ? '<i class="fas fa-thumbtack" style="color: #f39c12; margin-right: 5px;"></i>' : '';
+                            const pinButtonText = isPinned ? '取消置頂' : '置頂';
+                            const pinButtonStyle = isPinned ? 'background: #fff8dc; border-color: #f39c12; color: #f39c12;' : 'background: #f8f9fa; border-color: #ddd; color: #666;';
+
+                            div.innerHTML = `
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-weight: bold; color: var(--navy);">${pinIcon}<i class="fas fa-user-circle"></i> ${escapeHtml(user)}</span>
+                                    <span style="color: #999; font-size: 0.9rem;">${dateStr}</span>
+                                </div>
+                                <div style="color: #333; line-height: 1.6; margin-bottom: 10px;">${escapeHtml(c.content)}</div>
+                                <div style="display: flex; justify-content: flex-end;">
+                                    <button class="btn-pin-toggle" data-id="${c.id}" data-pinned="${isPinned}" 
+                                        style="padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; border: 1px solid; ${pinButtonStyle}">
+                                        <i class="fas fa-thumbtack"></i> ${pinButtonText}
+                                    </button>
+                                </div>
+                            `;
+                            vrCommentList.appendChild(div);
+                        });
+
+                        // Add event listeners to pin buttons
+                        vrCommentList.querySelectorAll('.btn-pin-toggle').forEach(btn => {
+                            btn.addEventListener('click', async function () {
+                                const commentId = this.getAttribute('data-id');
+                                const isPinned = this.getAttribute('data-pinned') === 'true';
+                                await togglePin(commentId, !isPinned);
+                            });
+                        });
+                    }
+                } catch (e) {
+                    console.error('[VR Forum] Exception:', e);
+                }
+            }
+
+            // Toggle pin status
+            async function togglePin(commentId, shouldPin) {
+                try {
+                    const { error } = await supabase
+                        .from('vr_comments')
+                        .update({ is_pinned: shouldPin })
+                        .eq('id', commentId);
+
+                    if (error) {
+                        console.error('[VR Forum] Pin error:', error);
+                        alert('置頂操作失敗: ' + error.message);
+                        return;
+                    }
+
+                    // Reload comments to show updated state
+                    await loadVRComments();
+                } catch (e) {
+                    console.error('[VR Forum] Pin exception:', e);
+                    alert('置頂操作發生錯誤: ' + e.message);
+                }
+            }
+
+            // Submit comment
+            btnSubmitVR.addEventListener('click', async function () {
+                const userEl = document.getElementById('vrForumUser');
+                const contentEl = document.getElementById('vrForumContent');
+
+                const userName = userEl.value.trim() || '訪客';
+                const content = contentEl.value.trim();
+
+                if (!content) {
+                    alert('請輸入留言內容！');
+                    return;
+                }
+
+                btnSubmitVR.disabled = true;
+                btnSubmitVR.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 發送中...';
+
+                try {
+                    const { error } = await supabase
+                        .from('vr_comments')
+                        .insert([{ user_name: userName, content: content }]);
+
+                    if (error) throw error;
+
+                    contentEl.value = '';
+                    userEl.value = '';
+                    alert('留言發送成功！');
+                    await loadVRComments();
+                } catch (e) {
+                    console.error('[VR Forum] Submit error:', e);
+                    alert('發送失敗: ' + e.message);
+                } finally {
+                    btnSubmitVR.disabled = false;
+                    btnSubmitVR.innerHTML = '發送留言 <i class="fas fa-paper-plane"></i>';
+                }
+            });
+
+            // XSS protection
+            function escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // Initial load
+            await loadVRComments();
+        });
+    </script>
+
+</body>
+
+</html>
