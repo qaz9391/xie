@@ -1,0 +1,16 @@
+{
+  "name": "must-campus-vr-tour",
+  "version": "1.0.0",
+  "description": "明新科技大學 校園導覽與線上點餐系統",
+  "scripts": {
+    "build": "echo 'No build step required for static site'"
+  },
+  "keywords": [
+    "vr",
+    "campus-tour",
+    "supabase",
+    "cafeteria"
+  ],
+  "author": "校園導覽專題小組 (謝嘉哲、陳亭蓁、陳俊安)",
+  "license": "ISC"
+}
