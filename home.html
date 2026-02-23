@@ -11,10 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/cafeteria.css">
 
-    <!-- Supabase Client Library -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/config.js"></script>
-
     <style>
         /* ===== 變數設定 ===== */
         :root {
@@ -2074,86 +2070,72 @@
             { id: 3, name: "A205 語言實驗室", type: "classroom", typeName: "教室", desc: "位於行政大樓二樓。", img: "images/a205.jpg" },
             { id: 4, name: "學務處", type: "admin", typeName: "處室", desc: "行政大樓一樓，負責學生事務。", img: "images/office_student.jpg" },
             { id: 5, name: "明明樓", type: "building", typeName: "大樓", desc: "各類選修課程主要上課地點。", img: "images/building_1.jpg" },
-            { id: 6, name: "第二男子宿舍", type: "dorm", typeName: "宿舍", desc: "校園後門，環境清幽。", img: "images/dorm_2.jpg" }
+            { id: 6, name: "第二男子宿舍", type: "dorm", typeName: "宿舍", desc: "校園後門，環境清幽。", img: "images/dorm_2.jpg" },
 
-            // 註：老師資料已移至資料庫（teachers 表），透過 loadTeachersFromDatabase() 動態載入
+            // --- 工業工程管理系 ---
+            { id: 101, name: "李得盛 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 805 室\njeff@must.edu.tw\n分機 3234", img: "images/李得盛.jpg" },
+            { id: 102, name: "林於杏 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 826 室\nbrianlin@must.edu.tw\n分機 3229", img: "images/林於杏.jpg" },
+            { id: 103, name: "王妙伶 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 833 室\nwml@must.edu.tw\n分機 3228", img: "images/王妙伶.jpg" },
+            { id: 104, name: "馬心怡 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 834 室\nhsma@must.edu.tw\n分機 3230", img: "images/馬心怡.jpg" },
+            { id: 105, name: "許耀文 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 813 室\navinhsu@must.edu.tw\n分機 3217", img: "images/許耀文.jpg" },
+            { id: 106, name: "王彥文 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 821 室\nywwang@must.edu.tw\n分機 3224", img: "images/王彥文.jpg" },
+            { id: 107, name: "張子筠 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 837 室\ntychang@must.edu.tw\n分機 3215", img: "images/張子筠.jpg" },
+            { id: 108, name: "鍾宜展 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 823 室\nycchung@must.edu.tw\n分機 3226", img: "images/鍾宜展.jpg" },
+            { id: 109, name: "楊昌哲 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 816 室\ncjyang@must.edu.tw\n分機 3227", img: "images/楊昌哲.jpg" },
+            { id: 110, name: "吳庭瑜 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 831 室\ntywu@must.edu.tw\n分機 3218", img: "images/吳庭瑜.jpg" },
+            { id: 111, name: "江支璋 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 818 室\nsmjoseph@must.edu.tw\n分機 3219", img: "images/江支璋.jpg" },
+            { id: 112, name: "林伶恩 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 836 室\nlillian@must.edu.tw\n分機 3235", img: "images/林伶恩.jpg" },
+            { id: 113, name: "許世洲 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 835 室\nfate@must.edu.tw\n分機 3214", img: "images/許世洲.jpg" },
+            { id: 114, name: "薄有為 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 825 室\npoyuway@must.edu.tw\n分機 3220", img: "images/薄有為.jpg" },
+            { id: 115, name: "張民昌 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 838 室\ncmc@must.edu.tw\n分機 3236", img: "images/張民昌.jpg" },
+            { id: 116, name: "馬珊蒂 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 830 室\nmashanti1980@gmail.com\n分機 3213", img: "images/馬珊蒂.jpg" },
+            { id: 117, name: "彭晟瑋 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 805 室", img: "images/彭晟瑋.jpg" },
+
+            // --- 資訊管理系 ---
+            { id: 201, name: "葉慈章 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 412 / 3 樓\ncheer@must.edu.tw\n分機 3430 / 3447", img: "images/葉慈章.jpg" },
+            { id: 202, name: "帥嘉珍 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R322\njjshuai@must.edu.tw\n分機 3451", img: "images/帥嘉珍.jpg" },
+            { id: 203, name: "應大中 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R323\ntcying@must.edu.tw\n分機 3452", img: "images/應大中.jpg" },
+            { id: 204, name: "陳玉專 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R327\ncardy@must.edu.tw\n分機 3456", img: "images/陳玉專.jpg" },
+            { id: 205, name: "李政穎 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R320\nalvin@must.edu.tw\n分機 3449", img: "images/李政穎.jpg" },
+            { id: 206, name: "陳建志 老師 (資管)", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R319\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志.jpg" },
+            { id: 207, name: "邱川峰 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R326\ncfchiu@must.edu.tw\n分機 3455", img: "images/邱川峰.jpg" },
+            { id: 208, name: "詹森仁 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R418\nsrchan@must.edu.tw\n分機 3586", img: "images/詹森仁.jpg" },
+            { id: 209, name: "李佩君 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R328\npjlee@must.edu.tw\n分機 3457", img: "images/李佩君.jpg" },
+            { id: 210, name: "黃夙賢 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R325\nshhuang@must.edu.tw\n分機 3454", img: "images/黃夙賢.jpg" },
+            { id: 211, name: "鄭姍姍 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R415\nyes5433@must.edu.tw\n分機 3580", img: "images/鄭姍姍.jpg" },
+            { id: 212, name: "彭美惠 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R329\nclare@must.edu.tw\n分機 3458", img: "images/彭美惠.jpg" },
+            { id: 213, name: "賴彥如 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管理大樓 4 樓 R417\npeng1204@must.edu.tw\n分機 3232", img: "images/賴彥如.jpg" },
+            { id: 214, name: "陳奎伯 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R428\nkbchen@must.edu.tw\n分機 3576", img: "images/陳奎伯.jpg" },
+            { id: 215, name: "張東文 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R324\ntungwen@must.edu.tw\n分機 3453", img: "images/張東文.jpg" },
+            { id: 216, name: "林思蘭 老師", type: "teacher", typeName: "系辦公室", desc: "資訊管理系 系辦\n管院 4 樓 R411\nshih@must.edu.tw\n分機 3431", img: "images/林思蘭.jpg" },
+            { id: 217, name: "莊杰茹 老師", type: "teacher", typeName: "系辦公室", desc: "資訊管理系 系辦\n管院 4 樓 R411\nruby@must.edu.tw\n分機 3433", img: "images/莊杰茹.jpg" },
+
+            // --- 行銷與流通系 ---
+            { id: 301, name: "鍾政偉 老師", type: "teacher", typeName: "系辦公室", desc: "行銷與流通系 系辦\n管理學院 6 樓\nalexccw@must.edu.tw\n分機 3500", img: "images/鍾政偉.jpg" },
+            { id: 302, name: "沈聰益 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 631 室\ntsungyi@must.edu.tw\n分機 3521", img: "images/沈聰益.jpg" },
+            { id: 303, name: "朱希亮 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 622 室\nchu@must.edu.tw\n分機 3509", img: "images/朱希亮.jpg" },
+            { id: 304, name: "楊明錞 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 623 室\nyang@must.edu.tw\n分機 3519", img: "images/楊明錞.jpg" },
+            { id: 305, name: "蔡瑤玉 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 628 室\nyauyuh@must.edu.tw\n分機 3510", img: "images/蔡瑤玉.jpg" },
+            { id: 306, name: "杜怡嫻 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 630 室\ntna838@hotmail.com\n分機 3511", img: "images/杜怡嫻.jpg" },
+            { id: 307, name: "湯寶裳 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 625 室\nps.tang@must.edu.tw\n分機 1871", img: "images/湯寶裳.jpg" },
+            { id: 308, name: "高國檳 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 633 室\nbenny@must.edu.tw\n分機 3506", img: "images/高國檳.jpg" },
+            { id: 309, name: "張哲維 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院 636 室\ndavychang0327@must.edu.tw\n分機 3520", img: "images/張哲維.jpg" },
+            { id: 310, name: "邱勇嘉 老師", type: "teacher", typeName: "教師", desc: "行銷與流通系\n管理學院大樓 634 室\nmk04271@must.edu.tw\n分機 3515", img: "images/邱勇嘉.jpg" },
+            { id: 311, name: "何庭瑜 老師", type: "teacher", typeName: "系辦公室", desc: "行銷與流通系 系辦\n管理學院 6 樓\ntingyu@must.edu.tw\n分機 3501", img: "images/何庭瑜.jpg" },
+
+            // --- 企業管理系 ---
+            { id: 401, name: "吳芸嫻 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 6 樓 626\nj1414@must.edu.tw\n分機 1702", img: "images/吳芸嫻.jpg" },
+            { id: 402, name: "張敏玟 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院大樓 533 室\nsophie.chang@must.edu.tw\n分機 1828", img: "images/張敏玟.jpg" },
+            { id: 403, name: "陳建志 老師 (企管)", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 319 室\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志_企管.jpg" },
+            { id: 404, name: "林淑瑛 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 732 室\nsylin@must.edu.tw\n分機 1892", img: "images/林淑瑛.jpg" },
+            { id: 405, name: "林淑芬 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 717 室\nlsf@must.edu.tw\n分機 1887", img: "images/林淑芬.jpg" },
+            { id: 406, name: "李明煌 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 731 室\nminglee@must.edu.tw\n分機 1891", img: "images/李明煌.jpg" },
+            { id: 407, name: "范芝萍 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 729 室\ncpfan@must.edu.tw\n分機 1889", img: "images/范芝萍.jpg" },
+            { id: 408, name: "詹雅娟 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 726 室\nya100@must.edu.tw\n分機 1878", img: "images/詹雅娟.jpg" },
+            { id: 409, name: "郭釗安 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 728 室\ncakuo@must.edu.tw\n分機 1876", img: "images/郭釗安.jpg" },
+            { id: 410, name: "洪瑩書 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 733 室\nyingshu@must.edu.tw\n分機 1893", img: "images/洪瑩書.jpg" },
+            { id: 411, name: "陳淑芬 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理大樓 713 室\nlita@must.edu.tw\n03-621-7879", img: "images/陳淑芬.jpg" },
         ];
-
-        // ============================================
-        // 🔥 Supabase 初始化與老師資料庫載入
-        // ============================================
-        let supabaseClient;
-        let teachersData = [];  // 將從資料庫載入
-        let teachersLoaded = false;
-
-        // 初始化 Supabase
-        if (window.supabase && window.CONFIG) {
-            supabaseClient = window.supabase.createClient(
-                window.CONFIG.SUPABASE_URL,
-                window.CONFIG.SUPABASE_KEY
-            );
-            console.log('[Home] Supabase initialized for teachers');
-        }
-
-        // 從資料庫載入老師資料
-        async function loadTeachersFromDatabase() {
-            if (teachersLoaded) {
-                console.log('[Home] Teachers already loaded from database');
-                return;
-            }
-
-            if (!supabaseClient) {
-                console.error('[Home] Supabase client not initialized');
-                alert('系統初始化失敗，請重新整理頁面');
-                return;
-            }
-
-            try {
-                console.log('[Home] Fetching teachers from database...');
-
-                // 顯示載入中狀態
-                resultsList.innerHTML = '<div style="padding:40px; text-align:center;"><i class="fas fa-spinner fa-spin" style="font-size:2rem; color:var(--primary);"></i><p style="margin-top:15px; color:#666;">載入老師資料中...</p></div>';
-
-                const { data: teachers, error } = await supabaseClient
-                    .from('teachers')
-                    .select('*')
-                    .order('department')
-                    .order('id');
-
-                if (error) {
-                    console.error('[Home] Teachers fetch error:', error);
-                    resultsList.innerHTML = '<div style="padding:40px; text-align:center; color:red;"><i class="fas fa-exclamation-circle" style="font-size:2rem;"></i><p style="margin-top:15px;">載入失敗：' + error.message + '</p></div>';
-                    return;
-                }
-
-                console.log('[Home] Teachers loaded successfully:', teachers?.length || 0);
-
-                if (!teachers || teachers.length === 0) {
-                    resultsList.innerHTML = '<div style="padding:40px; text-align:center; color:#999;"><i class="fas fa-user-slash" style="font-size:2rem;"></i><p style="margin-top:15px;">目前沒有老師資料</p></div>';
-                    return;
-                }
-
-                // 將資料庫格式轉換為原有格式（保持相容性）
-                teachersData = teachers.map(t => ({
-                    id: t.id,
-                    name: t.name,
-                    type: t.type,
-                    typeName: t.type_name,
-                    desc: t.description,
-                    img: t.image_url
-                }));
-
-                teachersLoaded = true;
-
-                // 合併校園地點和老師資料
-                const allData = [...campusLocations, ...teachersData];
-                renderList(allData);
-
-            } catch (e) {
-                console.error('[Home] Exception loading teachers:', e);
-                resultsList.innerHTML = '<div style="padding:40px; text-align:center; color:red;"><i class="fas fa-exclamation-circle" style="font-size:2rem;"></i><p style="margin-top:15px;">發生錯誤：' + e.message + '</p></div>';
-            }
-        }
 
         let currentFilter = 'all';
         const modal = document.getElementById('searchModal');
@@ -2167,15 +2149,7 @@
         function openSearch() {
             modal.style.display = 'flex';
             setTimeout(() => { modal.style.opacity = '1'; modal.querySelector('.search-box').style.transform = 'scale(1)'; }, 10);
-
-            // 載入老師資料（如果尚未載入）
-            if (!teachersLoaded) {
-                loadTeachersFromDatabase();
-            } else {
-                const allData = [...campusLocations, ...teachersData];
-                renderList(allData);
-            }
-
+            renderList(campusLocations);
             resetFilters();
         }
 
@@ -2192,11 +2166,9 @@
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // 合併所有資料
-            const allData = [...campusLocations, ...teachersData];
-            let filteredData = allData;
+            let filteredData = campusLocations;
             if (type !== 'all') {
-                filteredData = allData.filter(item => item.type === type);
+                filteredData = campusLocations.filter(item => item.type === type);
             }
             renderList(filteredData);
         }
@@ -2208,11 +2180,9 @@
         }
 
         function filterLocations(text) {
-            // 合併所有資料
-            const allData = [...campusLocations, ...teachersData];
-            let baseData = allData;
+            let baseData = campusLocations;
             if (currentFilter !== 'all') {
-                baseData = allData.filter(item => item.type === currentFilter);
+                baseData = campusLocations.filter(item => item.type === currentFilter);
             }
             const finalData = baseData.filter(loc =>
                 loc.name.includes(text) ||
@@ -2272,11 +2242,8 @@
                 previewImg.onerror = function () { this.src = 'https://via.placeholder.com/600x400?text=No+Image'; };
                 previewTitle.innerText = item.name;
 
-                // 將 literal \n 字符轉換為 <br> 標籤
-                let descWithBreaks = item.desc.replace(/\\n/g, '<br>');
-
                 // 自動將 Email 轉換成可點擊的連結
-                let formattedDesc = descWithBreaks.replace(
+                let formattedDesc = item.desc.replace(
                     /([a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/g,
                     '<a href="mailto:$1" style="color:var(--primary); text-decoration:underline; font-weight:bold;">$1</a>'
                 );
@@ -2291,7 +2258,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/config.js"></script>
     <script>
-        // VR Forum Functionality with Pin Feature
+        // VR Forum Functionality
         document.addEventListener('DOMContentLoaded', async function () {
             const vrCommentList = document.getElementById('vrCommentList');
             const btnSubmitVR = document.getElementById('btnSubmitVRComment');
@@ -2316,7 +2283,6 @@
                     const { data: comments, error } = await supabase
                         .from('vr_comments')
                         .select('*')
-                        .order('is_pinned', { ascending: false })
                         .order('created_at', { ascending: false })
                         .limit(20);
 
@@ -2332,66 +2298,22 @@
                         vrCommentList.innerHTML = '';
                         comments.forEach(c => {
                             const div = document.createElement('div');
-                            const isPinned = c.is_pinned || false;
-                            const bgColor = isPinned ? 'linear-gradient(135deg, #fffbea 0%, #fff8dc 100%)' : '#f8f9fa';
-                            const borderColor = isPinned ? '#f39c12' : 'var(--primary)';
-
-                            div.style.cssText = `background: ${bgColor}; padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid ${borderColor}; position: relative;`;
+                            div.style.cssText = 'background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid var(--primary);';
                             const dateStr = new Date(c.created_at).toLocaleString('zh-TW');
                             const user = c.user_name || '訪客';
-                            const pinIcon = isPinned ? '<i class="fas fa-thumbtack" style="color: #f39c12; margin-right: 5px;"></i>' : '';
-                            const pinButtonText = isPinned ? '取消置頂' : '置頂';
-                            const pinButtonStyle = isPinned ? 'background: #fff8dc; border-color: #f39c12; color: #f39c12;' : 'background: #f8f9fa; border-color: #ddd; color: #666;';
 
                             div.innerHTML = `
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <span style="font-weight: bold; color: var(--navy);">${pinIcon}<i class="fas fa-user-circle"></i> ${escapeHtml(user)}</span>
+                                    <span style="font-weight: bold; color: var(--navy);"><i class="fas fa-user-circle"></i> ${escapeHtml(user)}</span>
                                     <span style="color: #999; font-size: 0.9rem;">${dateStr}</span>
                                 </div>
-                                <div style="color: #333; line-height: 1.6; margin-bottom: 10px;">${escapeHtml(c.content)}</div>
-                                <div style="display: flex; justify-content: flex-end;">
-                                    <button class="btn-pin-toggle" data-id="${c.id}" data-pinned="${isPinned}" 
-                                        style="padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; cursor: pointer; transition: all 0.3s; border: 1px solid; ${pinButtonStyle}">
-                                        <i class="fas fa-thumbtack"></i> ${pinButtonText}
-                                    </button>
-                                </div>
+                                <div style="color: #333; line-height: 1.6;">${escapeHtml(c.content)}</div>
                             `;
                             vrCommentList.appendChild(div);
-                        });
-
-                        // Add event listeners to pin buttons
-                        vrCommentList.querySelectorAll('.btn-pin-toggle').forEach(btn => {
-                            btn.addEventListener('click', async function () {
-                                const commentId = this.getAttribute('data-id');
-                                const isPinned = this.getAttribute('data-pinned') === 'true';
-                                await togglePin(commentId, !isPinned);
-                            });
                         });
                     }
                 } catch (e) {
                     console.error('[VR Forum] Exception:', e);
-                }
-            }
-
-            // Toggle pin status
-            async function togglePin(commentId, shouldPin) {
-                try {
-                    const { error } = await supabase
-                        .from('vr_comments')
-                        .update({ is_pinned: shouldPin })
-                        .eq('id', commentId);
-
-                    if (error) {
-                        console.error('[VR Forum] Pin error:', error);
-                        alert('置頂操作失敗: ' + error.message);
-                        return;
-                    }
-
-                    // Reload comments to show updated state
-                    await loadVRComments();
-                } catch (e) {
-                    console.error('[VR Forum] Pin exception:', e);
-                    alert('置頂操作發生錯誤: ' + e.message);
                 }
             }
 

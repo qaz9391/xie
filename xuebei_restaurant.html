@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雪杯工坊 - 線上點餐</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D2691E;
+            --primary-dark: #8B4513;
+            --secondary: #2C3E50;
+            --bg-light: #FFF8DC;
+            --accent: #FF6347;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #FFF8DC 0%, #FFE4B5 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .restaurant-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Staff Section */
+        .staff-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+        }
+
+        .staff-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .staff-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 20px auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .speech-bubble {
+            background: var(--primary);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            font-size: 1.1rem;
+            font-weight: 500;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid var(--primary);
+        }
+
+        /* Cart Details Section */
+        .cart-details {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            text-align: left;
+            flex: 1;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+
+        .cart-details::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .cart-details::-webkit-scrollbar-track {
+            background: #FFE0B2;
+            border-radius: 10px;
+        }
+
+        .cart-details::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .cart-details-title {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-item-detail {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid var(--primary);
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .cart-item-quantity {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-top: 3px;
+        }
+
+        .cart-item-subtotal {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .cart-item-remove {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+        .cart-item-remove:hover {
+            background: #D32F2F;
+            transform: scale(1.1);
+        }
+
+        .cart-item-remove:active {
+            transform: scale(0.95);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+        }
+
+        .cart-empty i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--bg-light);
+        }
+
+        .menu-header h2 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        /* Menu Tabs */
+        .menu-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .menu-tab {
+            flex: 1;
+            padding: 15px 30px;
+            background: var(--bg-light);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .menu-tab:hover {
+            background: #FFE0B2;
+            transform: translateY(-2px);
+        }
+
+        .menu-tab.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-color: var(--primary-dark);
+            box-shadow: 0 4px 12px rgba(210, 105, 30, 0.3);
+        }
+
+        .menu-tab i {
+            margin-right: 8px;
+        }
+
+        /* Menu List */
+        .menu-list {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .menu-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .menu-list::-webkit-scrollbar-track {
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .menu-list::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+
+        .menu-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item-info {
+            flex: 1;
+        }
+
+        .menu-item-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .menu-item-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .menu-item-category {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .menu-item-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0 20px;
+        }
+
+        .menu-item-price::before {
+            content: '$';
+            font-size: 1rem;
+        }
+
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .add-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(210, 105, 30, 0.4);
+        }
+
+        .add-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #4E342E 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-info {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .cart-item-count {
+            font-size: 1rem;
+        }
+
+        .cart-item-count i {
+            margin-right: 8px;
+        }
+
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .loading i {
+            font-size: 3rem;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #DDD;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .restaurant-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .staff-section {
+                order: 1;
+            }
+
+            .menu-section {
+                order: 2;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .menu-tabs {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .menu-item-price {
+                margin: 0;
+            }
+
+            .cart-summary {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cart-info {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="cafeteria.html" class="back-btn"><i class="fas fa-arrow-left"></i> 返回餐廳</a>
+        <h1><i class="fas fa-drumstick-bite"></i> 雪杯工坊</h1>
+        <p>各式早點午餐式全套都有，香噴噴美味早午餐</p>
+    </div>
+
+    <div class="container">
+        <div class="restaurant-layout">
+            <!-- Staff Section -->
+            <div class="staff-section">
+                <img src="images/服務員.JPG" alt="服務人員" class="staff-image" id="staffImage">
+                <div class="speech-bubble">
+                    <i class="fas fa-comment-dots"></i> 您好！歡迎光臨雪杯工坊，想來份美味早午餐嗎？
+                </div>
+                <div style="margin-top: 20px; padding: 15px; background: var(--bg-light); border-radius: 12px;">
+                    <p style="color: var(--text-dark); font-weight: 500;"><i class="fas fa-info-circle"></i> 點餐提示</p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 8px;">
+                        請選擇「單點」或「套餐」<br>
+                        點選喜歡的餐點加入購物車
+                    </p>
+                </div>
+
+                <!-- Cart Details -->
+                <div class="cart-details" id="cartDetails">
+                    <div class="cart-details-title">
+                        <i class="fas fa-shopping-cart"></i>
+                        購物車內容
+                    </div>
+                    <div class="cart-empty">
+                        <i class="fas fa-basket-shopping"></i>
+                        <p>購物車目前是空的</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu Section -->
+            <div class="menu-section">
+                <div class="menu-header">
+                    <h2><i class="fas fa-book-open"></i> 菜單</h2>
+                </div>
+
+                <!-- Menu Tabs -->
+                <div class="menu-tabs">
+                    <button class="menu-tab active" onclick="switchMenu('single')" id="tabSingle">
+                        <i class="fas fa-hamburger"></i> 單點
+                    </button>
+                    <button class="menu-tab" onclick="switchMenu('combo')" id="tabCombo">
+                        <i class="fas fa-box"></i> 套餐
+                    </button>
+                </div>
+
+                <!-- Menu List -->
+                <div class="menu-list" id="menuList">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>載入菜單中...</p>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <div class="cart-info">
+                        <div class="cart-item-count">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cartCount">0</span> 項商品
+                        </div>
+                        <div class="cart-total">
+                            總計：$<span id="cartTotal">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.97.0/dist/umd/supabase.js"></script>
+    <script src="js/config.js"></script>
+    <script>
+        // Initialize
+        let supabaseClient;
+        let cart = [];
+        let currentMenuType = 'single';
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Initialize Supabase - UMD bundle exposes global 'supabase' object
+            const supabaseLib = window.supabase;
+            if (!supabaseLib || typeof supabaseLib.createClient !== 'function') {
+                console.error('[Xuebei] Supabase SDK not loaded. window.supabase:', window.supabase);
+                showError('Supabase SDK 載入失敗，請重新整理頁面');
+                return;
+            }
+            if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_KEY) {
+                console.error('[Xuebei] CONFIG not loaded:', window.CONFIG);
+                showError('設定檔載入失敗，請重新整理頁面');
+                return;
+            }
+
+            try {
+                supabaseClient = supabaseLib.createClient(
+                    window.CONFIG.SUPABASE_URL,
+                    window.CONFIG.SUPABASE_KEY
+                );
+                console.log('[Xuebei] Supabase initialized successfully');
+            } catch (initErr) {
+                console.error('[Xuebei] createClient failed:', initErr);
+                showError('資料庫初始化失敗：' + initErr.message);
+                return;
+            }
+
+            // Load initial menu
+            await loadMenu('single');
+        });
+
+        function showError(msg) {
+            const menuList = document.getElementById('menuList');
+            if (menuList) {
+                menuList.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>連線失敗</h3><p>${msg}</p></div>`;
+            }
+        }
+
+        // Load Menu
+        async function loadMenu(type) {
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>載入菜單中...</p></div>';
+
+            try {
+                const { data: items, error } = await supabaseClient
+                    .from('xuebei_menu')
+                    .select('*')
+                    .eq('type', type)
+                    .eq('is_available', true)
+                    .order('category')
+                    .order('name');
+
+                if (error) {
+                    console.error('[Xuebei] Load menu error:', error);
+                    menuList.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h3>載入失敗</h3><p>錯誤代碼：${error.code || 'unknown'}<br>${error.message || '請稍後再試'}</p></div>`;
+                    return;
+                }
+
+                if (!items || items.length === 0) {
+                    menuList.innerHTML = '<div class="empty-state"><i class="fas fa-bowl-food"></i><h3>目前沒有菜品</h3><p>請稍後再來看看</p></div>';
+                    return;
+                }
+
+                renderMenu(items);
+            } catch (e) {
+                console.error('[Xuebei] Exception:', e);
+                menuList.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h3>發生錯誤</h3><p>' + e.message + '</p></div>';
+            }
+        }
+
+        // Render Menu
+        function renderMenu(items) {
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = items.map(item => `
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <div class="menu-item-name">${escapeHtml(item.name)}</div>
+                        <div class="menu-item-desc">${escapeHtml(item.description || '')}</div>
+                        ${item.category ? `<span class="menu-item-category">${escapeHtml(item.category)}</span>` : ''}
+                    </div>
+                    <div class="menu-item-price">${item.price}</div>
+                    <button class="add-btn" onclick='addToCart(${JSON.stringify(item)})'>
+                        <i class="fas fa-plus"></i> 加入
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Switch Menu Type
+        function switchMenu(type) {
+            currentMenuType = type;
+
+            // Update tab styles
+            document.getElementById('tabSingle').classList.remove('active');
+            document.getElementById('tabCombo').classList.remove('active');
+            document.getElementById('tab' + type.charAt(0).toUpperCase() + type.slice(1)).classList.add('active');
+
+            // Load menu
+            loadMenu(type);
+        }
+
+        // Add to Cart
+        function addToCart(item) {
+            // Check if item already in cart
+            const existingIndex = cart.findIndex(c => c.id === item.id);
+
+            if (existingIndex >= 0) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({
+                    ...item,
+                    quantity: 1
+                });
+            }
+
+            updateCart();
+
+            // Visual feedback
+            const btn = event.target.closest('.add-btn');
+            btn.innerHTML = '<i class="fas fa-check"></i> 已加入';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-plus"></i> 加入';
+            }, 1000);
+        }
+
+        // Update Cart
+        function updateCart() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            document.getElementById('cartCount').textContent = totalItems;
+            document.getElementById('cartTotal').textContent = totalPrice;
+
+            // Update cart details
+            updateCartDetails();
+        }
+
+        // Update Cart Details
+        function updateCartDetails() {
+            const cartDetails = document.getElementById('cartDetails');
+
+            if (cart.length === 0) {
+                cartDetails.innerHTML = `
+                    <div class="cart-details-title">
+                        <i class="fas fa-shopping-cart"></i>
+                        購物車內容
+                    </div>
+                    <div class="cart-empty">
+                        <i class="fas fa-basket-shopping"></i>
+                        <p>購物車目前是空的</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cartDetails.innerHTML = `
+                <div class="cart-details-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    購物車內容
+                </div>
+                ${cart.map(item => `
+                    <div class="cart-item-detail">
+                        <div>
+                            <div class="cart-item-name">${escapeHtml(item.name)}</div>
+                            <div class="cart-item-quantity">數量：${item.quantity}</div>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div class="cart-item-subtotal">$${item.price * item.quantity}</div>
+                            <button class="cart-item-remove" onclick="removeFromCart(${item.id})" title="刪除">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        // Remove from Cart
+        function removeFromCart(itemId) {
+            const index = cart.findIndex(c => c.id === itemId);
+            if (index >= 0) {
+                cart.splice(index, 1);
+                updateCart();
+            }
+        }
+
+        // XSS Protection
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+
+</html>

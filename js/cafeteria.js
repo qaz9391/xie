@@ -15,14 +15,15 @@ window.addEventListener('DOMContentLoaded', async function () {
     const commentList = document.getElementById('commentList');
 
     // 檢查基本依賴
-    if (!window.supabase) {
-        console.error('[Cafeteria] Supabase library not loaded');
-        shopList.innerHTML = '<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: red; background: #ffe6e6;">錯誤：Supabase 未載入</div>';
+    const supabaseLib = window.supabase;
+    if (!supabaseLib || typeof supabaseLib.createClient !== 'function') {
+        console.error('[Cafeteria] Supabase library not loaded correctly:', window.supabase);
+        shopList.innerHTML = '<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: red; background: #ffe6e6;">錯誤：Supabase SDK 未正確載入，請重新整理頁面</div>';
         return;
     }
 
-    if (!window.CONFIG) {
-        console.error('[Cafeteria] CONFIG not loaded');
+    if (!window.CONFIG || !window.CONFIG.SUPABASE_URL || !window.CONFIG.SUPABASE_KEY) {
+        console.error('[Cafeteria] CONFIG not loaded:', window.CONFIG);
         shopList.innerHTML = '<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: red; background: #ffe6e6;">錯誤：設定檔未載入</div>';
         return;
     }
@@ -30,10 +31,16 @@ window.addEventListener('DOMContentLoaded', async function () {
     console.log('[Cafeteria] Dependencies OK, initializing Supabase...');
 
     // 初始化 Supabase（設為全局變量）
-    supabaseClient = window.supabase.createClient(
-        window.CONFIG.SUPABASE_URL,
-        window.CONFIG.SUPABASE_KEY
-    );
+    try {
+        supabaseClient = supabaseLib.createClient(
+            window.CONFIG.SUPABASE_URL,
+            window.CONFIG.SUPABASE_KEY
+        );
+    } catch (initErr) {
+        console.error('[Cafeteria] createClient failed:', initErr);
+        shopList.innerHTML = `<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: red;">初始化失敗：${initErr.message}</div>`;
+        return;
+    }
 
     // 為了向後兼容，也保留局部變量
     const supabase = supabaseClient;
@@ -64,7 +71,6 @@ window.addEventListener('DOMContentLoaded', async function () {
             stores.forEach(store => {
                 const imgUrl = store.image_url || 'https://placehold.co/600x400?text=No+Image';
                 const card = document.createElement('a');
-                // 使用自訂連結（如果有）否則使用預設的 menu.html
                 card.href = store.link_url || `menu.html?store_id=${store.id}`;
                 card.className = 'shop-card';
                 card.innerHTML = `
@@ -78,7 +84,6 @@ window.addEventListener('DOMContentLoaded', async function () {
             });
             console.log('[Cafeteria] Stores rendered successfully');
         }
-
 
     } catch (e) {
         console.error('[Cafeteria] Exception:', e);
@@ -226,7 +231,6 @@ window.addEventListener('DOMContentLoaded', async function () {
         console.error('[Cafeteria] Submit button not found!');
     }
 
-
     console.log('[Cafeteria] Initialization complete');
 });
 
@@ -270,7 +274,6 @@ function setupPinButtons() {
 
     console.log('[Cafeteria] Pin button event listener attached to commentList');
 }
-
 
 // 切換置頂狀態
 async function togglePin(commentId, shouldPin) {
