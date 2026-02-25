@@ -1,0 +1,27 @@
+# ===== VR 導覽快取控制 =====
+# 防止瀏覽器快取 VR 相關核心檔案（pano.xml, index.html, skin.js）
+# 每次更新 Pano2VR 輸出後，瀏覽器將強制重新載入最新版本
+
+<IfModule mod_headers.c>
+    # 對 output 資料夾中的 VR 核心檔案停用快取
+    <FilesMatch "\.(xml|html)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    # 圖片可以快取較長時間（7天）
+    ExpiresByType image/jpeg "access plus 7 days"
+    ExpiresByType image/jpg  "access plus 7 days"
+    ExpiresByType image/png  "access plus 7 days"
+    # JS/CSS 快取1天
+    ExpiresByType application/javascript "access plus 1 day"
+    ExpiresByType text/css "access plus 1 day"
+    # HTML 和 XML 不快取
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType text/xml  "access plus 0 seconds"
+    ExpiresByType application/xml "access plus 0 seconds"
+</IfModule>

@@ -1,0 +1,8 @@
+# output 資料夾：停用 VR 核心檔案的瀏覽器快取
+<IfModule mod_headers.c>
+    <FilesMatch "\.(xml|html)$">
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires "0"
+    </FilesMatch>
+</IfModule>

@@ -69,7 +69,9 @@ window.addEventListener('DOMContentLoaded', async function () {
             // 渲染店家
             shopList.innerHTML = '';
             stores.forEach(store => {
-                const imgUrl = store.image_url || 'https://placehold.co/600x400?text=No+Image';
+                const rawUrl = store.image_url || '';
+                // 如果是相對路徑（不以 http/https 開頭），使用相對路徑顯示本地圖片
+                const imgUrl = rawUrl.startsWith('http') ? rawUrl : (rawUrl || 'https://placehold.co/600x400?text=No+Image');
                 const card = document.createElement('a');
                 card.href = store.link_url || `menu.html?store_id=${store.id}`;
                 card.className = 'shop-card';

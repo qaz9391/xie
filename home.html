@@ -1560,8 +1560,12 @@
                     <i class="fas fa-hand-pointer"></i>
                     <span data-i18n="click-to-interact">點擊開始互動</span>
                 </div>
-                <iframe src="output/index.html" allowfullscreen
+                <iframe id="vrIframe" allowfullscreen
                     onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
+                <script>
+                    // 強制繞過快取：每次載入時加上當前時間戳，確保瀏覽器不使用舊版 VR
+                    document.getElementById('vrIframe').src = 'output/index.html?v=' + Date.now();
+                </script>
                 <button class="btn-fullscreen" onclick="toggleFullscreen()">
                     <i class="fas fa-expand"></i>
                 </button>
