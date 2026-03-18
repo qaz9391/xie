@@ -1,279 +1,303 @@
+/* Modern Design System for Cafeteria Pages */
+
+:root {
+    --primary-color: #009E73;
+    --primary-light: #e6f6f1;
+    --secondary-color: #1a365d;
+    --accent-color: #f39c12;
+    --text-main: #2d3748;
+    --text-muted: #718096;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Page Layout */
 body {
-    background-color: #f0f2f5;
+    background-color: var(--bg-main);
     font-family: 'Noto Sans TC', sans-serif;
-    color: #2c3e50;
+    color: var(--text-main);
     margin: 0;
     padding-bottom: 50px;
+    line-height: 1.6;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0 20px;
 }
 
 /* Header */
 .page-header {
-    background: white;
-    padding: 20px 0;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #007A5E 100%);
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-md);
     text-align: center;
     position: relative;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .page-header h1 {
     margin: 0;
-    color: #2c3e50;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .back-btn {
     position: absolute;
-    left: 20px;
+    left: 40px;
     top: 50%;
     transform: translateY(-50%);
     text-decoration: none;
-    color: #555;
-    font-weight: bold;
+    color: var(--primary-color);
+    font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 8px 15px;
-    border-radius: 20px;
-    background: #f8f9fa;
-    transition: 0.3s;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: white;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
 }
 
 .back-btn:hover {
-    background: #e9ecef;
-    color: #000;
+    background: var(--bg-main);
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+/* Section Titles */
+section h2 {
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+section h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 6px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
 }
 
 /* Shop List (Cafeteria) */
 .shop-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .shop-card {
-    background: white;
-    border-radius: 15px;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
 }
 
 .shop-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
 }
 
 .shop-img {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
     background: #eee;
+    transition: transform 0.5s ease;
+}
+
+.shop-card:hover .shop-img {
+    transform: scale(1.05);
 }
 
 .shop-info {
-    padding: 20px;
+    padding: 25px;
+    flex-grow: 1;
+    background: white;
+    z-index: 1;
 }
 
 .shop-info h2 {
     margin: 0 0 10px 0;
-    font-size: 1.4rem;
-    color: #2c3e50;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    padding-left: 0;
+}
+.shop-info h2::before {
+    display: none;
 }
 
 .shop-info p {
-    color: #666;
+    color: var(--text-muted);
     margin: 0;
-    line-height: 1.5;
-}
-
-/* Menu Page */
-.menu-header-img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 20px;
-    margin-bottom: 30px;
-}
-
-.menu-section-title {
-    font-size: 1.5rem;
-    margin: 30px 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #00B894;
-    display: inline-block;
-}
-
-.menu-items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.menu-item {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-.menu-item img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-.menu-item-details {
-    flex: 1;
-}
-
-.menu-item-name {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-}
-
-.menu-item-desc {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 10px;
-}
-
-.menu-item-price {
-    font-size: 1.2rem;
-    color: #00B894;
-    font-weight: bold;
-    margin-top: auto;
+    font-size: 1rem;
 }
 
 /* Forum/Comment Section */
 .forum-section {
-    background: white;
-    border-radius: 20px;
-    padding: 20px;
-    /* Reduced padding */
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: 40px;
     margin: 40px auto 0;
-    /* Center and margin */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-    max-width: 800px;
-    /* Limit width */
+    box-shadow: var(--shadow-md);
+    max-width: 900px;
+    border: 1px solid var(--border-color);
 }
 
 .forum-title {
-    font-size: 1.5rem;
-    /* Smaller title */
-    margin-bottom: 20px;
-    border-left: 5px solid #00B894;
-    padding-left: 15px;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+}
+
+.forum-title i {
+    color: var(--primary-color);
 }
 
 .comment-form {
     display: flex;
-    gap: 10px;
-    /* Smaller gap */
-    margin-bottom: 20px;
-    background: #f9f9f9;
-    padding: 15px;
-    /* Reduced padding */
-    border-radius: 15px;
+    gap: 15px;
+    margin-bottom: 35px;
+    background: var(--bg-main);
+    padding: 20px;
+    border-radius: var(--radius-md);
     align-items: flex-start;
+    border: 1px solid var(--border-color);
 }
 
 .comment-form input,
 .comment-form textarea {
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
 }
 
 .comment-form input {
-    width: 150px;
-    /* Smaller name input */
+    width: 180px;
 }
 
 .comment-form textarea {
     flex: 1;
     resize: none;
-    /* Disable resize */
-    height: 42px;
-    /* Fixed height for compact look, expand on focus? or just keep small */
-    min-height: 42px;
+    height: 46px;
+    min-height: 46px;
 }
 
 .btn-submit {
-    background: #00B894;
+    background: var(--primary-color);
     color: white;
     border: none;
-    padding: 0 20px;
-    height: 42px;
-    /* Match input height */
+    padding: 0 25px;
+    height: 46px;
     border-radius: 8px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: var(--transition);
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .btn-submit:hover {
-    background: #008f72;
+    background: #008762;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 158, 115, 0.3);
 }
 
 .comment-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 .comment-card {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
-    animation: fadeIn 0.5s ease;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    animation: fadeIn 0.5s ease forwards;
+    transition: var(--transition);
+}
+
+.comment-card:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: #cbd5e1;
 }
 
 .comment-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    align-items: center;
 }
 
 .comment-user {
-    font-weight: bold;
-    color: #2c3e50;
+    font-weight: 700;
+    color: var(--secondary-color);
+    font-size: 1.05rem;
 }
 
 .comment-date {
     font-size: 0.85rem;
-    color: #999;
+    color: var(--text-muted);
 }
 
 .comment-content {
-    color: #555;
-    line-height: 1.5;
+    color: var(--text-main);
+    line-height: 1.6;
+    font-size: 1rem;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(15px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -282,81 +306,84 @@ body {
 
 /* Pinned Comment Styles */
 .pinned-comment {
-    background: linear-gradient(135deg, #fffbea 0%, #fff8dc 100%);
-    border-left: 4px solid #f39c12;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.15);
+    background: #fffbef;
+    border-left: 5px solid var(--accent-color);
+    border-color: #fde68a;
+    border-bottom-color: #fde68a;
+    border-right-color: #fde68a;
+    border-top-color: #fde68a;
 }
 
 .pin-indicator {
-    color: #f39c12;
-    margin-right: 5px;
-    animation: pinPulse 2s infinite;
-}
-
-@keyframes pinPulse {
-
-    0%,
-    100% {
-        transform: rotate(0deg);
-    }
-
-    50% {
-        transform: rotate(15deg);
-    }
+    color: var(--accent-color);
+    margin-right: 8px;
 }
 
 /* Comment Actions */
 .comment-actions {
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: flex-end;
 }
 
 .btn-pin-toggle {
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    padding: 5px 12px;
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 6px 15px;
     border-radius: 6px;
     font-size: 0.85rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: var(--transition);
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
+    color: var(--text-muted);
 }
 
 .btn-pin-toggle:hover {
-    background: #e9ecef;
-    border-color: #ccc;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.btn-pin-toggle.btn-pin {
-    color: #666;
+    background: var(--bg-main);
+    border-color: #cbd5e1;
+    color: var(--secondary-color);
 }
 
 .btn-pin-toggle.btn-pin:hover {
-    background: #fffbea;
-    border-color: #f39c12;
-    color: #f39c12;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background: #fffbef;
 }
 
 .btn-pin-toggle.btn-unpin {
-    background: #fff8dc;
-    border-color: #f39c12;
-    color: #f39c12;
+    background: #fffbef;
+    border-color: #fcd34d;
+    color: var(--accent-color);
 }
 
 .btn-pin-toggle.btn-unpin:hover {
-    background: #f8f9fa;
-    border-color: #ccc;
-    color: #666;
+    background: white;
+    border-color: var(--border-color);
+    color: var(--text-muted);
 }
 
-.btn-pin-toggle i {
-    font-size: 0.9rem;
+/* Loading state */
+.loading-spinner {
+    padding: 60px;
+    color: var(--primary-color);
+}
+.loading-spinner p {
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page-header h1 { font-size: 2rem; }
+    .back-btn { top: 20px; left: 20px; transform: none; padding: 8px 15px;}
+    .page-header { padding-top: 70px; }
+    
+    .comment-form { flex-direction: column; }
+    .comment-form input, .comment-form textarea, .btn-submit { width: 100%; max-width: none; }
+    .forum-section { padding: 25px 20px; }
 }
