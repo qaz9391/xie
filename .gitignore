@@ -1,0 +1,22 @@
+# Windows system files
+[Dd]esktop.ini
+[Tt]humbs.db
+
+# OS X system files
+.DS_Store
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Temp files
+*.tmp
+*.log
+*.bak
+
+# VS Code
+.vscode/
+
+# Local server files (XAMPP/etc)
+cgi-bin/

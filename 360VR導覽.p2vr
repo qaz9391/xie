@@ -7,7 +7,7 @@
       <input>
         <patch/>
         <type>equirectangular</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/明新門口.jpg</filename>
+        <filename>../資訊/照片集/明新門口.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -170,7 +170,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/行政大樓.jpg</filename>
+        <filename>../資訊/照片集/行政大樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -498,7 +498,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/校長室.jpg</filename>
+        <filename>../資訊/照片集/校長室.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -578,7 +578,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/秘書處.jpg</filename>
+        <filename>../資訊/照片集/秘書處.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -658,7 +658,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/財務處.jpg</filename>
+        <filename>../資訊/照片集/財務處.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -738,7 +738,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/副校長市.jpg</filename>
+        <filename>../資訊/照片集/副校長市.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -818,7 +818,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/事務組.jpg</filename>
+        <filename>../資訊/照片集/事務組.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -898,7 +898,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/出納組.jpg</filename>
+        <filename>../資訊/照片集/出納組.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -978,7 +978,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/資訊大樓.jpg</filename>
+        <filename>../資訊/照片集/資訊大樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1149,7 +1149,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/行政二館.jpg</filename>
+        <filename>../資訊/照片集/行政二館.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1271,7 +1271,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/行政二館門口.jpg</filename>
+        <filename>../資訊/照片集/行政二館門口.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1362,7 +1362,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/明明樓.jpg</filename>
+        <filename>../資訊/照片集/明明樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1535,7 +1535,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/明光樓.jpg</filename>
+        <filename>../資訊/照片集/明光樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1679,7 +1679,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/明學樓.jpg</filename>
+        <filename>../資訊/照片集/明學樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1797,7 +1797,7 @@
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/校安中心.jpg</filename>
+        <filename>../資訊/照片集/校安中心.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -1918,7 +1918,7 @@ imagexskys@gmail.com
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/學生活動中心.jpg</filename>
+        <filename>../資訊/照片集/學生活動中心.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -2088,7 +2088,7 @@ imagexskys@gmail.com
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/學生餐廳.jpg</filename>
+        <filename>../資訊/照片集/學生餐廳.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -2258,7 +2258,7 @@ imagexskys@gmail.com
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/圖書館.jpg</filename>
+        <filename>../資訊/照片集/圖書館.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -2359,6 +2359,33 @@ imagexskys@gmail.com
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-98.95</pan>
+            <tilt>4.13</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point03</id>
+          <title>籃球場</title>
+          <description>籃球場</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node85}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
@@ -2382,7 +2409,7 @@ imagexskys@gmail.com
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/鴻超樓.jpg</filename>
+        <filename>../資訊/照片集/鴻超樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -2560,7 +2587,7 @@ imagexskys@gmail.com
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管理學院.jpg</filename>
+        <filename>../資訊/照片集/管理學院.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -2728,6 +2755,8 @@ imagexskys@gmail.com
           <customprops/>
           <polygon/>
           <id>Point03</id>
+          <title>一樓內部</title>
+          <description>一樓內部</description>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node81}</url>
@@ -2775,7 +2804,7 @@ imagexskys@gmail.com
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院319.jpg</filename>
+        <filename>../資訊/照片集/管院319.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -2935,7 +2964,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院320.jpg</filename>
+        <filename>../資訊/照片集/管院320.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -3098,7 +3127,7 @@ alvin@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院321.jpg</filename>
+        <filename>../資訊/照片集/管院321.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -3255,7 +3284,7 @@ alvin@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院322.jpg</filename>
+        <filename>../資訊/照片集/管院322.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -3415,7 +3444,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院318.jpg</filename>
+        <filename>../資訊/照片集/管院318.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -3521,7 +3550,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院828.jpg</filename>
+        <filename>../資訊/照片集/管院828.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -3652,7 +3681,7 @@ Email
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/14.png</filename>
+          <filename>../資訊/14.png</filename>
           <urlsafefilename>14.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -3690,7 +3719,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院829.jpg</filename>
+        <filename>../資訊/照片集/管院829.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -3821,7 +3850,7 @@ Email
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/15.png</filename>
+          <filename>../資訊/15.png</filename>
           <urlsafefilename>15.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -3859,7 +3888,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院831 839.jpg</filename>
+        <filename>../資訊/照片集/管院831 839.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4014,7 +4043,7 @@ Email
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/16.png</filename>
+          <filename>../資訊/16.png</filename>
           <urlsafefilename>16.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -4052,7 +4081,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院832 838.jpg</filename>
+        <filename>../資訊/照片集/管院832 838.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4156,7 +4185,7 @@ Email
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/17.png</filename>
+          <filename>../資訊/17.png</filename>
           <urlsafefilename>17.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -4192,7 +4221,7 @@ Email
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/18.png</filename>
+          <filename>../資訊/18.png</filename>
           <urlsafefilename>18.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -4230,7 +4259,7 @@ Email
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院323.jpg</filename>
+        <filename>../資訊/照片集/管院323.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4392,7 +4421,7 @@ tcying@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院324.jpg</filename>
+        <filename>../資訊/照片集/管院324.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4524,7 +4553,7 @@ tcying@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院325.jpg</filename>
+        <filename>../資訊/照片集/管院325.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4656,7 +4685,7 @@ tcying@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院326.jpg</filename>
+        <filename>../資訊/照片集/管院326.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4788,7 +4817,7 @@ tcying@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院327.jpg</filename>
+        <filename>../資訊/照片集/管院327.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -4975,7 +5004,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院328.jpg</filename>
+        <filename>../資訊/照片集/管院328.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5107,7 +5136,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院329 330.jpg</filename>
+        <filename>../資訊/照片集/管院329 330.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5213,7 +5242,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院414.jpg</filename>
+        <filename>../資訊/照片集/管院414.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5319,7 +5348,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院415.jpg</filename>
+        <filename>../資訊/照片集/管院415.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5451,7 +5480,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院417.jpg</filename>
+        <filename>../資訊/照片集/管院417.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5583,7 +5612,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院418.jpg</filename>
+        <filename>../資訊/照片集/管院418.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5715,7 +5744,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院419.jpg</filename>
+        <filename>../資訊/照片集/管院419.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5847,7 +5876,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院421.jpg</filename>
+        <filename>../資訊/照片集/管院421.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -5979,7 +6008,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院423 427.jpg</filename>
+        <filename>../資訊/照片集/管院423 427.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6111,7 +6140,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院426.jpg</filename>
+        <filename>../資訊/照片集/管院426.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6217,7 +6246,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院428 422.jpg</filename>
+        <filename>../資訊/照片集/管院428 422.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6375,7 +6404,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院522.jpg</filename>
+        <filename>../資訊/照片集/管院522.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6480,7 +6509,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/44.png</filename>
+          <filename>../資訊/44.png</filename>
           <urlsafefilename>44.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -6518,7 +6547,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院529.jpg</filename>
+        <filename>../資訊/照片集/管院529.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6623,7 +6652,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/43.png</filename>
+          <filename>../資訊/43.png</filename>
           <urlsafefilename>43.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -6661,7 +6690,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院531.jpg</filename>
+        <filename>../資訊/照片集/管院531.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6791,7 +6820,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/42.png</filename>
+          <filename>../資訊/42.png</filename>
           <urlsafefilename>42.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -6829,7 +6858,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院532.jpg</filename>
+        <filename>../資訊/照片集/管院532.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -6960,7 +6989,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/41.png</filename>
+          <filename>../資訊/41.png</filename>
           <urlsafefilename>41.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -6998,7 +7027,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院533 524.jpg</filename>
+        <filename>../資訊/照片集/管院533 524.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -7129,7 +7158,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/40.png</filename>
+          <filename>../資訊/40.png</filename>
           <urlsafefilename>40.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -7167,7 +7196,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院622.jpg</filename>
+        <filename>../資訊/照片集/管院622.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -7283,7 +7312,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/27.png</filename>
+          <filename>../資訊/27.png</filename>
           <urlsafefilename>27.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -7321,7 +7350,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院623.jpg</filename>
+        <filename>../資訊/照片集/管院623.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -7463,7 +7492,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/28.png</filename>
+          <filename>../資訊/28.png</filename>
           <urlsafefilename>28.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -7501,7 +7530,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院625.jpg</filename>
+        <filename>../資訊/照片集/管院625.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -7643,7 +7672,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/29.png</filename>
+          <filename>../資訊/29.png</filename>
           <urlsafefilename>29.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -7681,7 +7710,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院626.jpg</filename>
+        <filename>../資訊/照片集/管院626.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -7823,7 +7852,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/39.png</filename>
+          <filename>../資訊/39.png</filename>
           <urlsafefilename>39.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -7861,7 +7890,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院627.jpg</filename>
+        <filename>../資訊/照片集/管院627.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -7992,7 +8021,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/32.png</filename>
+          <filename>../資訊/32.png</filename>
           <urlsafefilename>32.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8030,7 +8059,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院628.jpg</filename>
+        <filename>../資訊/照片集/管院628.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -8161,7 +8190,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/38.png</filename>
+          <filename>../資訊/38.png</filename>
           <urlsafefilename>38.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8199,7 +8228,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院629.jpg</filename>
+        <filename>../資訊/照片集/管院629.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -8356,7 +8385,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/37.png</filename>
+          <filename>../資訊/37.png</filename>
           <urlsafefilename>37.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8394,7 +8423,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院630.jpg</filename>
+        <filename>../資訊/照片集/管院630.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -8525,7 +8554,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/36.png</filename>
+          <filename>../資訊/36.png</filename>
           <urlsafefilename>36.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8563,7 +8592,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院633.jpg</filename>
+        <filename>../資訊/照片集/管院633.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -8668,7 +8697,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/35.png</filename>
+          <filename>../資訊/35.png</filename>
           <urlsafefilename>35.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8704,7 +8733,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/33.png</filename>
+          <filename>../資訊/33.png</filename>
           <urlsafefilename>33.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8740,7 +8769,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element03</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/34.png</filename>
+          <filename>../資訊/34.png</filename>
           <urlsafefilename>34.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8778,7 +8807,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院717.jpg</filename>
+        <filename>../資訊/照片集/管院717.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -8883,7 +8912,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/19.png</filename>
+          <filename>../資訊/19.png</filename>
           <urlsafefilename>19.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -8921,7 +8950,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院723.jpg</filename>
+        <filename>../資訊/照片集/管院723.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -9052,7 +9081,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/20.png</filename>
+          <filename>../資訊/20.png</filename>
           <urlsafefilename>20.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -9090,7 +9119,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院724.jpg</filename>
+        <filename>../資訊/照片集/管院724.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -9221,7 +9250,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/32.png</filename>
+          <filename>../資訊/32.png</filename>
           <urlsafefilename>32.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -9259,7 +9288,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院726 731.jpg</filename>
+        <filename>../資訊/照片集/管院726 731.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -9384,7 +9413,7 @@ Emailcardy@must.edu.tw
           <id>Point05</id>
           <linktype>image</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>資訊-20260120T065749Z-1-001/資訊/22.png</url>
+          <url>../資訊/22.png</url>
           <safeurl>22.png</safeurl>
           <type>point</type>
           <distance>0</distance>
@@ -9416,7 +9445,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/21.png</filename>
+          <filename>../資訊/21.png</filename>
           <urlsafefilename>21.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -9454,7 +9483,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院728 729.jpg</filename>
+        <filename>../資訊/照片集/管院728 729.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -9570,7 +9599,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/24.png</filename>
+          <filename>../資訊/24.png</filename>
           <urlsafefilename>24.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -9606,7 +9635,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/23.png</filename>
+          <filename>../資訊/23.png</filename>
           <urlsafefilename>23.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -9644,7 +9673,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院730.jpg</filename>
+        <filename>../資訊/照片集/管院730.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -9786,7 +9815,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/25.png</filename>
+          <filename>../資訊/25.png</filename>
           <urlsafefilename>25.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -9824,7 +9853,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院732.jpg</filename>
+        <filename>../資訊/照片集/管院732.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -9992,7 +10021,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/26.png</filename>
+          <filename>../資訊/26.png</filename>
           <urlsafefilename>26.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10030,7 +10059,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院805.jpg</filename>
+        <filename>../資訊/照片集/管院805.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -10135,7 +10164,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/15.png</filename>
+          <filename>../資訊/15.png</filename>
           <urlsafefilename>15.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10171,7 +10200,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/照片集/1.png</filename>
+          <filename>../資訊/1.png</filename>
           <urlsafefilename>1.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10207,7 +10236,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element03</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/2.png</filename>
+          <filename>../資訊/2.png</filename>
           <urlsafefilename>2.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10245,7 +10274,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院816.jpg</filename>
+        <filename>../資訊/照片集/管院816.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -10350,7 +10379,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/3.png</filename>
+          <filename>../資訊/3.png</filename>
           <urlsafefilename>3.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10388,7 +10417,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院817.jpg</filename>
+        <filename>../資訊/照片集/管院817.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -10519,7 +10548,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/5.png</filename>
+          <filename>../資訊/5.png</filename>
           <urlsafefilename>5.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10557,7 +10586,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院821.jpg</filename>
+        <filename>../資訊/照片集/管院821.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -10688,7 +10717,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/5.png</filename>
+          <filename>../資訊/5.png</filename>
           <urlsafefilename>5.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10726,7 +10755,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院822 826.jpg</filename>
+        <filename>../資訊/照片集/管院822 826.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -10883,7 +10912,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/6.png</filename>
+          <filename>../資訊/6.png</filename>
           <urlsafefilename>6.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -10921,7 +10950,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院823 825.jpg</filename>
+        <filename>../資訊/照片集/管院823 825.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11052,7 +11081,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/7.png</filename>
+          <filename>../資訊/7.png</filename>
           <urlsafefilename>7.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11088,7 +11117,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/8.png</filename>
+          <filename>../資訊/8.png</filename>
           <urlsafefilename>8.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11126,7 +11155,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院833 837.jpg</filename>
+        <filename>../資訊/照片集/管院833 837.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11282,7 +11311,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/9.png</filename>
+          <filename>../資訊/9.png</filename>
           <urlsafefilename>9.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11318,7 +11347,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/10.png</filename>
+          <filename>../資訊/10.png</filename>
           <urlsafefilename>10.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11356,7 +11385,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院835.jpg</filename>
+        <filename>../資訊/照片集/管院835.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11435,7 +11464,7 @@ Emailcardy@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/11.png</filename>
+          <filename>../資訊/11.png</filename>
           <urlsafefilename>11.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11473,7 +11502,7 @@ Emailcardy@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/838.jpg</filename>
+        <filename>../資訊/照片集/838.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11572,7 +11601,7 @@ avinhsu@must.edu.tw
 03-5593142#3217</description>
           <linktype>image</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>資訊-20260120T065749Z-1-001/資訊/13.png</url>
+          <url>../資訊/13.png</url>
           <safeurl>13.png</safeurl>
           <type>point</type>
           <distance>0</distance>
@@ -11635,7 +11664,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院834 836.jpg</filename>
+        <filename>../資訊/照片集/管院834 836.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11736,7 +11765,7 @@ cmc@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element01</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/12.png</filename>
+          <filename>../資訊/12.png</filename>
           <urlsafefilename>12.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11772,7 +11801,7 @@ cmc@must.edu.tw
           </videorect>
           <type>image</type>
           <id>Element02</id>
-          <filename>資訊-20260120T065749Z-1-001/資訊/31.png</filename>
+          <filename>../資訊/31.png</filename>
           <urlsafefilename>31.png</urlsafefilename>
           <mode>0</mode>
           <nodechangekeep>0</nodechangekeep>
@@ -11811,7 +11840,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院101 107.jpg</filename>
+        <filename>../資訊/照片集/管院101 107.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11913,7 +11942,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院1樓門口.jpg</filename>
+        <filename>../資訊/照片集/管院1樓門口.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -11944,8 +11973,8 @@ cmc@must.edu.tw
       <hotspots>
         <hotspot>
           <position>
-            <pan>-246.12</pan>
-            <tilt>-4.65</tilt>
+            <pan>-241.7</pan>
+            <tilt>-5.14</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -11956,6 +11985,8 @@ cmc@must.edu.tw
           <customprops/>
           <polygon/>
           <id>Point01</id>
+          <title>門口</title>
+          <description>門口</description>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node20}</url>
@@ -12045,7 +12076,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/足球場.jpg</filename>
+        <filename>../資訊/照片集/足球場.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12193,7 +12224,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院2樓1.jpg</filename>
+        <filename>../資訊/照片集/管院2樓1.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12295,7 +12326,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院側門.jpg</filename>
+        <filename>../資訊/照片集/管院側門.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12397,7 +12428,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/籃球場.jpg</filename>
+        <filename>../資訊/照片集/籃球場.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12518,7 +12549,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/學餐內部.jpg</filename>
+        <filename>../資訊/照片集/學餐內部.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12577,6 +12608,8 @@ cmc@must.edu.tw
           <customprops/>
           <polygon/>
           <id>Point01</id>
+          <title>學餐門口</title>
+          <description>學餐門口</description>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node17}</url>
@@ -12590,8 +12623,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-233.19</pan>
-            <tilt>0.37</tilt>
+            <pan>-230.15</pan>
+            <tilt>0.36</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -12602,9 +12635,11 @@ cmc@must.edu.tw
           <customprops/>
           <polygon/>
           <id>Point02</id>
+          <title>足球場</title>
+          <description>足球場</description>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>{node90}</url>
+          <url>{node82}</url>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -12615,8 +12650,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-213.62</pan>
-            <tilt>0.42</tilt>
+            <pan>-199.77</pan>
+            <tilt>1.13</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -12628,10 +12663,37 @@ cmc@must.edu.tw
           <polygon/>
           <id>Point03</id>
           <title>雪杯</title>
-          <linktype>image</linktype>
+          <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
-          <url>資訊-20260120T065749Z-1-001/資訊/照片集/雪杯.jpg</url>
+          <url>{node98}</url>
           <safeurl>image.jpg</safeurl>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-264.14</pan>
+            <tilt>-2.16</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point04</id>
+          <title>奇奇便當</title>
+          <description>奇奇便當</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node95}</url>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -12663,7 +12725,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院201.jpg</filename>
+        <filename>../資訊/照片集/管院201.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12769,7 +12831,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院202.jpg</filename>
+        <filename>../資訊/照片集/管院202.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12871,7 +12933,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院204.jpg</filename>
+        <filename>../資訊/照片集/管院204.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -12973,7 +13035,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/排球場.jpg</filename>
+        <filename>../資訊/照片集/排球場.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -13125,7 +13187,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院一樓走廊.jpg</filename>
+        <filename>../資訊/照片集/管院一樓走廊.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -13227,7 +13289,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院一樓哈佛學堂.jpg</filename>
+        <filename>../資訊/照片集/管院一樓哈佛學堂.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -13329,7 +13391,7 @@ cmc@must.edu.tw
       <input>
         <patch/>
         <type>auto</type>
-        <filename>資訊-20260120T065749Z-1-001/資訊/照片集/管院2樓.jpg</filename>
+        <filename>../資訊/照片集/管院2樓.jpg</filename>
         <videotype>equi</videotype>
         <levelpitch>0</levelpitch>
         <levelroll>0</levelroll>
@@ -13555,6 +13617,575 @@ cmc@must.edu.tw
       <sounds/>
       <id>node93</id>
     </panorama>
+    <panorama>
+      <projectsettings>
+        <userdata>
+          <customprops/>
+        </userdata>
+        <mapgrid>
+          <anchor/>
+        </mapgrid>
+        <floorplangrid>
+          <anchor/>
+        </floorplangrid>
+      </projectsettings>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>../資訊/照片集/四人房.jpg</filename>
+        <videotype>equi</videotype>
+        <levelpitch>0</levelpitch>
+        <levelroll>0</levelroll>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>0</start>
+        </pan>
+        <tilt>
+          <start>0</start>
+        </tilt>
+        <fov>
+          <start>100</start>
+        </fov>
+        <flyinstart/>
+        <pannorth>0</pannorth>
+      </viewingparameter>
+      <userdata>
+        <customprops/>
+        <capturedatetime>2026-03-19T20:51:42</capturedatetime>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-221.3</pan>
+            <tilt>-9.81</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <title>宿舍門口</title>
+          <description>宿舍門口</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node99}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <ggloudproject/>
+      <sounds/>
+      <id>node94</id>
+    </panorama>
+    <panorama>
+      <projectsettings>
+        <userdata>
+          <customprops/>
+        </userdata>
+        <mapgrid>
+          <anchor/>
+        </mapgrid>
+        <floorplangrid>
+          <anchor/>
+        </floorplangrid>
+      </projectsettings>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>../資訊/照片集/奇奇便當.jpg</filename>
+        <videotype>equi</videotype>
+        <levelpitch>0</levelpitch>
+        <levelroll>0</levelroll>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>0</start>
+        </pan>
+        <tilt>
+          <start>0</start>
+        </tilt>
+        <fov>
+          <start>100</start>
+        </fov>
+        <flyinstart/>
+        <pannorth>0</pannorth>
+      </viewingparameter>
+      <userdata>
+        <customprops/>
+        <capturedatetime>2026-03-19T20:51:42</capturedatetime>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-46.69</pan>
+            <tilt>-2.92</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <title>雪杯</title>
+          <description>雪杯</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node98}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-106.92</pan>
+            <tilt>-0.56</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point02</id>
+          <title>足球場</title>
+          <description>足球場</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node82}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-270</pan>
+            <tilt>-0.94</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point03</id>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node86}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <ggloudproject/>
+      <sounds/>
+      <id>node95</id>
+    </panorama>
+    <panorama>
+      <projectsettings>
+        <userdata>
+          <customprops/>
+        </userdata>
+        <mapgrid>
+          <anchor/>
+        </mapgrid>
+        <floorplangrid>
+          <anchor/>
+        </floorplangrid>
+      </projectsettings>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>../資訊/照片集/宿舍內部.jpg</filename>
+        <videotype>equi</videotype>
+        <levelpitch>0</levelpitch>
+        <levelroll>0</levelroll>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>0</start>
+        </pan>
+        <tilt>
+          <start>0</start>
+        </tilt>
+        <fov>
+          <start>100</start>
+        </fov>
+        <flyinstart/>
+        <pannorth>0</pannorth>
+      </viewingparameter>
+      <userdata>
+        <customprops/>
+        <capturedatetime>2026-03-19T20:51:42</capturedatetime>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-88.92</pan>
+            <tilt>-0.06</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <title>宿舍門口</title>
+          <description>宿舍門口</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node99}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-299.12</pan>
+            <tilt>1.75</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point02</id>
+          <title>陽台</title>
+          <description>陽台</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node97}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <ggloudproject/>
+      <sounds/>
+      <id>node96</id>
+    </panorama>
+    <panorama>
+      <projectsettings>
+        <userdata>
+          <customprops/>
+        </userdata>
+        <mapgrid>
+          <anchor/>
+        </mapgrid>
+        <floorplangrid>
+          <anchor/>
+        </floorplangrid>
+      </projectsettings>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>../資訊/照片集/宿舍陽台.jpg</filename>
+        <videotype>equi</videotype>
+        <levelpitch>0</levelpitch>
+        <levelroll>0</levelroll>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>0</start>
+        </pan>
+        <tilt>
+          <start>0</start>
+        </tilt>
+        <fov>
+          <start>100</start>
+        </fov>
+        <flyinstart/>
+        <pannorth>0</pannorth>
+      </viewingparameter>
+      <userdata>
+        <customprops/>
+        <capturedatetime>2026-03-19T20:51:42</capturedatetime>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-306.32</pan>
+            <tilt>-4.06</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <title>雙人房</title>
+          <description>雙人房</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node96}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <ggloudproject/>
+      <sounds/>
+      <id>node97</id>
+    </panorama>
+    <panorama>
+      <projectsettings>
+        <userdata>
+          <customprops/>
+        </userdata>
+        <mapgrid>
+          <anchor/>
+        </mapgrid>
+        <floorplangrid>
+          <anchor/>
+        </floorplangrid>
+      </projectsettings>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>../資訊/照片集/雪杯 (2).jpg</filename>
+        <videotype>equi</videotype>
+        <levelpitch>0</levelpitch>
+        <levelroll>0</levelroll>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>0</start>
+        </pan>
+        <tilt>
+          <start>0</start>
+        </tilt>
+        <fov>
+          <start>100</start>
+        </fov>
+        <flyinstart/>
+        <pannorth>0</pannorth>
+      </viewingparameter>
+      <userdata>
+        <customprops/>
+        <capturedatetime>2026-03-19T20:51:42</capturedatetime>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-112.41</pan>
+            <tilt>-3.27</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node95}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <ggloudproject/>
+      <sounds/>
+      <id>node98</id>
+    </panorama>
+    <panorama>
+      <projectsettings>
+        <userdata>
+          <customprops/>
+        </userdata>
+        <mapgrid>
+          <anchor/>
+        </mapgrid>
+        <floorplangrid>
+          <anchor/>
+        </floorplangrid>
+      </projectsettings>
+      <input>
+        <patch/>
+        <type>auto</type>
+        <filename>../資訊/照片集/明新宿舍.jpg</filename>
+        <videotype>equi</videotype>
+        <levelpitch>0</levelpitch>
+        <levelroll>0</levelroll>
+      </input>
+      <viewingparameter>
+        <pan>
+          <start>38.2026</start>
+          <min>0</min>
+          <max>360</max>
+        </pan>
+        <tilt>
+          <start>1.55224</start>
+          <min>-90</min>
+          <max>90</max>
+        </tilt>
+        <fov>
+          <start>118.042</start>
+          <minunit>pixels</minunit>
+          <max>140</max>
+          <maxfovstereographic>330</maxfovstereographic>
+          <maxfovfisheye>360</maxfovfisheye>
+        </fov>
+        <flyinstart>
+          <pan>0</pan>
+          <tilt>-90</tilt>
+          <fov>170</fov>
+        </flyinstart>
+        <pannorth>31.0749</pannorth>
+        <scaletofit>1</scaletofit>
+        <projection>rectilinear</projection>
+        <flyinprojection>stereo</flyinprojection>
+        <defaultviewtimestamp>2026-03-19T21:09:05</defaultviewtimestamp>
+      </viewingparameter>
+      <userdata>
+        <customprops/>
+        <capturedatetime>2026-03-19T20:51:42</capturedatetime>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>636</x>
+          <y>74</y>
+        </floorplancoordinates>
+      </userdata>
+      <floorplans/>
+      <hotspots>
+        <hotspot>
+          <position>
+            <pan>-293.03</pan>
+            <tilt>-2.35</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <title>四人房</title>
+          <description>四人房</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node94}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-292.86</pan>
+            <tilt>7.91</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point02</id>
+          <title>雙人房</title>
+          <description>雙人房</description>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node96}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+      </hotspots>
+      <output/>
+      <streetview/>
+      <streetviewproject/>
+      <ggloudproject/>
+      <sounds/>
+      <id>node99</id>
+    </panorama>
   </tour>
   <panorama>
     <id>master</id>
@@ -13593,9 +14224,9 @@ cmc@must.edu.tw
     <floorplans>
       <floorplan>
         <id>FloorPlan01</id>
-        <floorplanfilename>資訊-20260120T065749Z-1-001/資訊/照片集/地圖.png</floorplanfilename>
+        <floorplanfilename>../資訊/照片集/地圖.png</floorplanfilename>
         <type>file</type>
-        <lastmodified>2026-02-24T14:26:42</lastmodified>
+        <lastmodified>2026-02-17T11:37:15</lastmodified>
         <floorplannorth>0</floorplannorth>
         <floorplanscale>0</floorplanscale>
         <floorplanoutputquality>100</floorplanoutputquality>
