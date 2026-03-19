@@ -220,8 +220,7 @@ nav{display:none;}
         <div class="nav-link">房型資訊 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
         <div class="dropdown">
           <a href="#rooms"><i class="fas fa-door-open"></i> 所有房型</a>
-          <a href="#rooms" onclick="document.getElementById('filter-campus').value='和平校區';applyFilters()"><i class="fas fa-map-marker-alt"></i> 和平校區</a>
-          <a href="#rooms" onclick="document.getElementById('filter-campus').value='公館校區';applyFilters()"><i class="fas fa-map-marker-alt"></i> 公館校區</a>
+          <a href="#rooms" onclick="document.getElementById('filter-campus').value='校本部';applyFilters()"><i class="fas fa-map-marker-alt"></i> 校本部</a>
           <div class="dropdown-divider"></div>
           <a href="#rooms" onclick="document.getElementById('filter-gender').value='男';applyFilters()"><i class="fas fa-mars"></i> 男生宿舍</a>
           <a href="#rooms" onclick="document.getElementById('filter-gender').value='女';applyFilters()"><i class="fas fa-venus"></i> 女生宿舍</a>
@@ -277,19 +276,10 @@ nav{display:none;}
     </div>
   </div>
   <div class="hero-cards">
-    <div class="hero-stat"><span class="num">3</span><div class="lbl">宿舍棟數</div></div>
-    <div class="hero-stat"><span class="num">500+</span><div class="lbl">住宿床位</div></div>
+    <div class="hero-stat"><span class="num">168</span><div class="lbl">總房間數</div></div>
+    <div class="hero-stat"><span class="num">664</span><div class="lbl">住宿床位</div></div>
     <div class="hero-stat"><span class="num">24h</span><div class="lbl">安全管理</div></div>
   </div>
-</section>
-
-<!-- DORM INTRO ACCORDION -->
-<section class="section dorm-section" id="intro">
-  <div class="section-header">
-    <h2>宿舍介紹</h2>
-    <p>點選各項目展開詳細資訊</p>
-  </div>
-  <div class="accordion-group" id="accordionGroup"></div>
 </section>
 
 <!-- ROOM LISTING -->
@@ -304,8 +294,7 @@ nav{display:none;}
       <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">校區</label>
       <select class="select-filter" id="filter-campus" onchange="applyFilters()">
         <option value="">全部校區</option>
-        <option value="和平校區">和平校區</option>
-        <option value="公館校區">公館校區</option>
+        <option value="校本部">校本部</option>
       </select>
     </div>
     <div>
@@ -321,9 +310,7 @@ nav{display:none;}
       <select class="select-filter" id="filter-beds" onchange="applyFilters()">
         <option value="">全部人數</option>
         <option value="2">2人房</option>
-        <option value="3">3人房</option>
         <option value="4">4人房</option>
-        <option value="6">6人房</option>
       </select>
     </div>
     <div>
@@ -341,6 +328,15 @@ nav{display:none;}
     <i class="fas fa-search" style="font-size:2.5rem;margin-bottom:12px;display:block"></i>
     查無符合條件的房型
   </div>
+</section>
+
+<!-- DORM INTRO ACCORDION -->
+<section class="section dorm-section" id="intro">
+  <div class="section-header">
+    <h2>宿舍介紹</h2>
+    <p>點選各項目展開詳細資訊</p>
+  </div>
+  <div class="accordion-group" id="accordionGroup"></div>
 </section>
 
 <!-- FACILITIES -->
@@ -461,7 +457,7 @@ function renderRooms(data) {
         <h3>${r.name}</h3>
         <div class="room-meta">
           <span class="meta-tag"><i class="fas fa-map-marker-alt"></i> ${r.campus}</span>
-          <span class="meta-tag">${r.gender==='男'?'♂ 男生':'♀ 女生'}</span>
+          <span class="meta-tag">${r.gender==='男'?'♂ 男生':(r.gender==='女'?'♀ 女生':'👫 男女皆可')}</span>
           <span class="meta-tag"><i class="fas fa-user-friends"></i> ${r.beds}人房</span>
         </div>
         <p class="room-desc">${r.description || r.desc || ''}</p>
@@ -509,7 +505,7 @@ function applyFilters() {
   const status = document.getElementById('filter-status').value;
   let filtered = dormData.rooms.filter(r =>
     (!campus || r.campus === campus) &&
-    (!gender || r.gender === gender) &&
+    (!gender || r.gender.includes(gender)) &&
     (!beds   || parseInt(r.beds) === parseInt(beds)) &&
     (!status || r.status === status)
   );

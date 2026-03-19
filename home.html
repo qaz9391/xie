@@ -882,19 +882,15 @@
             z-index: 10;
         }
 
-        /* 將 News Ticker 改為覆蓋在 Hero 底部 */
+        /* 最新公告列（移至 VR 上方獨立顯示） */
         .news-ticker-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
             width: 100%;
-            background: rgba(44, 62, 80, 0.85); /* 半透明 Navy */
+            background: var(--navy);
             color: white;
             display: flex;
             align-items: center;
             font-size: 0.95rem;
-            z-index: 90;
-            backdrop-filter: blur(5px);
+            border-bottom: 3px solid var(--primary);
         }
 
         .news-title {
@@ -1672,8 +1668,22 @@
             <p data-i18n="vr-desc">探索無限可能 Explore the Future</p>
         </div>
 
-        <!-- Hero Banner (整合 VR 與 最新公告) -->
-        <div class="hero-banner">
+        <!-- News Ticker: 移至 VR 畫面的正上方，避免遮蔽全景互動與地圖 -->
+        <div class="news-ticker-container">
+            <div class="news-title" data-i18n="news-title">最新公告</div>
+            <div class="news-content">
+                <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
+                    <span class="news-item" data-i18n="news-1">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
+                    <span class="news-item" data-i18n="news-2">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
+                    <span class="news-item" data-i18n="news-3">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
+                    <span class="news-item" data-i18n="news-4">📢 【教務處】114學年度第2學期選課須知公告，請同學留意選課時間</span>
+                    <span class="news-item" data-i18n="news-5">📢 【學務處】114學年度社團博覽會即將於9/24展開，歡迎踴躍參加</span>
+                </marquee>
+            </div>
+        </div>
+
+        <!-- Hero Banner (單純作為 VR 容器) -->
+        <div class="hero-banner" style="border-top: none;">
             <div class="vr-frame" id="panoramaFrame">
                 <div class="iframe-loader" id="vrLoader">
                     <div class="spinner"></div>
@@ -1686,20 +1696,6 @@
                 <button class="btn-fullscreen" onclick="toggleFullscreen()" title="全螢幕">
                     <i class="fas fa-expand"></i>
                 </button>
-            </div>
-
-            <!-- Footer News Ticker in Hero -->
-            <div class="news-ticker-container">
-                <div class="news-title" data-i18n="news-title">最新公告</div>
-                <div class="news-content">
-                    <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
-                        <span class="news-item" data-i18n="news-1">📢 【教務處】114學年度新生入學手冊已開放下載，請新生們務必詳細閱讀</span>
-                        <span class="news-item" data-i18n="news-2">📢 【學務處】寒假時間已到，請各位同學出門遊玩時，注意自身安全</span>
-                        <span class="news-item" data-i18n="news-3">📢 【圖書館】開學首週舉辦「圖書館尋寶活動」，歡迎新生參加！</span>
-                        <span class="news-item" data-i18n="news-4">📢 【教務處】114學年度第2學期選課須知公告，請同學留意選課時間</span>
-                        <span class="news-item" data-i18n="news-5">📢 【學務處】114學年度社團博覽會即將於9/24展開，歡迎踴躍參加</span>
-                    </marquee>
-                </div>
             </div>
         </div>
 
