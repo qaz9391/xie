@@ -31,7 +31,7 @@ async function fetchOrders() {
     try {
         // Fetch Orders
         const { data: orders, error } = await supabase
-            .from('orders')
+            .from('購物車主表')
             .select('*')
             .order('created_at', { ascending: false });
 
@@ -95,7 +95,7 @@ async function viewDetails(orderId) {
     // Supabase JS allows relational queries if setup, but simple manual join is safer if PKs missing
 
     const { data: items, error } = await supabase
-        .from('order_items')
+        .from('購物車明細表')
         .select(`
             quantity,
             unit_price,
@@ -140,7 +140,7 @@ async function updateStatus(id, status) {
     if (!confirm('確定要更新訂單狀態嗎？')) return;
 
     const { error } = await supabase
-        .from('orders')
+        .from('購物車主表')
         .update({ status: status })
         .eq('id', id);
 

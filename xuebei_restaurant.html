@@ -712,7 +712,7 @@
 
             try {
                 const { data: items, error } = await supabaseClient
-                    .from('xuebei_menu')
+                    .from('雪杯工坊菜單')
                     .select('*')
                     .eq('type', type)
                     .eq('is_available', true)

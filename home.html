@@ -2424,7 +2424,7 @@
             async function loadVRComments() {
                 try {
                     const { data: comments, error } = await supabase
-                        .from('vr_comments')
+                        .from('首頁留言板')
                         .select('*')
                         .order('created_at', { ascending: false })
                         .limit(20);
@@ -2478,7 +2478,7 @@
 
                 try {
                     const { error } = await supabase
-                        .from('vr_comments')
+                        .from('首頁留言板')
                         .insert([{ user_name: userName, content: content }]);
 
                     if (error) throw error;

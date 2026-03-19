@@ -67,7 +67,7 @@ async function fetchStoreInfo() {
     try {
         console.log('[Menu] Fetching store info for:', STORE_ID);
         const { data, error } = await supabaseClient
-            .from('stores')
+            .from('店家')
             .select('*')
             .eq('id', STORE_ID)
             .single();
@@ -101,7 +101,7 @@ async function fetchMenu() {
         console.log('[Menu] Fetching menu items for store:', STORE_ID);
 
         const { data: items, error } = await supabaseClient
-            .from('menu_items')
+            .from('通用備用表1')
             .select('*')
             .eq('store_id', STORE_ID)
             .eq('is_available', true);

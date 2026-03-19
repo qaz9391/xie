@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     try {
         console.log('[Cafeteria] Fetching stores...');
         const { data: stores, error } = await supabase
-            .from('stores')
+            .from('店家')
             .select('*')
             .order('created_at', { ascending: true });
 
@@ -96,7 +96,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     try {
         console.log('[Cafeteria] Fetching comments...');
         const { data: comments, error } = await supabase
-            .from('comments')
+            .from('美食留言')
             .select('*')
             .order('is_pinned', { ascending: false })
             .order('created_at', { ascending: false })
@@ -168,7 +168,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             try {
                 console.log('[Cafeteria] Submitting comment...');
                 const { error } = await supabaseClient
-                    .from('comments')
+                    .from('美食留言')
                     .insert([{ user_name: userName, content: content }]);
 
                 if (error) {
@@ -182,7 +182,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 // 重新載入留言
                 const { data: comments } = await supabaseClient
-                    .from('comments')
+                    .from('美食留言')
                     .select('*')
                     .order('is_pinned', { ascending: false })
                     .order('created_at', { ascending: false })
@@ -289,7 +289,7 @@ async function togglePin(commentId, shouldPin) {
         }
 
         const { error } = await supabaseClient
-            .from('comments')
+            .from('美食留言')
             .update({ is_pinned: shouldPin })
             .eq('id', commentId);
 
@@ -303,7 +303,7 @@ async function togglePin(commentId, shouldPin) {
 
         // 重新載入留言列表
         const { data: comments, error: fetchError } = await supabaseClient
-            .from('comments')
+            .from('美食留言')
             .select('*')
             .order('is_pinned', { ascending: false })
             .order('created_at', { ascending: false })

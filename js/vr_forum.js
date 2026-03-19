@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     try {
         console.log('[VR Forum] Fetching VR comments...');
         const { data: comments, error } = await supabase
-            .from('vr_comments')
+            .from('首頁留言板')
             .select('*')
             .order('is_pinned', { ascending: false })
             .order('created_at', { ascending: false })
@@ -113,7 +113,7 @@ window.addEventListener('DOMContentLoaded', async function () {
             try {
                 console.log('[VR Forum] Submitting comment...');
                 const { error } = await supabaseClient
-                    .from('vr_comments')
+                    .from('首頁留言板')
                     .insert([{ user_name: userName, content: content }]);
 
                 if (error) {
@@ -127,7 +127,7 @@ window.addEventListener('DOMContentLoaded', async function () {
 
                 // 重新載入留言
                 const { data: comments } = await supabaseClient
-                    .from('vr_comments')
+                    .from('首頁留言板')
                     .select('*')
                     .order('is_pinned', { ascending: false })
                     .order('created_at', { ascending: false })
@@ -234,7 +234,7 @@ async function togglePin(commentId, shouldPin) {
         }
 
         const { error } = await supabaseClient
-            .from('vr_comments')
+            .from('首頁留言板')
             .update({ is_pinned: shouldPin })
             .eq('id', commentId);
 
@@ -248,7 +248,7 @@ async function togglePin(commentId, shouldPin) {
 
         // 重新載入留言列表
         const { data: comments, error: fetchError } = await supabaseClient
-            .from('vr_comments')
+            .from('首頁留言板')
             .select('*')
             .order('is_pinned', { ascending: false })
             .order('created_at', { ascending: false })
