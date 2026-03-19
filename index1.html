@@ -595,7 +595,7 @@ async function initDormData() {
     
     // Show a loading UI or disable the UI momentarily if needed, but for now just fetch
     const [accRes, roomsRes, facRes, contactRes] = await Promise.all([
-      supabase.from('住宿各式資訊').select('*').order('id'),
+      supabase.from('住宿各式資料1').select('*').order('id'),
       supabase.from('住宿房間資料').select('*').order('id'),
       supabase.from('住宿各類設施').select('*').order('id'),
       supabase.from('住宿地址資料').select('*').order('id')
