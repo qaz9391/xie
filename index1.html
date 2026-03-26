@@ -182,6 +182,19 @@ nav{display:none;}
 /* Scroll animation */
 .fade-up{opacity:0;transform:translateY(20px);transition:.6s;}
 .fade-up.visible{opacity:1;transform:none;}
+
+/* ===== VR BANNER ===== */
+.vr-title-bar{background:var(--green-dark);color:#fff;padding:15px 5%;text-align:center;border-bottom:4px solid var(--green);}
+.vr-title-bar h2{font-size:2rem;font-weight:700;letter-spacing:2px;margin-bottom:5px;}
+.vr-title-bar p{font-size:1.1rem;font-weight:300;opacity:.9;margin:0;}
+.vr-banner{position:relative;width:94%;max-width:1400px;margin:0 auto 40px;height:500px;background:#000;overflow:hidden;border:6px solid var(--green);border-radius:30px;box-shadow:0 15px 40px rgba(0,0,0,0.3);}
+.vr-banner iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;z-index:1;}
+.vr-banner .vr-loader{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:flex;justify-content:center;align-items:center;z-index:5;transition:opacity .5s;}
+.vr-banner .vr-spinner{width:50px;height:50px;border:5px solid #333;border-top-color:var(--green);border-radius:50%;animation:vrSpin 1s linear infinite;}
+@keyframes vrSpin{100%{transform:rotate(360deg);}}
+.btn-vr-fullscreen{position:absolute;top:20px;right:20px;width:45px;height:45px;background:rgba(0,0,0,.6);border-radius:50%;border:2px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:.3s;}
+.btn-vr-fullscreen:hover{background:var(--green);transform:scale(1.1);}
+@media(max-width:768px){.vr-banner{width:100%;height:350px;border-radius:0;border:none;border-bottom:5px solid var(--green);}}
 </style>
 </head>
 <body>
@@ -281,6 +294,26 @@ nav{display:none;}
     <div class="hero-stat"><span class="num">24h</span><div class="lbl">安全管理</div></div>
   </div>
 </section>
+
+<!-- 3D VR TOUR -->
+<div class="vr-title-bar">
+  <h2><i class="fas fa-vr-cardboard"></i> 宿舍 3D 實景導覽</h2>
+  <p>拖曳畫面 360° 探索宿舍環境</p>
+</div>
+<div class="vr-banner" id="vrBanner">
+  <div class="vr-loader" id="vrLoader">
+    <div class="vr-spinner"></div>
+  </div>
+  <iframe id="vrIframe" allowfullscreen
+    onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
+  <script>
+    document.getElementById('vrIframe').src = 'output_index1/index.html?v=' + Date.now();
+  </script>
+  <button class="btn-vr-fullscreen" onclick="toggleVRFullscreen()" title="全螢幕">
+    <i class="fas fa-expand"></i>
+  </button>
+</div>
+
 
 <!-- ROOM LISTING -->
 <section class="section rooms-section" id="rooms">
@@ -655,6 +688,27 @@ function setupSmoothScrolling() {
       }
     });
   });
+}
+</script>
+
+<script>
+// VR 全螢幕功能
+function toggleVRFullscreen() {
+  const elem = document.getElementById("vrBanner");
+  const btnIcon = document.querySelector(".btn-vr-fullscreen i");
+  if (!document.fullscreenElement) {
+    if (elem.requestFullscreen) elem.requestFullscreen();
+    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    btnIcon.classList.remove("fa-expand");
+    btnIcon.classList.add("fa-compress");
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    else if (document.msExitFullscreen) document.msExitFullscreen();
+    btnIcon.classList.remove("fa-compress");
+    btnIcon.classList.add("fa-expand");
+  }
 }
 </script>
 </body>
