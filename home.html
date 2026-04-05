@@ -2203,34 +2203,68 @@
         // 🔥 教師資料庫 (格式統一)
         // ============================================
         const campusLocations = [
-            { id: 1, name: "管理學院", type: "building", typeName: "大樓", desc: "本院以期落實「培育跨域協作、務實創新、全人學習之管理專業人才」為教育目標。", img: "images/management_building.jpg?v=2", building: "管理學院" },
-            { id: 2, name: "圖書館", type: "building", typeName: "大樓", desc: "圖書館不僅是藏書的地方，更是您探索知識、激發創意與放鬆身心的空間。", img: "images/library.jpg?v=2", building: "圖書館" },
+            { id: 1, name: "管理學院", type: "building", typeName: "大樓", desc: "本院以期落實「培育跨域協作、務實創新、全人學習之管理專業人才」為教育目標。", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+            { id: 2, name: "圖書館", type: "building", typeName: "大樓", desc: "圖書館不僅是藏書的地方，更是您探索知識、激發創意與放鬆身心的空間。", img: "images/library.jpg?v=2", building: "圖書館", vrNode: "book" },
             { id: 3, name: "A205 語言實驗室", type: "classroom", typeName: "教室", desc: "位於行政大樓二樓。", img: "images/a205.jpg", building: "行政大樓" },
             { id: 4, name: "學務處", type: "admin", typeName: "處室", desc: "行政大樓一樓，負責學生事務。", img: "images/office_student.jpg", building: "行政大樓" },
-            { id: 5, name: "明明樓", type: "building", typeName: "大樓", desc: "各類選修課程主要上課地點。", img: "images/building_1.jpg", building: "明明樓" },
-            { id: 6, name: "第二男子宿舍", type: "dorm", typeName: "宿舍", desc: "校園後門，環境清幽。", img: "images/dorm_2.jpg" },
+            { id: 5, name: "明明樓", type: "building", typeName: "大樓", desc: "各類選修課程主要上課地點。", img: "images/building_1.jpg", building: "明明樓", vrNode: "mml" },
+            { id: 6, name: "第二男子宿舍", type: "dorm", typeName: "宿舍", desc: "校園後門，環境清幽。", img: "images/dorm_2.jpg", vrNode: "dorm2" },
 
             // --- 大樓 (Buildings) ---
-            { id: 7, name: "行政大樓", type: "building", typeName: "大樓", desc: "校園行政中心，各處室辦公所在地。", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 8, name: "工程大樓", type: "building", typeName: "大樓", desc: "工程學院各系所教學與實驗室所在。", img: "images/campus_gate.jpg?v=2", building: "工程大樓" },
-            { id: 9, name: "鴻超樓", type: "building", typeName: "大樓", desc: "半導體學院與相關實驗室所在。", img: "images/campus_gate.jpg?v=2", building: "鴻超樓" },
-            { id: 10, name: "新芎樓", type: "building", typeName: "大樓", desc: "人文與設計學院教學大樓。", img: "images/campus_gate.jpg?v=2", building: "新芎樓" },
-            { id: 11, name: "光武館", type: "building", typeName: "大樓", desc: "體育館，提供室內運動設施與活動場地。", img: "images/campus_gate.jpg?v=2", building: "光武館" },
-            { id: 12, name: "學生活動中心", type: "building", typeName: "大樓", desc: "學生社團活動與集會場所。", img: "images/campus_gate.jpg?v=2", building: "學生活動中心" },
+            { id: 7, name: "行政大樓", type: "building", typeName: "大樓", desc: "校園行政中心，各處室辦公所在地。", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 8, name: "工程大樓", type: "building", typeName: "大樓", desc: "工程學院各系所教學與實驗室所在。", img: "images/campus_gate.jpg?v=2", building: "工程大樓", vrNode: "eng" },
+            { id: 9, name: "鴻超樓", type: "building", typeName: "大樓", desc: "半導體學院與相關實驗室所在。", img: "images/campus_gate.jpg?v=2", building: "鴻超樓", vrNode: "hcl" },
+            { id: 10, name: "新芎樓", type: "building", typeName: "大樓", desc: "人文與設計學院教學大樓。", img: "images/campus_gate.jpg?v=2", building: "新芎樓", vrNode: "xql" },
+            { id: 11, name: "光武館", type: "building", typeName: "大樓", desc: "體育館，提供室內運動設施與活動場地。", img: "images/campus_gate.jpg?v=2", building: "光武館", vrNode: "kwg" },
+            { id: 12, name: "學生活動中心", type: "building", typeName: "大樓", desc: "學生社團活動與集會場所。", img: "images/campus_gate.jpg?v=2", building: "學生活動中心", vrNode: "sac" },
+            { id: 25, name: "資訊大樓", type: "building", typeName: "大樓", desc: "資訊學院教學大樓，配備先進電腦實驗室。", img: "images/campus_gate.jpg?v=2", building: "資訊大樓", vrNode: "cc" },
+            { id: 26, name: "明明樓", type: "building", typeName: "大樓", desc: "通識教育與多元選修課程大樓。", img: "images/building_1.jpg", building: "明明樓", vrNode: "mml" },
+            { id: 27, name: "明光樓", type: "building", typeName: "大樓", desc: "多元功能教學大樓。", img: "images/campus_gate.jpg?v=2", building: "明光樓", vrNode: "mgl" },
+            { id: 28, name: "明學樓", type: "building", typeName: "大樓", desc: "跨領域學習與研究大樓，研發處與學務處部分單位所在地。", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+            { id: 30, name: "宗山樓", type: "building", typeName: "大樓", desc: "學生住宿服務、衛保組及諮商輔導中心所在地。", img: "images/campus_gate.jpg?v=2", building: "宗山樓", vrNode: "zsl" },
 
             // --- 處室 (Administrative Offices) ---
-            { id: 13, name: "教務處", type: "admin", typeName: "處室", desc: "行政大樓二樓\n負責教學行政、課程規劃、註冊選課等業務。\n分機 1200", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 14, name: "總務處", type: "admin", typeName: "處室", desc: "行政大樓一樓\n負責校園總務、營繕、出納及採購等事務。\n分機 1300", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 15, name: "研究發展處", type: "admin", typeName: "處室", desc: "行政大樓三樓\n推動學術研究、產學合作及計畫管理。\n分機 1400", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 16, name: "圖書資訊處", type: "admin", typeName: "處室", desc: "圖書館\n管理圖書資源與校園資訊系統。\n分機 1500", img: "images/library.jpg?v=2", building: "圖書館" },
-            { id: 17, name: "國際暨兩岸事務處", type: "admin", typeName: "處室", desc: "行政大樓四樓\n負責國際交流、交換學生及兩岸合作事務。\n分機 1600", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 18, name: "秘書室", type: "admin", typeName: "處室", desc: "行政大樓五樓\n校長室幕僚單位，負責校務會議及公文管理。\n分機 1100", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 19, name: "人事室", type: "admin", typeName: "處室", desc: "行政大樓三樓\n負責教職員人事任免、差勤及福利等業務。\n分機 1700", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 20, name: "會計室", type: "admin", typeName: "處室", desc: "行政大樓三樓\n負責預算編列、經費核銷及財務管理。\n分機 1800", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 21, name: "進修推廣部", type: "admin", typeName: "處室", desc: "行政大樓一樓\n負責進修學院與推廣教育業務。\n分機 1900", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 22, name: "體育室", type: "admin", typeName: "處室", desc: "光武館\n負責體育教學與校園運動賽事。\n分機 2000", img: "images/campus_gate.jpg?v=2", building: "光武館" },
-            { id: 23, name: "學生諮商中心", type: "admin", typeName: "處室", desc: "行政大樓一樓\n提供學生心理諮商與輔導服務。\n分機 1256", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
-            { id: 24, name: "軍訓室", type: "admin", typeName: "處室", desc: "行政大樓一樓\n負責學生軍訓與校安通報。\n分機 1240", img: "images/campus_gate.jpg?v=2", building: "行政大樓" },
+            // 行政大樓 (ab)
+            { id: 14, name: "總務處", type: "admin", typeName: "處室", desc: "行政大樓 1F\n負責校園總務、營繕、出納及採購等事務。\n分機 1300", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 501, name: "環境安全衛生中心 / 開標室", type: "admin", typeName: "處室", desc: "行政大樓 1F", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 18, name: "校長室 / 副校長室", type: "admin", typeName: "處室", desc: "行政大樓 2F\n校級決策中心與行政領導核心。", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 502, name: "財務處 / 公共關係室", type: "admin", typeName: "處室", desc: "行政大樓 2F", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 503, name: "董事會 / 董事長室", type: "admin", typeName: "處室", desc: "行政大樓 3F", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 19, name: "人力資源處 (人事室)", type: "admin", typeName: "處室", desc: "行政大樓 4F\n負責教職員人事任免、薪資及福利。\n分機 1700", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 504, name: "稽核室", type: "admin", typeName: "處室", desc: "行政大樓 4F", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 17, name: "國際暨兩岸事務處", type: "admin", typeName: "處室", desc: "行政大樓 4F\n負責國際交流、交換學生及兩岸合作事務。\n分機 1600", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 20, name: "會計室", type: "admin", typeName: "處室", desc: "行政大樓 3F\n負責預算編列與經費核銷。\n分機 1800", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 505, name: "秘書室", type: "admin", typeName: "處室", desc: "行政大樓 5F\n分機 1100", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+
+            // 行政大樓 - 教務相關
+            { id: 13, name: "教務處 (註冊/課務/綜合組)", type: "admin", typeName: "處室", desc: "行政大樓 2F\n負責教學行政、註冊選課等核心教務業務。\n分機 1200", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 21, name: "進修推廣部 / 推廣教育中心", type: "admin", typeName: "處室", desc: "行政大樓 1F\n負責進修學院與推廣教育業務。\n分機 1900", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+            { id: 506, name: "教學發展中心", type: "admin", typeName: "處室", desc: "行政大樓 2F", img: "images/campus_gate.jpg?v=2", building: "行政大樓", vrNode: "ab" },
+
+            // 明學樓 (mxl)
+            { id: 4, name: "學務處 (課外活動指導組)", type: "admin", typeName: "處室", desc: "明學樓 2F\n管理學生社團活動與課外輔導。", img: "images/office_student.jpg", building: "明學樓", vrNode: "mxl" },
+            { id: 507, name: "招商暨職涯中心", type: "admin", typeName: "處室", desc: "明學樓 2F", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+            { id: 15, name: "研究發展處", type: "admin", typeName: "處室", desc: "明學樓 7F\n推動學術研究、產學合作及計畫管理。", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+            { id: 508, name: "產學及技術轉移中心", type: "admin", typeName: "處室", desc: "明學樓 7F", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+
+            // 宗山樓 (zsl)
+            { id: 509, name: "住宿服務組 / 衛生保健組", type: "admin", typeName: "處室", desc: "宗山樓 1F\n負責宿舍申請、衛保及健康中心服務。", img: "images/campus_gate.jpg?v=2", building: "宗山樓", vrNode: "zsl" },
+            { id: 510, name: "服務學習中心", type: "admin", typeName: "處室", desc: "宗山樓 1F", img: "images/campus_gate.jpg?v=2", building: "宗山樓", vrNode: "zsl" },
+            { id: 23, name: "諮商輔導暨職涯發展中心", type: "admin", typeName: "處室", desc: "宗山樓 2F\n提供學生心理諮商與輔導服務。\n分機 1256", img: "images/campus_gate.jpg?v=2", building: "宗山樓", vrNode: "zsl" },
+
+            // 明明樓 (mml)
+            { id: 511, name: "入學服務處 / 教務處試務組", type: "admin", typeName: "處室", desc: "明明樓 1F\n負責新生入學與考試事務。", img: "images/campus_gate.jpg?v=2", building: "明明樓", vrNode: "mml" },
+            
+            // 活動中心周邊 (sac)
+            { id: 512, name: "生活輔導組 / 資源教室", type: "admin", typeName: "處室", desc: "學生活動中心 / 中正堂周邊", img: "images/campus_gate.jpg?v=2", building: "學生活動中心", vrNode: "sac" },
+            { id: 24, name: "軍訓室 / 校安中心", type: "admin", typeName: "處室", desc: "行政大樓 1F / 體育館周邊\n負責學生軍訓與校安通報。\n分機 1240", img: "images/campus_gate.jpg?v=2", building: "學生活動中心", vrNode: "sac" },
+            { id: 22, name: "體育室", type: "admin", typeName: "處室", desc: "光武館 / 活動中心周邊\n負責體育教學與校園運動賽事。", img: "images/campus_gate.jpg?v=2", building: "光武館", vrNode: "kwg" },
+
+            // 圖書館 (book)
+            { id: 16, name: "圖書館 (讀者服務組)", type: "admin", typeName: "處室", desc: "圖書館 1-2F\n管理圖書資源與校園資訊系統。", img: "images/library.jpg?v=2", building: "圖書館", vrNode: "book" },
+            { id: 513, name: "電子計算機中心", type: "admin", typeName: "處室", desc: "圖書館 2F\n教學支援與系統資訊組。", img: "images/library.jpg?v=2", building: "圖書館", vrNode: "book" },
+            { id: 514, name: "圖書館長室 / 採編組", type: "admin", typeName: "處室", desc: "圖書館 3F", img: "images/library.jpg?v=2", building: "圖書館", vrNode: "book" },
+            { id: 515, name: "校史館 (校務展示)", type: "admin", typeName: "處室", desc: "圖書館 8F", img: "images/library.jpg?v=2", building: "圖書館", vrNode: "book" },
 
             // --- 工業工程管理系 ---
             { id: 101, name: "李得盛 老師", type: "teacher", typeName: "教師", desc: "工業工程管理系\n管院 805 室\njeff@must.edu.tw\n分機 3234", img: "images/李得盛.jpg" },
@@ -2306,17 +2340,42 @@
         const previewContainer = document.getElementById('previewContainer');
         const teacherBg = document.getElementById('teacherBg');
 
-        function openSearch() {
-            modal.style.display = 'flex';
-            setTimeout(() => { modal.style.opacity = '1'; modal.querySelector('.search-box').style.transform = 'scale(1)'; }, 10);
+        function resetSearchModal() {
+            // 1. 清空搜尋框文字
+            const input = modal.querySelector('.search-input');
+            if (input) input.value = '';
+            
+            // 2. 重設列表過濾
             renderList(campusLocations);
             resetFilters();
+            
+            // 3. 重設預覽區域為初始狀態 (圖二)
+            if (previewImg) previewImg.src = 'images/campus_map.jpg?v=2';
+            if (previewContainer) previewContainer.classList.remove('teacher-mode');
+            if (teacherBg) teacherBg.classList.add('active'); // 初始顯示地圖背景 (如果有)
+            if (teacherBg) teacherBg.classList.remove('active'); // 確保不是教師模式的背景
+
+            // 使用 i18n 根據目前語言重設文字
+            if (previewTitle) previewTitle.innerText = i18n[currentLang]["preview-title"] || "請選擇地點";
+            if (previewDesc) previewDesc.innerHTML = i18n[currentLang]["preview-desc"] || "點擊左側列表，查看該地點的 3D 實景照片與聯絡資訊。";
+            
+            // 4. 清除列表中的選取狀態
+            document.querySelectorAll('.result-item').forEach(el => el.classList.remove('active'));
+        }
+
+        function openSearch() {
+            resetSearchModal();
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.style.opacity = '1'; modal.querySelector('.search-box').style.transform = 'scale(1)'; }, 10);
         }
 
         function closeSearch() {
             modal.style.opacity = '0';
             modal.querySelector('.search-box').style.transform = 'scale(0.9)';
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
+            setTimeout(() => { 
+                modal.style.display = 'none'; 
+                resetSearchModal();
+            }, 300);
         }
 
         window.onclick = function (e) { if (e.target == modal) closeSearch(); }
@@ -2408,26 +2467,55 @@
                     '<a href="mailto:$1" style="color:var(--primary); text-decoration:underline; font-weight:bold;">$1</a>'
                 );
 
-                // 教師：增加「前往辦公室大樓」按鈕
-                if (item.type === 'teacher') {
-                    // 從描述中解析大樓名稱
-                    let buildingName = '';
-                    if (item.desc.includes('管院') || item.desc.includes('管理學院') || item.desc.includes('管理大樓')) {
-                        buildingName = '管理學院';
-                    } else if (item.desc.includes('行政大樓')) {
-                        buildingName = '行政大樓';
-                    } else if (item.desc.includes('工程大樓')) {
-                        buildingName = '工程大樓';
-                    } else if (item.desc.includes('鴻超樓')) {
-                        buildingName = '鴻超樓';
-                    }
-                    if (buildingName) {
-                        formattedDesc += '<br><br><a href="javascript:void(0)" onclick="goToBuilding(\'' + buildingName + '\')" style="display:inline-block;background:var(--primary);color:white;padding:8px 20px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:0.95rem;transition:0.3s;"><i class=\'fas fa-building\' style=\'margin-right:6px\'></i>前往 ' + buildingName + '</a>';
+                // 教師與通用的「進入 3D 導覽」按鈕邏輯
+                let targetNode = item.vrNode || '';
+                
+                // 如果是教師且沒有指定 vrNode，則根據描述或所屬大樓尋找
+                if (item.type === 'teacher' && !targetNode) {
+                    let bName = '';
+                    if (item.desc.includes('管院') || item.desc.includes('管理學院') || item.desc.includes('管理大樓')) bName = '管理學院';
+                    else if (item.desc.includes('行政大樓')) bName = '行政大樓';
+                    else if (item.desc.includes('工程大樓')) bName = '工程大樓';
+                    else if (item.desc.includes('鴻超樓')) bName = '鴻超樓';
+                    else if (item.desc.includes('圖書館')) bName = '圖書館';
+                    else if (item.desc.includes('明明樓')) bName = '明明樓';
+
+                    if (bName) {
+                        const building = campusLocations.find(loc => loc.type === 'building' && loc.name === bName);
+                        if (building && building.vrNode) targetNode = building.vrNode;
                     }
                 }
 
-                // 處室/大樓：顯示所屬大樓資訊
-                if (item.building && (item.type === 'admin')) {
+                // 如果是處室，也根據所屬大樓尋找 vrNode
+                if ((item.type === 'admin' || item.type === 'classroom') && !targetNode && item.building) {
+                    const building = campusLocations.find(loc => loc.type === 'building' && loc.name === item.building);
+                    if (building && building.vrNode) targetNode = building.vrNode;
+                }
+
+                // 渲染按鈕
+                if (item.type === 'teacher') {
+                    // 解析大樓名稱用於顯示資訊按鈕
+                    let bName = '';
+                    if (item.desc.includes('管院') || item.desc.includes('管理學院') || item.desc.includes('管理大樓')) bName = '管理學院';
+                    else if (item.desc.includes('行政大樓')) bName = '行政大樓';
+                    else if (item.desc.includes('工程大樓')) bName = '工程大樓';
+                    else if (item.desc.includes('鴻超樓')) bName = '鴻超樓';
+                    else if (item.desc.includes('圖書館')) bName = '圖書館';
+
+                    formattedDesc += '<br><br><div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">';
+                    if (bName) {
+                        formattedDesc += '<a href="javascript:void(0)" onclick="goToBuilding(\'' + bName + '\')" style="display:inline-block;background:var(--navy);color:white;padding:8px 20px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:0.95rem;transition:0.3s;"><i class=\'fas fa-map-marker-alt\' style=\'margin-right:6px\'></i>' + bName + ' 資訊</a>';
+                    }
+                    if (targetNode) {
+                        formattedDesc += '<a href="javascript:void(0)" onclick="movePanoToNode(\'' + targetNode + '\'); closeSearch();" style="display:inline-block;background:var(--primary);color:white;padding:8px 20px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:0.95rem;transition:0.3s;"><i class=\'fas fa-vr-cardboard\' style=\'margin-right:6px\'></i>進入 3D 導覽</a>';
+                    }
+                    formattedDesc += '</div>';
+                } else if (targetNode) {
+                    // 大樓/處室/教室的導覽按鈕
+                    formattedDesc += '<br><br><a href="javascript:void(0)" onclick="movePanoToNode(\'' + targetNode + '\'); closeSearch();" style="display:inline-block;background:var(--primary);color:white;padding:8px 20px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:0.95rem;transition:0.3s;"><i class=\'fas fa-vr-cardboard\' style=\'margin-right:6px\'></i>進入 3D 導覽</a>';
+                }
+
+                if (item.building && (item.type === 'admin' || item.type === 'classroom')) {
                     formattedDesc += '<br><br><span style="display:inline-block;background:#e6fffa;color:var(--navy);padding:6px 14px;border-radius:12px;font-size:0.85rem;font-weight:600;"><i class=\'fas fa-map-marker-alt\' style=\'margin-right:5px;color:var(--primary)\'></i>所在大樓：' + item.building + '</span>';
                 }
 
@@ -2453,6 +2541,29 @@
                         el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 });
+            }
+        }
+
+        // --- 新增：VR 場景跳轉功能 ---
+        function movePanoToNode(nodeId) {
+            const vrIframe = document.getElementById('vrIframe');
+            if (vrIframe && vrIframe.contentWindow && vrIframe.contentWindow.pano) {
+                // 如果 nodeId 為 'glxy'，直接跳轉
+                // 若未來需要支持多個，可在此擴充
+                vrIframe.contentWindow.pano.openNext('{' + nodeId + '}');
+                
+                // 平滑滾動到 VR 標題區域 (如圖二所示，包含標題與公告)
+                const scrollTarget = document.querySelector('.page-title-bar');
+                if (scrollTarget) {
+                    scrollTarget.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    document.querySelector('.hero-banner').scrollIntoView({ behavior: 'smooth' });
+                }
+                
+                // 如果目前在全螢幕模式，維持全螢幕狀態
+                console.log('[VR] Redirecting to scene:', nodeId);
+            } else {
+                console.warn('[VR] Pano object not ready or iframe not accessible');
             }
         }
     </script>

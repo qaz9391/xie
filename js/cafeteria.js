@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', async function () {
     try {
         console.log('[Cafeteria] Fetching stores...');
         const { data: stores, error } = await supabase
-            .from('店家')
+            .from('stores')
             .select('*')
             .order('created_at', { ascending: true });
 

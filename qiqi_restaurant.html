@@ -662,7 +662,7 @@
 
             try {
                 const { data: items, error } = await supabaseClient
-                    .from('奇奇菜單')
+                    .from('qiqi_menu')
                     .select('*')
                     .eq('type', type)
                     .eq('is_available', true)

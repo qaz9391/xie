@@ -77,8 +77,10 @@ myvr/
 ├── js/
 │   ├── cafeteria.js    # 前台點餐邏輯 (Supabase Create)
 │   └── orders.js       # 後台讀取邏輯 (Supabase Read)
-├── images/             # 圖片資源
-└── output/             # VR 全景輸出檔 (Pano2VR)
+├── output/             # VR 全景輸出檔 (首頁)
+├── output_index1/
+│   └── output/         # VR 全景輸出檔 (宿舍)
+└── images/             # 圖片資源
 ```
 
 ## 📝 開發團隊
