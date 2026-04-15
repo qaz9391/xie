@@ -1,465 +1,1410 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>明新科大 住宿服務中心</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root{--green:#2d9e6b;--green-dark:#1e7a52;--green-light:#e8f7f1;--green-mid:#a8dfc8;--navy:#1a2e2a;--white:#fff;--bg:#f4faf7;--shadow:0 8px 30px rgba(45,158,107,.12);--radius:14px;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--navy);}
-a{text-decoration:none;color:inherit;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>明新科大 住宿服務中心</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --green: #2d9e6b;
+      --green-dark: #1e7a52;
+      --green-light: #e8f7f1;
+      --green-mid: #a8dfc8;
+      --navy: #1a2e2a;
+      --white: #fff;
+      --bg: #f4faf7;
+      --shadow: 0 8px 30px rgba(45, 158, 107, .12);
+      --radius: 14px;
+    }
 
-/* ===== TOP BAR ===== */
-.topbar{background:var(--green-dark);color:#fff;padding:6px 5%;display:flex;justify-content:space-between;align-items:center;font-size:.82rem;}
-.topbar a{color:rgba(255,255,255,.8);margin-left:12px;transition:.2s;}
-.topbar a:hover{color:#fff;}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ===== HEADER ===== */
-header{background:#fff;position:sticky;top:0;z-index:500;box-shadow:0 2px 15px rgba(0,0,0,.07);}
-.header-inner{display:flex;justify-content:space-between;align-items:center;padding:0 5%;height:70px;}
-.logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.1rem;color:var(--navy);}
-.logo-icon{width:44px;height:44px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;}
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+    }
 
-/* ===== NAV DROPDOWN ===== */
-nav{display:flex;align-items:center;gap:0;}
-.nav-item{position:relative;}
-.nav-link{display:flex;align-items:center;gap:5px;padding:0 18px;height:70px;font-size:.95rem;font-weight:500;color:#444;transition:.2s;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
-.nav-link:hover,.nav-item:hover .nav-link{color:var(--green);border-bottom-color:var(--green);}
-.dropdown{position:absolute;top:70px;left:50%;transform:translateX(-50%) translateY(10px);background:#fff;border-radius:var(--radius);box-shadow:0 10px 40px rgba(0,0,0,.13);padding:10px 0;min-width:200px;opacity:0;pointer-events:none;transition:.25s;}
-.nav-item:hover .dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);}
-.dropdown a{display:flex;align-items:center;gap:10px;padding:11px 22px;font-size:.9rem;color:#555;transition:.2s;}
-.dropdown a i{color:var(--green);width:18px;}
-.dropdown a:hover{background:var(--green-light);color:var(--green);}
-.dropdown-divider{height:1px;background:#f0f0f0;margin:5px 0;}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* ===== CART BTN ===== */
-.cart-btn{position:relative;background:var(--green);color:#fff;border:none;padding:10px 20px;border-radius:30px;cursor:pointer;font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px;transition:.3s;margin-left:20px;}
-.cart-btn:hover{background:var(--green-dark);transform:translateY(-1px);}
-.cart-badge{position:absolute;top:-6px;right:-6px;background:#e74c3c;color:#fff;width:20px;height:20px;border-radius:50%;font-size:.7rem;display:flex;align-items:center;justify-content:center;font-weight:700;display:none;}
+    /* ===== TOP BAR ===== */
+    .topbar {
+      background: var(--green-dark);
+      color: #fff;
+      padding: 6px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .82rem;
+    }
 
-/* ===== HERO ===== */
-.hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 60%,#52c48a 100%);padding:80px 5% 60px;display:flex;align-items:center;gap:60px;min-height:420px;position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-50px;right:-50px;width:400px;height:400px;background:rgba(255,255,255,.06);border-radius:50%;}
-.hero::after{content:'';position:absolute;bottom:-80px;left:20%;width:300px;height:300px;background:rgba(255,255,255,.04);border-radius:50%;}
-.hero-text{flex:1;color:#fff;position:relative;z-index:2;}
-.hero-text h1{font-size:2.8rem;font-weight:700;line-height:1.2;margin-bottom:20px;text-shadow:0 3px 10px rgba(0,0,0,.2);}
-.hero-text p{font-size:1.1rem;opacity:.88;line-height:1.7;margin-bottom:35px;max-width:480px;}
-.hero-btns{display:flex;gap:15px;flex-wrap:wrap;}
-.btn-white{background:#fff;color:var(--green-dark);padding:13px 30px;border-radius:30px;font-weight:700;font-size:1rem;transition:.3s;box-shadow:0 5px 20px rgba(0,0,0,.15);}
-.btn-white:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.2);}
-.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6);padding:13px 30px;border-radius:30px;font-weight:600;font-size:1rem;transition:.3s;}
-.btn-outline:hover{background:rgba(255,255,255,.15);border-color:#fff;}
-.hero-cards{display:flex;gap:15px;position:relative;z-index:2;}
-.hero-stat{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);padding:20px 25px;text-align:center;color:#fff;}
-.hero-stat .num{font-size:2rem;font-weight:800;display:block;}
-.hero-stat .lbl{font-size:.82rem;opacity:.8;margin-top:3px;}
+    .topbar a {
+      color: rgba(255, 255, 255, .8);
+      margin-left: 12px;
+      transition: .2s;
+    }
 
-/* ===== SECTION COMMON ===== */
-.section{padding:70px 5%;}
-.section-header{text-align:center;margin-bottom:50px;}
-.section-header h2{font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:12px;}
-.section-header p{color:#666;font-size:1rem;line-height:1.7;}
-.section-header::after{content:'';display:block;width:50px;height:4px;background:var(--green);margin:18px auto 0;border-radius:2px;}
+    .topbar a:hover {
+      color: #fff;
+    }
 
-/* ===== DORM INFO ACCORDION ===== */
-.dorm-section{background:#fff;}
-.accordion-group{max-width:1000px;margin:0 auto;}
-.accordion-item{border:1px solid #e8e8e8;border-radius:12px;margin-bottom:14px;overflow:hidden;transition:.3s;}
-.accordion-item.open{box-shadow:var(--shadow);}
-.accordion-header{display:flex;justify-content:space-between;align-items:center;padding:20px 25px;cursor:pointer;background:#fff;transition:.2s;}
-.accordion-header:hover{background:var(--green-light);}
-.accordion-header .title{display:flex;align-items:center;gap:12px;font-weight:600;font-size:1.05rem;color:var(--navy);}
-.accordion-header .title i{color:var(--green);font-size:1.2rem;}
-.accordion-icon{color:#999;transition:.3s;}
-.accordion-item.open .accordion-icon{transform:rotate(180deg);color:var(--green);}
-.accordion-body{display:none;padding:0 25px 25px;}
-.accordion-item.open .accordion-body{display:block;}
-.info-table{width:100%;border-collapse:collapse;margin-top:10px;}
-.info-table th{background:var(--green-light);color:var(--green-dark);padding:10px 14px;text-align:left;font-weight:600;font-size:.9rem;}
-.info-table td{padding:10px 14px;border-bottom:1px solid #f5f5f5;font-size:.9rem;color:#444;}
-.info-table tr:last-child td{border:none;}
-.info-table tr:hover td{background:#fafff8;}
+    /* ===== HEADER ===== */
+    header {
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, .07);
+    }
 
-/* ===== ROOM FILTER ===== */
-.rooms-section{background:var(--bg);}
-.filter-bar{display:flex;gap:15px;align-items:center;flex-wrap:wrap;margin-bottom:35px;background:#fff;padding:20px 25px;border-radius:var(--radius);box-shadow:var(--shadow);}
-.filter-bar label{font-weight:600;color:var(--navy);font-size:.9rem;white-space:nowrap;}
-.select-filter{padding:9px 16px;border:2px solid #e0e0e0;border-radius:8px;font-size:.9rem;color:#444;cursor:pointer;transition:.2s;background:#fff;font-family:inherit;}
-.select-filter:focus{outline:none;border-color:var(--green);}
-.btn-reset{padding:9px 18px;background:var(--green-light);color:var(--green-dark);border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;}
-.btn-reset:hover{background:var(--green);color:#fff;}
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 5%;
+      height: 70px;
+    }
 
-/* ===== ROOM CARDS ===== */
-.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:25px;}
-.room-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,.06);transition:.35s;}
-.room-card:hover{transform:translateY(-6px);box-shadow:0 15px 40px rgba(45,158,107,.18);}
-.room-img{height:200px;background:linear-gradient(135deg,var(--green-light),var(--green-mid));display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden;}
-.room-badge{position:absolute;top:12px;left:12px;background:var(--green);color:#fff;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;}
-.room-badge.full{background:#e74c3c;}
-.room-info{padding:20px;}
-.room-info h3{font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
-.room-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
-.meta-tag{background:var(--green-light);color:var(--green-dark);padding:4px 10px;border-radius:6px;font-size:.78rem;font-weight:500;}
-.room-desc{font-size:.87rem;color:#666;line-height:1.6;margin-bottom:16px;}
-.room-specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px;}
-.spec-item{display:flex;flex-direction:column;}
-.spec-label{font-size:.75rem;color:#999;}
-.spec-value{font-size:.9rem;font-weight:600;color:var(--navy);}
-.room-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f0f0f0;padding-top:14px;}
-.room-price{font-size:1.1rem;font-weight:700;color:var(--green-dark);}
-.room-price span{font-size:.78rem;color:#888;font-weight:400;}
-.btn-add-cart{background:var(--green);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:.87rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:.2s;}
-.btn-add-cart:hover{background:var(--green-dark);transform:scale(1.04);}
-.btn-add-cart.added{background:#27ae60;}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
 
-/* ===== CART DRAWER ===== */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;opacity:0;pointer-events:none;transition:.3s;}
-.cart-overlay.open{opacity:1;pointer-events:all;}
-.cart-drawer{position:fixed;right:0;top:0;height:100%;width:400px;background:#fff;z-index:900;transform:translateX(100%);transition:.35s;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,.15);}
-.cart-drawer.open{transform:translateX(0);}
-.cart-drawer-header{background:var(--green);color:#fff;padding:20px 25px;display:flex;justify-content:space-between;align-items:center;}
-.cart-drawer-header h3{font-size:1.2rem;display:flex;align-items:center;gap:10px;}
-.cart-close{background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;transition:.2s;}
-.cart-close:hover{transform:rotate(90deg);}
-.cart-items{flex:1;overflow-y:auto;padding:20px;}
-.cart-empty{text-align:center;padding:60px 20px;color:#aaa;}
-.cart-empty i{font-size:3rem;margin-bottom:15px;display:block;}
-.cart-item{display:flex;gap:15px;padding:15px;background:var(--green-light);border-radius:10px;margin-bottom:12px;align-items:flex-start;}
-.cart-item-icon{width:50px;height:50px;background:var(--green);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;flex-shrink:0;}
-.cart-item-info{flex:1;}
-.cart-item-info h4{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:3px;}
-.cart-item-info p{font-size:.82rem;color:#666;}
-.cart-item-remove{background:none;border:none;color:#aaa;cursor:pointer;font-size:1rem;transition:.2s;flex-shrink:0;}
-.cart-item-remove:hover{color:#e74c3c;}
-.cart-footer{padding:20px 25px;border-top:1px solid #eee;}
-.cart-note{background:var(--green-light);padding:15px;border-radius:10px;font-size:.85rem;color:var(--green-dark);line-height:1.6;text-align:center;}
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--green);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.4rem;
+    }
 
-/* ===== FACILITIES ===== */
-.facilities-section{background:#fff;}
-.facilities-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
-.facility-card{background:var(--green-light);border-radius:12px;padding:25px 20px;text-align:center;transition:.3s;}
-.facility-card:hover{background:var(--green);color:#fff;transform:translateY(-5px);}
-.facility-card i{font-size:2rem;color:var(--green);margin-bottom:12px;transition:.3s;}
-.facility-card:hover i{color:#fff;}
-.facility-card h4{font-weight:600;font-size:.95rem;color:var(--navy);transition:.3s;}
-.facility-card:hover h4{color:#fff;}
-.facility-card p{font-size:.8rem;color:#666;margin-top:5px;transition:.3s;}
-.facility-card:hover p{color:rgba(255,255,255,.85);}
+    /* ===== NAV DROPDOWN ===== */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
 
-/* ===== CONTACT ===== */
-.contact-section{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:60px 5%;}
-.contact-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
-.contact-text{color:#fff;}
-.contact-text h2{font-size:1.8rem;font-weight:700;margin-bottom:15px;}
-.contact-text p{opacity:.88;line-height:1.7;margin-bottom:20px;}
-.contact-items{display:flex;flex-direction:column;gap:12px;}
-.contact-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.12);padding:14px 18px;border-radius:10px;color:#fff;}
-.contact-item i{font-size:1.1rem;color:rgba(255,255,255,.8);}
+    .nav-item {
+      position: relative;
+    }
 
-/* ===== FOOTER ===== */
-footer{background:var(--navy);color:rgba(255,255,255,.7);padding:30px 5%;text-align:center;font-size:.88rem;line-height:1.8;}
-footer a{color:var(--green-mid);transition:.2s;}
-footer a:hover{color:#fff;}
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 18px;
+      height: 70px;
+      font-size: .95rem;
+      font-weight: 500;
+      color: #444;
+      transition: .2s;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+    }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-.hero{flex-direction:column;padding:50px 5%;}
-.hero-text h1{font-size:2rem;}
-.hero-cards{flex-wrap:wrap;}
-.cart-drawer{width:100%;}
-.contact-inner{grid-template-columns:1fr;}
-nav{display:none;}
-.filter-bar{flex-direction:column;align-items:flex-start;}
-}
+    .nav-link:hover,
+    .nav-item:hover .nav-link {
+      color: var(--green);
+      border-bottom-color: var(--green);
+    }
 
-/* ===== NOTICE BANNER ===== */
-.notice-bar{background:var(--green-light);border-left:4px solid var(--green);padding:12px 5%;display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--green-dark);}
-.notice-bar i{font-size:1rem;}
+    .dropdown {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, .13);
+      padding: 10px 0;
+      min-width: 200px;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s;
+    }
 
-/* Scroll animation */
-.fade-up{opacity:0;transform:translateY(20px);transition:.6s;}
-.fade-up.visible{opacity:1;transform:none;}
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(-50%) translateY(0);
+    }
 
-/* ===== VR BANNER ===== */
-.vr-title-bar{background:var(--green-dark);color:#fff;padding:15px 5%;text-align:center;border-bottom:4px solid var(--green);}
-.vr-title-bar h2{font-size:2rem;font-weight:700;letter-spacing:2px;margin-bottom:5px;}
-.vr-title-bar p{font-size:1.1rem;font-weight:300;opacity:.9;margin:0;}
-.vr-banner{position:relative;width:94%;max-width:1400px;margin:0 auto 40px;height:500px;background:#000;overflow:hidden;border:6px solid var(--green);border-radius:30px;box-shadow:0 15px 40px rgba(0,0,0,0.3);}
-.vr-banner iframe{width:100%;height:100%;border:none;position:absolute;top:0;left:0;z-index:1;}
-.vr-banner .vr-loader{position:absolute;top:0;left:0;width:100%;height:100%;background:#000;display:flex;justify-content:center;align-items:center;z-index:5;transition:opacity .5s;}
-.vr-banner .vr-spinner{width:50px;height:50px;border:5px solid #333;border-top-color:var(--green);border-radius:50%;animation:vrSpin 1s linear infinite;}
-@keyframes vrSpin{100%{transform:rotate(360deg);}}
-.btn-vr-fullscreen{position:absolute;top:20px;right:20px;width:45px;height:45px;background:rgba(0,0,0,.6);border-radius:50%;border:2px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:.3s;}
-.btn-vr-fullscreen:hover{background:var(--green);transform:scale(1.1);}
-@media(max-width:768px){.vr-banner{width:100%;height:350px;border-radius:0;border:none;border-bottom:5px solid var(--green);}}
-</style>
+    .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 22px;
+      font-size: .9rem;
+      color: #555;
+      transition: .2s;
+    }
+
+    .dropdown a i {
+      color: var(--green);
+      width: 18px;
+    }
+
+    .dropdown a:hover {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 5px 0;
+    }
+
+    /* ===== CART BTN ===== */
+    .cart-btn {
+      position: relative;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: .9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: .3s;
+      margin-left: 20px;
+    }
+
+    .cart-btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #e74c3c;
+      color: #fff;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: .7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      display: none;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, #52c48a 100%);
+      padding: 80px 5% 60px;
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: 20%;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, .04);
+      border-radius: 50%;
+    }
+
+    .hero-text {
+      flex: 1;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, .2);
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      opacity: .88;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      max-width: 480px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--green-dark);
+      padding: 13px 30px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: .3s;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, .15);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, .6);
+      padding: 13px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: .3s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, .15);
+      border-color: #fff;
+    }
+
+    .hero-cards {
+      display: flex;
+      gap: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-stat {
+      background: rgba(255, 255, 255, .15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: var(--radius);
+      padding: 20px 25px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hero-stat .num {
+      font-size: 2rem;
+      font-weight: 800;
+      display: block;
+    }
+
+    .hero-stat .lbl {
+      font-size: .82rem;
+      opacity: .8;
+      margin-top: 3px;
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section {
+      padding: 70px 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .section-header::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 4px;
+      background: var(--green);
+      margin: 18px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ===== DORM INFO ACCORDION ===== */
+    .dorm-section {
+      background: #fff;
+    }
+
+    .accordion-group {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .accordion-item {
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .accordion-item.open {
+      box-shadow: var(--shadow);
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 25px;
+      cursor: pointer;
+      background: #fff;
+      transition: .2s;
+    }
+
+    .accordion-header:hover {
+      background: var(--green-light);
+    }
+
+    .accordion-header .title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--navy);
+    }
+
+    .accordion-header .title i {
+      color: var(--green);
+      font-size: 1.2rem;
+    }
+
+    .accordion-icon {
+      color: #999;
+      transition: .3s;
+    }
+
+    .accordion-item.open .accordion-icon {
+      transform: rotate(180deg);
+      color: var(--green);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 0 25px 25px;
+    }
+
+    .accordion-item.open .accordion-body {
+      display: block;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .info-table th {
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: .9rem;
+    }
+
+    .info-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: .9rem;
+      color: #444;
+    }
+
+    .info-table tr:last-child td {
+      border: none;
+    }
+
+    .info-table tr:hover td {
+      background: #fafff8;
+    }
+
+    /* ===== ROOM FILTER ===== */
+    .rooms-section {
+      background: var(--bg);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+      background: #fff;
+      padding: 20px 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .filter-bar label {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+
+    .select-filter {
+      padding: 9px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: .9rem;
+      color: #444;
+      cursor: pointer;
+      transition: .2s;
+      background: #fff;
+      font-family: inherit;
+    }
+
+    .select-filter:focus {
+      outline: none;
+      border-color: var(--green);
+    }
+
+    .btn-reset {
+      padding: 9px 18px;
+      background: var(--green-light);
+      color: var(--green-dark);
+      border: none;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .btn-reset:hover {
+      background: var(--green);
+      color: #fff;
+    }
+
+    /* ===== ROOM CARDS ===== */
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .room-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, .06);
+      transition: .35s;
+    }
+
+    .room-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(45, 158, 107, .18);
+    }
+
+    .room-img {
+      height: 200px;
+      background: linear-gradient(135deg, var(--green-light), var(--green-mid));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .room-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--green);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .room-badge.full {
+      background: #e74c3c;
+    }
+
+    .room-info {
+      padding: 20px;
+    }
+
+    .room-info h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .room-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .meta-tag {
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: .78rem;
+      font-weight: 500;
+    }
+
+    .room-desc {
+      font-size: .87rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .room-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-label {
+      font-size: .75rem;
+      color: #999;
+    }
+
+    .spec-value {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .room-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 14px;
+    }
+
+    .room-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    .room-price span {
+      font-size: .78rem;
+      color: #888;
+      font-weight: 400;
+    }
+
+    .btn-add-cart {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: .87rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: .2s;
+    }
+
+    .btn-add-cart:hover {
+      background: var(--green-dark);
+      transform: scale(1.04);
+    }
+
+    .btn-add-cart.added {
+      background: #27ae60;
+    }
+
+    /* ===== CART DRAWER ===== */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      z-index: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s;
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 400px;
+      background: #fff;
+      z-index: 900;
+      transform: translateX(100%);
+      transition: .35s;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, .15);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-drawer-header {
+      background: var(--green);
+      color: #fff;
+      padding: 20px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-drawer-header h3 {
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .cart-close:hover {
+      transform: rotate(90deg);
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: #aaa;
+    }
+
+    .cart-empty i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 15px;
+      padding: 15px;
+      background: var(--green-light);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .cart-item-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-info h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .cart-item-info p {
+      font-size: .82rem;
+      color: #666;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #aaa;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: .2s;
+      flex-shrink: 0;
+    }
+
+    .cart-item-remove:hover {
+      color: #e74c3c;
+    }
+
+    .cart-footer {
+      padding: 20px 25px;
+      border-top: 1px solid #eee;
+    }
+
+    .cart-note {
+      background: var(--green-light);
+      padding: 15px;
+      border-radius: 10px;
+      font-size: .85rem;
+      color: var(--green-dark);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ===== FACILITIES ===== */
+    .facilities-section {
+      background: #fff;
+    }
+
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .facility-card {
+      background: var(--green-light);
+      border-radius: 12px;
+      padding: 25px 20px;
+      text-align: center;
+      transition: .3s;
+    }
+
+    .facility-card:hover {
+      background: var(--green);
+      color: #fff;
+      transform: translateY(-5px);
+    }
+
+    .facility-card i {
+      font-size: 2rem;
+      color: var(--green);
+      margin-bottom: 12px;
+      transition: .3s;
+    }
+
+    .facility-card:hover i {
+      color: #fff;
+    }
+
+    .facility-card h4 {
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--navy);
+      transition: .3s;
+    }
+
+    .facility-card:hover h4 {
+      color: #fff;
+    }
+
+    .facility-card p {
+      font-size: .8rem;
+      color: #666;
+      margin-top: 5px;
+      transition: .3s;
+    }
+
+    .facility-card:hover p {
+      color: rgba(255, 255, 255, .85);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      padding: 60px 5%;
+    }
+
+    .contact-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .contact-text {
+      color: #fff;
+    }
+
+    .contact-text h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .contact-text p {
+      opacity: .88;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, .12);
+      padding: 14px 18px;
+      border-radius: 10px;
+      color: #fff;
+    }
+
+    .contact-item i {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, .8);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy);
+      color: rgba(255, 255, 255, .7);
+      padding: 30px 5%;
+      text-align: center;
+      font-size: .88rem;
+      line-height: 1.8;
+    }
+
+    footer a {
+      color: var(--green-mid);
+      transition: .2s;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px) {
+      .hero {
+        flex-direction: column;
+        padding: 50px 5%;
+      }
+
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .hero-cards {
+        flex-wrap: wrap;
+      }
+
+      .cart-drawer {
+        width: 100%;
+      }
+
+      .contact-inner {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ===== NOTICE BANNER ===== */
+    .notice-bar {
+      background: var(--green-light);
+      border-left: 4px solid var(--green);
+      padding: 12px 5%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .9rem;
+      color: var(--green-dark);
+    }
+
+    .notice-bar i {
+      font-size: 1rem;
+    }
+
+    /* Scroll animation */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: .6s;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== VR BANNER ===== */
+    .vr-title-bar {
+      background: var(--green-dark);
+      color: #fff;
+      padding: 15px 5%;
+      text-align: center;
+      border-bottom: 4px solid var(--green);
+    }
+
+    .vr-title-bar h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+    }
+
+    .vr-title-bar p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: .9;
+      margin: 0;
+    }
+
+    .vr-banner {
+      position: relative;
+      width: 94%;
+      max-width: 1400px;
+      margin: 0 auto 40px;
+      height: 500px;
+      background: #000;
+      overflow: hidden;
+      border: 6px solid var(--green);
+      border-radius: 30px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .vr-banner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .vr-banner .vr-loader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+      transition: opacity .5s;
+    }
+
+    .vr-banner .vr-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #333;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: vrSpin 1s linear infinite;
+    }
+
+    @keyframes vrSpin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .btn-vr-fullscreen {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 45px;
+      height: 45px;
+      background: rgba(0, 0, 0, .6);
+      border-radius: 50%;
+      border: 2px solid #fff;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: .3s;
+    }
+
+    .btn-vr-fullscreen:hover {
+      background: var(--green);
+      transform: scale(1.1);
+    }
+
+    @media(max-width:768px) {
+      .vr-banner {
+        width: 100%;
+        height: 350px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 5px solid var(--green);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <span><i class="fas fa-home" style="margin-right:6px"></i>明新科技大學 住宿服務中心</span>
-  <div>
-    <a href="https://www.must.edu.tw/" target="_blank"><i class="fas fa-globe"></i> 學校官網</a>
-    <a href="tel:035593142"><i class="fas fa-phone"></i> 03-5593142</a>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span><i class="fas fa-home" style="margin-right:6px"></i>明新科技大學 住宿服務中心</span>
+    <div>
+      <a href="https://www.must.edu.tw/" target="_blank"><i class="fas fa-globe"></i> 學校官網</a>
+      <a href="tel:035593142"><i class="fas fa-phone"></i> 03-5593142</a>
+    </div>
   </div>
-</div>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon"><i class="fas fa-building"></i></div>
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-building"></i></div>
+        <div>
+          <div style="font-size:1.05rem">學生住宿服務中心</div>
+          <div style="font-size:.75rem;color:#888;font-weight:400">Student Housing Center</div>
+        </div>
+      </div>
+      <nav>
+        <!-- 關於宿舍 -->
+        <div class="nav-item">
+          <div class="nav-link">關於宿舍 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
+          <div class="dropdown">
+            <a href="#intro"><i class="fas fa-info-circle"></i> 宿舍介紹</a>
+            <a href="#facilities"><i class="fas fa-swimming-pool"></i> 宿舍設施</a>
+            <a href="#contact"><i class="fas fa-phone"></i> 聯絡我們</a>
+          </div>
+        </div>
+        <!-- 房型資訊 -->
+        <div class="nav-item">
+          <div class="nav-link">房型資訊 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
+          <div class="dropdown">
+            <a href="#rooms"><i class="fas fa-door-open"></i> 所有房型</a>
+            <a href="#rooms" onclick="document.getElementById('filter-campus').value='校本部';applyFilters()"><i
+                class="fas fa-map-marker-alt"></i> 校本部</a>
+            <div class="dropdown-divider"></div>
+            <a href="#rooms" onclick="document.getElementById('filter-gender').value='男';applyFilters()"><i
+                class="fas fa-mars"></i> 男生宿舍</a>
+            <a href="#rooms" onclick="document.getElementById('filter-gender').value='女';applyFilters()"><i
+                class="fas fa-venus"></i> 女生宿舍</a>
+          </div>
+        </div>
+        <!-- 申請住宿 -->
+        <div class="nav-item">
+          <div class="nav-link">申請資訊 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
+          <div class="dropdown">
+            <a href="#intro"><i class="fas fa-list-ol"></i> 申請流程</a>
+            <a href="#intro"><i class="fas fa-file-alt"></i> 進住須知</a>
+            <a href="#intro"><i class="fas fa-question-circle"></i> 常見問題</a>
+            <div class="dropdown-divider"></div>
+            <a href="#intro"><i class="fas fa-calendar-alt"></i> 重要日程</a>
+          </div>
+        </div>
+        <!-- 規章文件 -->
+        <div class="nav-item">
+          <div class="nav-link">規章文件 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
+          <div class="dropdown">
+            <a href="#"><i class="fas fa-file-pdf"></i> 進住須知下載</a>
+            <a href="#"><i class="fas fa-file-pdf"></i> 宿舍規則</a>
+            <a href="#"><i class="fas fa-file-pdf"></i> 收費標準</a>
+          </div>
+        </div>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="home.html" class="cart-btn"
+          style="background:var(--bg);color:var(--green);border:2px solid var(--green);margin-left:0;">
+          <i class="fas fa-arrow-left"></i> 返回導覽首頁
+        </a>
+        <button class="cart-btn" onclick="toggleCart()" style="margin-left:0;">
+          <i class="fas fa-shopping-cart"></i> 已選房型
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NOTICE BAR -->
+  <div class="notice-bar">
+    <i class="fas fa-bullhorn"></i>
+    <span>📢 【注意】114學年度第2學期宿舍申請截止日期：2026/03/20，請同學把握時間！</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>安心舒適的<br>校園住宿生活</h1>
+      <p>明新科技大學提供多元化住宿選擇，讓您在求學期間擁有溫馨、安全且便利的生活空間。</p>
+      <div class="hero-btns">
+        <a href="#rooms" class="btn-white"><i class="fas fa-search"></i> 瀏覽房型</a>
+        <a href="#intro" class="btn-outline"><i class="fas fa-info-circle"></i> 了解更多</a>
+      </div>
+    </div>
+    <div class="hero-cards">
+      <div class="hero-stat"><span class="num">168</span>
+        <div class="lbl">總房間數</div>
+      </div>
+      <div class="hero-stat"><span class="num">664</span>
+        <div class="lbl">住宿床位</div>
+      </div>
+      <div class="hero-stat"><span class="num">24h</span>
+        <div class="lbl">安全管理</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D VR TOUR -->
+  <div class="vr-title-bar">
+    <h2><i class="fas fa-vr-cardboard"></i> 宿舍 3D 實景導覽</h2>
+    <p>拖曳畫面 360° 探索宿舍環境</p>
+  </div>
+  <div class="vr-banner" id="vrBanner">
+    <div class="vr-loader" id="vrLoader">
+      <div class="vr-spinner"></div>
+    </div>
+    <iframe id="vrIframe" allowfullscreen
+      onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
+    <script>
+      document.getElementById('vrIframe').src = 'output_index1/output/index.html?v=' + Date.now();
+    </script>
+    <button class="btn-vr-fullscreen" onclick="toggleVRFullscreen()" title="全螢幕">
+      <i class="fas fa-expand"></i>
+    </button>
+  </div>
+
+
+  <!-- ROOM LISTING -->
+  <section class="section rooms-section" id="rooms">
+    <div class="section-header">
+      <h2>房型一覽</h2>
+      <p>使用下拉篩選快速找到適合您的房型，並加入選單</p>
+    </div>
+    <div class="filter-bar fade-up">
+      <label><i class="fas fa-filter" style="color:var(--green)"></i> 篩選條件：</label>
       <div>
-        <div style="font-size:1.05rem">學生住宿服務中心</div>
-        <div style="font-size:.75rem;color:#888;font-weight:400">Student Housing Center</div>
+        <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">校區</label>
+        <select class="select-filter" id="filter-campus" onchange="applyFilters()">
+          <option value="">全部校區</option>
+          <option value="校本部">校本部</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">性別</label>
+        <select class="select-filter" id="filter-gender" onchange="applyFilters()">
+          <option value="">男女皆可</option>
+          <option value="男">男生</option>
+          <option value="女">女生</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">人數</label>
+        <select class="select-filter" id="filter-beds" onchange="applyFilters()">
+          <option value="">全部人數</option>
+          <option value="2">2人房</option>
+          <option value="4">4人房</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">狀態</label>
+        <select class="select-filter" id="filter-status" onchange="applyFilters()">
+          <option value="">全部</option>
+          <option value="可申請">可申請</option>
+          <option value="額滿">額滿</option>
+        </select>
+      </div>
+      <button class="btn-reset" onclick="resetFilters()"><i class="fas fa-redo"></i> 重置</button>
+    </div>
+    <div class="rooms-grid" id="roomsGrid"></div>
+    <div id="noResult" style="display:none;text-align:center;padding:40px;color:#aaa">
+      <i class="fas fa-search" style="font-size:2.5rem;margin-bottom:12px;display:block"></i>
+      查無符合條件的房型
+    </div>
+  </section>
+
+  <!-- DORM INTRO ACCORDION -->
+  <section class="section dorm-section" id="intro">
+    <div class="section-header">
+      <h2>宿舍介紹</h2>
+      <p>點選各項目展開詳細資訊</p>
+    </div>
+    <div class="accordion-group" id="accordionGroup"></div>
+  </section>
+
+  <!-- FACILITIES -->
+  <section class="section facilities-section" id="facilities">
+    <div class="section-header">
+      <h2>宿舍設施</h2>
+      <p>完善的生活機能，讓在外求學更安心</p>
+    </div>
+    <div class="facilities-grid" id="facilitiesGrid"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <h2><i class="fas fa-headset" style="margin-right:10px"></i>聯絡我們</h2>
+        <p>如有住宿相關問題，歡迎聯繫住宿服務中心，我們將盡速為您服務。</p>
+        <div class="contact-items" id="contactItems"></div>
+      </div>
+      <div>
+        <div style="background:rgba(255,255,255,.12);border-radius:16px;padding:30px;color:#fff">
+          <h3 style="margin-bottom:20px;font-size:1.1rem"><i class="fas fa-clock" style="margin-right:8px"></i>服務時間</h3>
+          <div style="display:flex;flex-direction:column;gap:12px;font-size:.9rem">
+            <div
+              style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.15)">
+              <span>週一 ～ 週五</span><strong>08:00 ～ 17:00</strong>
+            </div>
+            <div
+              style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.15)">
+              <span>週六</span><strong>09:00 ～ 12:00</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between">
+              <span>週日 / 國定假日</span><strong style="color:rgba(255,255,255,.5)">休息</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <nav>
-      <!-- 關於宿舍 -->
-      <div class="nav-item">
-        <div class="nav-link">關於宿舍 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
-        <div class="dropdown">
-          <a href="#intro"><i class="fas fa-info-circle"></i> 宿舍介紹</a>
-          <a href="#facilities"><i class="fas fa-swimming-pool"></i> 宿舍設施</a>
-          <a href="#contact"><i class="fas fa-phone"></i> 聯絡我們</a>
-        </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="margin-bottom:8px;font-weight:600;color:#fff">明新科技大學 住宿服務中心</div>
+    <div>304 新竹縣新豐鄉新興路1號 ｜ <a href="tel:035593142">03-559-3142</a> ｜ <a href="https://www.must.edu.tw"
+        target="_blank">www.must.edu.tw</a></div>
+    <div style="margin-top:10px;color:rgba(255,255,255,.4);font-size:.8rem">© 2026 明新科技大學. All Rights Reserved.</div>
+  </footer>
+
+  <!-- CART OVERLAY + DRAWER -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3><i class="fas fa-shopping-cart"></i> 已選房型清單</h3>
+      <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty" id="cartEmpty">
+        <i class="fas fa-bed"></i>
+        尚未選擇任何房型<br>
+        <small style="margin-top:8px;display:block">請至房型一覽點選「加入選單」</small>
       </div>
-      <!-- 房型資訊 -->
-      <div class="nav-item">
-        <div class="nav-link">房型資訊 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
-        <div class="dropdown">
-          <a href="#rooms"><i class="fas fa-door-open"></i> 所有房型</a>
-          <a href="#rooms" onclick="document.getElementById('filter-campus').value='校本部';applyFilters()"><i class="fas fa-map-marker-alt"></i> 校本部</a>
-          <div class="dropdown-divider"></div>
-          <a href="#rooms" onclick="document.getElementById('filter-gender').value='男';applyFilters()"><i class="fas fa-mars"></i> 男生宿舍</a>
-          <a href="#rooms" onclick="document.getElementById('filter-gender').value='女';applyFilters()"><i class="fas fa-venus"></i> 女生宿舍</a>
-        </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-note">
+        <i class="fas fa-info-circle" style="color:var(--green);margin-right:5px"></i>
+        此為選單功能，實際申請請洽服務中心或依公告流程辦理。
       </div>
-      <!-- 申請住宿 -->
-      <div class="nav-item">
-        <div class="nav-link">申請資訊 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
-        <div class="dropdown">
-          <a href="#intro"><i class="fas fa-list-ol"></i> 申請流程</a>
-          <a href="#intro"><i class="fas fa-file-alt"></i> 進住須知</a>
-          <a href="#intro"><i class="fas fa-question-circle"></i> 常見問題</a>
-          <div class="dropdown-divider"></div>
-          <a href="#intro"><i class="fas fa-calendar-alt"></i> 重要日程</a>
-        </div>
-      </div>
-      <!-- 規章文件 -->
-      <div class="nav-item">
-        <div class="nav-link">規章文件 <i class="fas fa-chevron-down" style="font-size:.7rem"></i></div>
-        <div class="dropdown">
-          <a href="#"><i class="fas fa-file-pdf"></i> 進住須知下載</a>
-          <a href="#"><i class="fas fa-file-pdf"></i> 宿舍規則</a>
-          <a href="#"><i class="fas fa-file-pdf"></i> 收費標準</a>
-        </div>
-      </div>
-    </nav>
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <a href="home.html" class="cart-btn" style="background:var(--bg);color:var(--green);border:2px solid var(--green);margin-left:0;">
-        <i class="fas fa-arrow-left"></i> 返回導覽首頁
-      </a>
-      <button class="cart-btn" onclick="toggleCart()" style="margin-left:0;">
-        <i class="fas fa-shopping-cart"></i> 已選房型
-        <span class="cart-badge" id="cartBadge">0</span>
-      </button>
     </div>
   </div>
-</header>
 
-<!-- NOTICE BAR -->
-<div class="notice-bar">
-  <i class="fas fa-bullhorn"></i>
-  <span>📢 【注意】114學年度第2學期宿舍申請截止日期：2026/03/20，請同學把握時間！</span>
-</div>
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-text">
-    <h1>安心舒適的<br>校園住宿生活</h1>
-    <p>明新科技大學提供多元化住宿選擇，讓您在求學期間擁有溫馨、安全且便利的生活空間。</p>
-    <div class="hero-btns">
-      <a href="#rooms" class="btn-white"><i class="fas fa-search"></i> 瀏覽房型</a>
-      <a href="#intro" class="btn-outline"><i class="fas fa-info-circle"></i> 了解更多</a>
-    </div>
-  </div>
-  <div class="hero-cards">
-    <div class="hero-stat"><span class="num">168</span><div class="lbl">總房間數</div></div>
-    <div class="hero-stat"><span class="num">664</span><div class="lbl">住宿床位</div></div>
-    <div class="hero-stat"><span class="num">24h</span><div class="lbl">安全管理</div></div>
-  </div>
-</section>
-
-<!-- 3D VR TOUR -->
-<div class="vr-title-bar">
-  <h2><i class="fas fa-vr-cardboard"></i> 宿舍 3D 實景導覽</h2>
-  <p>拖曳畫面 360° 探索宿舍環境</p>
-</div>
-<div class="vr-banner" id="vrBanner">
-  <div class="vr-loader" id="vrLoader">
-    <div class="vr-spinner"></div>
-  </div>
-  <iframe id="vrIframe" allowfullscreen
-    onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
   <script>
-    document.getElementById('vrIframe').src = 'output_index1/output/index.html?v=' + Date.now();
-  </script>
-  <button class="btn-vr-fullscreen" onclick="toggleVRFullscreen()" title="全螢幕">
-    <i class="fas fa-expand"></i>
-  </button>
-</div>
+    // ============================================================
+    // 資料來源 (Supabase)
+    // ============================================================
 
+    let dormData = {
+      accordions: [],
+      rooms: [],
+      facilities: [],
+      contacts: []
+    };
 
-<!-- ROOM LISTING -->
-<section class="section rooms-section" id="rooms">
-  <div class="section-header">
-    <h2>房型一覽</h2>
-    <p>使用下拉篩選快速找到適合您的房型，並加入選單</p>
-  </div>
-  <div class="filter-bar fade-up">
-    <label><i class="fas fa-filter" style="color:var(--green)"></i> 篩選條件：</label>
-    <div>
-      <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">校區</label>
-      <select class="select-filter" id="filter-campus" onchange="applyFilters()">
-        <option value="">全部校區</option>
-        <option value="校本部">校本部</option>
-      </select>
-    </div>
-    <div>
-      <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">性別</label>
-      <select class="select-filter" id="filter-gender" onchange="applyFilters()">
-        <option value="">男女皆可</option>
-        <option value="男">男生</option>
-        <option value="女">女生</option>
-      </select>
-    </div>
-    <div>
-      <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">人數</label>
-      <select class="select-filter" id="filter-beds" onchange="applyFilters()">
-        <option value="">全部人數</option>
-        <option value="2">2人房</option>
-        <option value="4">4人房</option>
-      </select>
-    </div>
-    <div>
-      <label style="font-size:.82rem;color:#888;display:block;margin-bottom:3px">狀態</label>
-      <select class="select-filter" id="filter-status" onchange="applyFilters()">
-        <option value="">全部</option>
-        <option value="可申請">可申請</option>
-        <option value="額滿">額滿</option>
-      </select>
-    </div>
-    <button class="btn-reset" onclick="resetFilters()"><i class="fas fa-redo"></i> 重置</button>
-  </div>
-  <div class="rooms-grid" id="roomsGrid"></div>
-  <div id="noResult" style="display:none;text-align:center;padding:40px;color:#aaa">
-    <i class="fas fa-search" style="font-size:2.5rem;margin-bottom:12px;display:block"></i>
-    查無符合條件的房型
-  </div>
-</section>
+    // ============================================================
+    // RENDER FUNCTIONS
+    // ============================================================
 
-<!-- DORM INTRO ACCORDION -->
-<section class="section dorm-section" id="intro">
-  <div class="section-header">
-    <h2>宿舍介紹</h2>
-    <p>點選各項目展開詳細資訊</p>
-  </div>
-  <div class="accordion-group" id="accordionGroup"></div>
-</section>
-
-<!-- FACILITIES -->
-<section class="section facilities-section" id="facilities">
-  <div class="section-header">
-    <h2>宿舍設施</h2>
-    <p>完善的生活機能，讓在外求學更安心</p>
-  </div>
-  <div class="facilities-grid" id="facilitiesGrid"></div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="contact-inner">
-    <div class="contact-text">
-      <h2><i class="fas fa-headset" style="margin-right:10px"></i>聯絡我們</h2>
-      <p>如有住宿相關問題，歡迎聯繫住宿服務中心，我們將盡速為您服務。</p>
-      <div class="contact-items" id="contactItems"></div>
-    </div>
-    <div>
-      <div style="background:rgba(255,255,255,.12);border-radius:16px;padding:30px;color:#fff">
-        <h3 style="margin-bottom:20px;font-size:1.1rem"><i class="fas fa-clock" style="margin-right:8px"></i>服務時間</h3>
-        <div style="display:flex;flex-direction:column;gap:12px;font-size:.9rem">
-          <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.15)">
-            <span>週一 ～ 週五</span><strong>08:00 ～ 17:00</strong>
-          </div>
-          <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.15)">
-            <span>週六</span><strong>09:00 ～ 12:00</strong>
-          </div>
-          <div style="display:flex;justify-content:space-between">
-            <span>週日 / 國定假日</span><strong style="color:rgba(255,255,255,.5)">休息</strong>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div style="margin-bottom:8px;font-weight:600;color:#fff">明新科技大學 住宿服務中心</div>
-  <div>304 新竹縣新豐鄉新興路1號 ｜ <a href="tel:035593142">03-559-3142</a> ｜ <a href="https://www.must.edu.tw" target="_blank">www.must.edu.tw</a></div>
-  <div style="margin-top:10px;color:rgba(255,255,255,.4);font-size:.8rem">© 2026 明新科技大學. All Rights Reserved.</div>
-</footer>
-
-<!-- CART OVERLAY + DRAWER -->
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-drawer-header">
-    <h3><i class="fas fa-shopping-cart"></i> 已選房型清單</h3>
-    <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty" id="cartEmpty">
-      <i class="fas fa-bed"></i>
-      尚未選擇任何房型<br>
-      <small style="margin-top:8px;display:block">請至房型一覽點選「加入選單」</small>
-    </div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-note">
-      <i class="fas fa-info-circle" style="color:var(--green);margin-right:5px"></i>
-      此為選單功能，實際申請請洽服務中心或依公告流程辦理。
-    </div>
-  </div>
-</div>
-
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/config.js"></script>
-
-<script>
-// ============================================================
-// 資料來源 (Supabase)
-// ============================================================
-
-let dormData = {
-  accordions: [],
-  rooms: [],
-  facilities: [],
-  contacts: []
-};
-
-// ============================================================
-// RENDER FUNCTIONS
-// ============================================================
-
-function renderAccordions() {
-  const container = document.getElementById('accordionGroup');
-  container.innerHTML = dormData.accordions.map((item, i) => `
+    function renderAccordions() {
+      const container = document.getElementById('accordionGroup');
+      container.innerHTML = dormData.accordions.map((item, i) => `
     <div class="accordion-item fade-up" id="acc-${i}">
       <div class="accordion-header" onclick="toggleAccordion(${i})">
         <div class="title"><i class="${item.icon}"></i>${item.title}</div>
@@ -468,29 +1413,29 @@ function renderAccordions() {
       <div class="accordion-body">${item.content}</div>
     </div>
   `).join('');
-}
+    }
 
-function toggleAccordion(i) {
-  const item = document.getElementById('acc-' + i);
-  item.classList.toggle('open');
-}
+    function toggleAccordion(i) {
+      const item = document.getElementById('acc-' + i);
+      item.classList.toggle('open');
+    }
 
-function renderRooms(data) {
-  const grid = document.getElementById('roomsGrid');
-  const noRes = document.getElementById('noResult');
-  if (!data.length) { grid.innerHTML = ''; noRes.style.display = 'block'; return; }
-  noRes.style.display = 'none';
-  grid.innerHTML = data.map(r => `
+    function renderRooms(data) {
+      const grid = document.getElementById('roomsGrid');
+      const noRes = document.getElementById('noResult');
+      if (!data.length) { grid.innerHTML = ''; noRes.style.display = 'block'; return; }
+      noRes.style.display = 'none';
+      grid.innerHTML = data.map(r => `
     <div class="room-card fade-up">
       <div class="room-img">
         <span style="font-size:4rem">${r.emoji}</span>
-        <span class="room-badge ${r.status==='額滿'?'full':''}">${r.status}</span>
+        <span class="room-badge ${r.status === '額滿' ? 'full' : ''}">${r.status}</span>
       </div>
       <div class="room-info">
         <h3>${r.name}</h3>
         <div class="room-meta">
           <span class="meta-tag"><i class="fas fa-map-marker-alt"></i> ${r.campus}</span>
-          <span class="meta-tag">${r.gender==='男'?'♂ 男生':(r.gender==='女'?'♀ 女生':'👫 男女皆可')}</span>
+          <span class="meta-tag">${r.gender === '男' ? '♂ 男生' : (r.gender === '女' ? '♀ 女生' : '👫 男女皆可')}</span>
           <span class="meta-tag"><i class="fas fa-user-friends"></i> ${r.beds}人房</span>
         </div>
         <p class="room-desc">${r.description || r.desc || ''}</p>
@@ -502,97 +1447,97 @@ function renderRooms(data) {
         </div>
         <div class="room-footer">
           <div class="room-price">${r.price} <span>/人</span></div>
-          <button class="btn-add-cart" id="btn-${r.id}" onclick="addToCart(${r.id})" ${r.status==='額滿'?'disabled style="opacity:.4;cursor:not-allowed"':''}>
+          <button class="btn-add-cart" id="btn-${r.id}" onclick="addToCart(${r.id})" ${r.status === '額滿' ? 'disabled style="opacity:.4;cursor:not-allowed"' : ''}>
             <i class="fas fa-plus"></i> 加入選單
           </button>
         </div>
       </div>
     </div>
   `).join('');
-  observeFadeUp();
-}
+      observeFadeUp();
+    }
 
-function renderFacilities() {
-  document.getElementById('facilitiesGrid').innerHTML = dormData.facilities.map(f => `
+    function renderFacilities() {
+      document.getElementById('facilitiesGrid').innerHTML = dormData.facilities.map(f => `
     <div class="facility-card fade-up">
       <i class="${f.icon}"></i>
       <h4>${f.name}</h4>
       <p>${f.description || f.desc || ''}</p>
     </div>
   `).join('');
-}
+    }
 
-function renderContacts() {
-  document.getElementById('contactItems').innerHTML = dormData.contacts.map(c => `
+    function renderContacts() {
+      document.getElementById('contactItems').innerHTML = dormData.contacts.map(c => `
     <div class="contact-item"><i class="${c.icon}"></i><span>${c.text}</span></div>
   `).join('');
-}
+    }
 
-// ============================================================
-// FILTERS
-// ============================================================
-function applyFilters() {
-  const campus = document.getElementById('filter-campus').value;
-  const gender = document.getElementById('filter-gender').value;
-  const beds   = document.getElementById('filter-beds').value;
-  const status = document.getElementById('filter-status').value;
-  let filtered = dormData.rooms.filter(r =>
-    (!campus || r.campus === campus) &&
-    (!gender || r.gender.includes(gender)) &&
-    (!beds   || parseInt(r.beds) === parseInt(beds)) &&
-    (!status || r.status === status)
-  );
-  renderRooms(filtered);
-}
+    // ============================================================
+    // FILTERS
+    // ============================================================
+    function applyFilters() {
+      const campus = document.getElementById('filter-campus').value;
+      const gender = document.getElementById('filter-gender').value;
+      const beds = document.getElementById('filter-beds').value;
+      const status = document.getElementById('filter-status').value;
+      let filtered = dormData.rooms.filter(r =>
+        (!campus || r.campus === campus) &&
+        (!gender || r.gender.includes(gender)) &&
+        (!beds || parseInt(r.beds) === parseInt(beds)) &&
+        (!status || r.status === status)
+      );
+      renderRooms(filtered);
+    }
 
-function resetFilters() {
-  ['filter-campus','filter-gender','filter-beds','filter-status'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  renderRooms(dormData.rooms);
-}
+    function resetFilters() {
+      ['filter-campus', 'filter-gender', 'filter-beds', 'filter-status'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      renderRooms(dormData.rooms);
+    }
 
-// ============================================================
-// CART
-// ============================================================
-let cart = [];
+    // ============================================================
+    // CART
+    // ============================================================
+    let cart = [];
 
-function addToCart(roomId) {
-  const room = dormData.rooms.find(r => parseInt(r.id) === parseInt(roomId));
-  if (!room) return;
-  if (cart.find(c => parseInt(c.id) === parseInt(roomId))) {
-    alert('此房型已在選單中！');
-    return;
-  }
-  cart.push(room);
-  updateCartUI();
-  const btn = document.getElementById('btn-' + roomId);
-  if (btn) { btn.innerHTML = '<i class="fas fa-check"></i> 已加入'; btn.classList.add('added'); }
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-}
+    function addToCart(roomId) {
+      const room = dormData.rooms.find(r => parseInt(r.id) === parseInt(roomId));
+      if (!room) return;
+      if (cart.find(c => parseInt(c.id) === parseInt(roomId))) {
+        alert('此房型已在選單中！');
+        return;
+      }
+      cart.push(room);
+      updateCartUI();
+      const btn = document.getElementById('btn-' + roomId);
+      if (btn) { btn.innerHTML = '<i class="fas fa-check"></i> 已加入'; btn.classList.add('added'); }
+      document.getElementById('cartDrawer').classList.add('open');
+      document.getElementById('cartOverlay').classList.add('open');
+    }
 
-function removeFromCart(roomId) {
-  cart = cart.filter(c => parseInt(c.id) !== parseInt(roomId));
-  const btn = document.getElementById('btn-' + roomId);
-  if (btn) { btn.innerHTML = '<i class="fas fa-plus"></i> 加入選單'; btn.classList.remove('added'); }
-  updateCartUI();
-}
+    function removeFromCart(roomId) {
+      cart = cart.filter(c => parseInt(c.id) !== parseInt(roomId));
+      const btn = document.getElementById('btn-' + roomId);
+      if (btn) { btn.innerHTML = '<i class="fas fa-plus"></i> 加入選單'; btn.classList.remove('added'); }
+      updateCartUI();
+    }
 
-function updateCartUI() {
-  const badge = document.getElementById('cartBadge');
-  const itemsEl = document.getElementById('cartItems');
-  const empty = document.getElementById('cartEmpty');
-  badge.style.display = cart.length ? 'flex' : 'none';
-  badge.textContent = cart.length;
-  if (!cart.length) { empty.style.display = 'block'; itemsEl.innerHTML = ''; itemsEl.appendChild(empty); return; }
-  empty.style.display = 'none';
-  const existingItems = itemsEl.querySelectorAll('.cart-item');
-  existingItems.forEach(e => e.remove());
-  cart.forEach(r => {
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.innerHTML = `
+    function updateCartUI() {
+      const badge = document.getElementById('cartBadge');
+      const itemsEl = document.getElementById('cartItems');
+      const empty = document.getElementById('cartEmpty');
+      badge.style.display = cart.length ? 'flex' : 'none';
+      badge.textContent = cart.length;
+      if (!cart.length) { empty.style.display = 'block'; itemsEl.innerHTML = ''; itemsEl.appendChild(empty); return; }
+      empty.style.display = 'none';
+      const existingItems = itemsEl.querySelectorAll('.cart-item');
+      existingItems.forEach(e => e.remove());
+      cart.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
       <div class="cart-item-icon">${r.emoji}</div>
       <div class="cart-item-info">
         <h4>${r.name}</h4>
@@ -600,116 +1545,117 @@ function updateCartUI() {
       </div>
       <button class="cart-item-remove" onclick="removeFromCart(${r.id})" title="移除"><i class="fas fa-trash-alt"></i></button>
     `;
-    itemsEl.appendChild(div);
-  });
-}
+        itemsEl.appendChild(div);
+      });
+    }
 
-function toggleCart() {
-  document.getElementById('cartDrawer').classList.toggle('open');
-  document.getElementById('cartOverlay').classList.toggle('open');
-}
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('open');
+      document.getElementById('cartOverlay').classList.toggle('open');
+    }
 
-// ============================================================
-// SCROLL FADE
-// ============================================================
-function observeFadeUp() {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-}
+    // ============================================================
+    // SCROLL FADE
+    // ============================================================
+    function observeFadeUp() {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    }
 
-// ============================================================
-// SUPABASE FETCH & INIT
-// ============================================================
-async function initDormData() {
-  try {
-    const supabase = window.supabase.createClient(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_KEY);
-    
-    // Show a loading UI or disable the UI momentarily if needed, but for now just fetch
-    const [accRes, roomsRes, facRes, contactRes] = await Promise.all([
-      supabase.from('住宿各式資料1').select('*').order('id'),
-      supabase.from('住宿房間資料').select('*').order('id'),
-      supabase.from('住宿各類設施').select('*').order('id'),
-      supabase.from('住宿地址資料').select('*').order('id')
-    ]);
+    // ============================================================
+    // SUPABASE FETCH & INIT
+    // ============================================================
+    async function initDormData() {
+      try {
+        const supabase = window.supabase.createClient(window.CONFIG.SUPABASE_URL, window.CONFIG.SUPABASE_KEY);
 
-    if(accRes.error) throw accRes.error;
-    if(roomsRes.error) throw roomsRes.error;
-    if(facRes.error) throw facRes.error;
-    if(contactRes.error) throw contactRes.error;
+        // Show a loading UI or disable the UI momentarily if needed, but for now just fetch
+        const [accRes, roomsRes, facRes, contactRes] = await Promise.all([
+          supabase.from('住宿各式資料1').select('*').order('id'),
+          supabase.from('住宿房間資料').select('*').order('id'),
+          supabase.from('住宿各類設施').select('*').order('id'),
+          supabase.from('住宿地址資料').select('*').order('id')
+        ]);
 
-    dormData.accordions = accRes.data || [];
-    dormData.rooms = roomsRes.data || [];
-    dormData.facilities = facRes.data || [];
-    dormData.contacts = contactRes.data || [];
+        if (accRes.error) throw accRes.error;
+        if (roomsRes.error) throw roomsRes.error;
+        if (facRes.error) throw facRes.error;
+        if (contactRes.error) throw contactRes.error;
 
-    // Initialize UI after data is loaded
-    renderAccordions();
-    renderRooms(dormData.rooms);
-    renderFacilities();
-    renderContacts();
-    updateCartUI();
-    observeFadeUp();
-  } catch (error) {
-    console.error("Error fetching dorm data:", error);
-    alert("載入宿舍資料失敗，請稍後再試。");
-  }
-}
+        dormData.accordions = accRes.data || [];
+        dormData.rooms = roomsRes.data || [];
+        dormData.facilities = facRes.data || [];
+        dormData.contacts = contactRes.data || [];
 
-document.addEventListener('DOMContentLoaded', () => {
-  initDormData();
-  setupSmoothScrolling();
-});
-
-// Intercept clicks on internal links to prevent adding multiple history states
-function setupSmoothScrolling() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      
-      // Ignore empty hashes or just '#'
-      if(targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        e.preventDefault(); // Prevent default anchor click behavior
-        
-        // Calculate offset for the sticky header (height: 70px)
-        const headerOffset = 70;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-  
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        // Initialize UI after data is loaded
+        renderAccordions();
+        renderRooms(dormData.rooms);
+        renderFacilities();
+        renderContacts();
+        updateCartUI();
+        observeFadeUp();
+      } catch (error) {
+        console.error("Error fetching dorm data:", error);
+        alert("載入宿舍資料失敗，請稍後再試。");
       }
-    });
-  });
-}
-</script>
+    }
 
-<script>
-// VR 全螢幕功能
-function toggleVRFullscreen() {
-  const elem = document.getElementById("vrBanner");
-  const btnIcon = document.querySelector(".btn-vr-fullscreen i");
-  if (!document.fullscreenElement) {
-    if (elem.requestFullscreen) elem.requestFullscreen();
-    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-    btnIcon.classList.remove("fa-expand");
-    btnIcon.classList.add("fa-compress");
-  } else {
-    if (document.exitFullscreen) document.exitFullscreen();
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    else if (document.msExitFullscreen) document.msExitFullscreen();
-    btnIcon.classList.remove("fa-compress");
-    btnIcon.classList.add("fa-expand");
-  }
-}
-</script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initDormData();
+      setupSmoothScrolling();
+    });
+
+    // Intercept clicks on internal links to prevent adding multiple history states
+    function setupSmoothScrolling() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+
+          // Ignore empty hashes or just '#'
+          if (targetId === '#') return;
+
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            e.preventDefault(); // Prevent default anchor click behavior
+
+            // Calculate offset for the sticky header (height: 70px)
+            const headerOffset = 70;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    }
+  </script>
+
+  <script>
+    // VR 全螢幕功能
+    function toggleVRFullscreen() {
+      const elem = document.getElementById("vrBanner");
+      const btnIcon = document.querySelector(".btn-vr-fullscreen i");
+      if (!document.fullscreenElement) {
+        if (elem.requestFullscreen) elem.requestFullscreen();
+        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+        btnIcon.classList.remove("fa-expand");
+        btnIcon.classList.add("fa-compress");
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+        btnIcon.classList.remove("fa-compress");
+        btnIcon.classList.add("fa-expand");
+      }
+    }
+  </script>
 </body>
+
 </html>

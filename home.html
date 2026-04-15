@@ -1604,6 +1604,7 @@
                 <div class="filter-tabs">
                     <button class="filter-btn active" onclick="filterType('all')" data-i18n="filter-all">全部</button>
                     <button class="filter-btn" onclick="filterType('building')" data-i18n="filter-building">大樓</button>
+                    <button class="filter-btn" onclick="filterType('dept')" data-i18n="filter-dept">系所</button>
                     <button class="filter-btn" onclick="filterType('admin')" data-i18n="filter-admin">處室</button>
                     <button class="filter-btn" onclick="filterType('teacher')" data-i18n="filter-teacher">教師</button>
                     <button class="filter-btn" onclick="filterType('classroom')"
@@ -1992,6 +1993,7 @@
                 "search-placeholder": "搜尋名稱、老師、房號...",
                 "filter-all": "全部",
                 "filter-building": "大樓",
+                "filter-dept": "系所",
                 "filter-admin": "處室",
                 "filter-teacher": "教師",
                 "filter-classroom": "教室",
@@ -2054,6 +2056,7 @@
                 "search-placeholder": "Search name, teacher, room...",
                 "filter-all": "All",
                 "filter-building": "Building",
+                "filter-dept": "Department",
                 "filter-admin": "Office",
                 "filter-teacher": "Teacher",
                 "filter-classroom": "Classroom",
@@ -2324,6 +2327,46 @@
             { id: 409, name: "郭釗安 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 728 室\ncakuo@must.edu.tw\n分機 1876", img: "images/郭釗安.jpg" },
             { id: 410, name: "洪瑩書 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理學院 733 室\nyingshu@must.edu.tw\n分機 1893", img: "images/洪瑩書.jpg" },
             { id: 411, name: "陳淑芬 老師", type: "teacher", typeName: "教師", desc: "企業管理系\n管理大樓 713 室\nlita@must.edu.tw\n03-621-7879", img: "images/陳淑芬.jpg" },
+
+            // ============================================
+            // 🎓 學院與科系資料 (Colleges & Departments)
+            // ============================================
+            
+            // --- 1. 管理學院 (College of Management) ---
+            { id: 801, name: "資訊管理系", type: "dept", typeName: "系所", desc: "管理學院 3 樓與 4 樓\n包含系辦公室及多間電腦網路教室。", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+            { id: 802, name: "運動事業管理系", type: "dept", typeName: "系所", desc: "管理學院 2 樓", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+            { id: 803, name: "企業管理系", type: "dept", typeName: "系所", desc: "管理學院 5 樓", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+            { id: 804, name: "行銷與流通管理系", type: "dept", typeName: "系所", desc: "管理學院 6 樓", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+            { id: 805, name: "財務金融系", type: "dept", typeName: "系所", desc: "管理學院 7 樓\n管院院辦公室也在此層。", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+            { id: 806, name: "工業工程與管理系", type: "dept", typeName: "系所", desc: "管理學院 8 樓", img: "images/management_building.jpg?v=2", building: "管理學院", vrNode: "glxy" },
+
+            // --- 2. 逢喜樓 / 鴻超樓 (College of Semiconductor & Engineering) ---
+            { id: 810, name: "半導體學院", type: "building", typeName: "學院", desc: "位於逢喜樓 (鴻超樓)\n致力於培育半導體產業專業人才。", img: "images/campus_gate.jpg?v=2", building: "鴻超樓", vrNode: "hcl" },
+            { id: 811, name: "半導體與光電科技系", type: "dept", typeName: "系所", desc: "逢喜樓 (鴻超樓) 2 樓", img: "images/campus_gate.jpg?v=2", building: "鴻超樓", vrNode: "hcl" },
+            { id: 812, name: "半導體工程與材料系", type: "dept", typeName: "系所", desc: "逢喜樓 (鴻超樓) 3 樓\n半導體學院辦公室也在此層。", img: "images/campus_gate.jpg?v=2", building: "鴻超樓", vrNode: "hcl" },
+            { id: 813, name: "資訊工程系", type: "dept", typeName: "系所", desc: "逢喜樓 (鴻超樓) 4 樓", img: "images/campus_gate.jpg?v=2", building: "鴻超樓", vrNode: "hcl" },
+            { id: 814, name: "工程學院辦公室", type: "admin", typeName: "處室", desc: "逢喜樓 (鴻超樓) 5 樓", img: "images/campus_gate.jpg?v=2", building: "鴻超樓", vrNode: "hcl" },
+
+            // --- 3. 工程學院專屬館舍 (Engineering Specialized Buildings) ---
+            { id: 820, name: "電機工程系 (電機館)", type: "dept", typeName: "系所", desc: "電機館 (分為一館、二館、三館)", img: "images/campus_gate.jpg?v=2", building: "電機館" },
+            { id: 821, name: "電子工程系 (電子館)", type: "dept", typeName: "系所", desc: "電子館", img: "images/campus_gate.jpg?v=2", building: "電子館" },
+            { id: 822, name: "機械工程系 (機械館)", type: "dept", typeName: "系所", desc: "機械大樓 / 機械館", img: "images/campus_gate.jpg?v=2", building: "機械館" },
+            { id: 823, name: "土木工程與環境資源管理系", type: "dept", typeName: "系所", desc: "土環館", img: "images/campus_gate.jpg?v=2", building: "土環館" },
+            { id: 824, name: "半導體工程與材料系 (實驗室)", type: "dept", typeName: "系所", desc: "部分實驗室位於半材館", img: "images/campus_gate.jpg?v=2", building: "半材館" },
+            { id: 825, name: "風力發電學士學位學程", type: "dept", typeName: "系所", desc: "工程學院相關學程", img: "images/campus_gate.jpg?v=2", building: "工程大樓" },
+
+            // --- 4. 民生學院 (College of Human Ecology) ---
+            { id: 830, name: "旅館管理與廚藝創意系", type: "dept", typeName: "系所", desc: "立緒樓 2 樓\n1 樓設有廚藝教室。", img: "images/campus_gate.jpg?v=2", building: "立緒樓" },
+            { id: 831, name: "幼兒保育系", type: "dept", typeName: "系所", desc: "立緒樓 3 樓", img: "images/campus_gate.jpg?v=2", building: "立緒樓" },
+            { id: 832, name: "休閒事業管理系", type: "dept", typeName: "系所", desc: "明學樓 4 樓", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+            { id: 833, name: "樂齡服務產業管理系", type: "dept", typeName: "系所", desc: "明學樓 6 樓", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+
+            // --- 5. 人文與設計學院 (College of Humanities and Design) ---
+            { id: 840, name: "國際商務外語系", type: "dept", typeName: "系所", desc: "明德樓 5 樓與 6 樓", img: "images/campus_gate.jpg?v=2", building: "明德樓" },
+            { id: 841, name: "時尚造型與設計系", type: "dept", typeName: "系所", desc: "行政二館 3 樓", img: "images/campus_gate.jpg?v=2", building: "行政二館", vrNode: "node10" },
+            { id: 842, name: "多媒體與遊戲發展系", type: "dept", typeName: "系所", desc: "人文與設計學院", img: "images/campus_gate.jpg?v=2", building: "明學樓", vrNode: "mxl" },
+            { id: 843, name: "運動事業管理系", type: "dept", typeName: "系所", desc: "人文與設計學院", img: "images/campus_gate.jpg?v=2", building: "體育館" },
+            { id: 844, name: "化妝品應用學士學位學程", type: "dept", typeName: "系所", desc: "人文與設計學院 (民生/人設相關)", img: "images/campus_gate.jpg?v=2", building: "立緒樓" },
         ];
 
         let currentFilter = 'all';
@@ -2417,6 +2460,7 @@
 
                 let icon = 'fas fa-map-marker-alt';
                 if (item.type === 'classroom') icon = 'fas fa-chalkboard-teacher';
+                if (item.type === 'dept') icon = 'fas fa-graduation-cap';
                 if (item.type === 'admin') icon = 'fas fa-briefcase';
                 if (item.type === 'teacher') icon = 'fas fa-user-tie';
                 if (item.type === 'building') icon = 'fas fa-building';

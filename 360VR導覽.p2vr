@@ -35,7 +35,7 @@
           <tilt>2.51</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>47.9132</pannorth>
+        <pannorth>22.7754</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
@@ -46,8 +46,8 @@
         <capturedatetime>2025-11-24T16:57:27</capturedatetime>
         <floorplancoordinates>
           <floorplanid>FloorPlan01</floorplanid>
-          <x>1040</x>
-          <y>632</y>
+          <x>1032</x>
+          <y>652</y>
         </floorplancoordinates>
         <altitude>-10000</altitude>
         <customnodeid>must</customnodeid>
@@ -67,8 +67,8 @@
       <hotspots>
         <hotspot>
           <position>
-            <pan>-225.48</pan>
-            <tilt>1.46</tilt>
+            <pan>-233.1</pan>
+            <tilt>-1.4</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -150,7 +150,20 @@
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-209.55</pan>
+            <tilt>41.63</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <animation>
         <sequence/>
       </animation>
@@ -177,17 +190,17 @@
       </input>
       <viewingparameter>
         <pan>
-          <start>24.9984</start>
+          <start>23.6414</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>0</start>
+          <start>7.96696</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
         <fov>
-          <start>108.174</start>
+          <start>100</start>
           <minunit>pixels</minunit>
           <max>140</max>
           <maxfovstereographic>330</maxfovstereographic>
@@ -198,17 +211,22 @@
           <tilt>0</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>0</pannorth>
+        <pannorth>31.3714</pannorth>
         <flyinprojection>rectilinear</flyinprojection>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
-        <defaultviewtimestamp>2026-02-11T15:07:00</defaultviewtimestamp>
+        <defaultviewtimestamp>2026-04-08T13:53:51</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <customprops/>
         <capturedatetime>2025-11-24T16:57:27</capturedatetime>
         <altitude>-10000</altitude>
         <customnodeid>ab</customnodeid>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>1032</x>
+          <y>516</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
@@ -487,7 +505,20 @@
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-209.95</pan>
+            <tilt>40.74</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node2</id>
     </panorama>
     <panorama>
@@ -1145,7 +1176,20 @@
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-206.38</pan>
+            <tilt>53.01</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node9</id>
     </panorama>
     <panorama>
@@ -1204,7 +1248,7 @@
         <floorplancoordinates>
           <floorplanid>FloorPlan01</floorplanid>
           <x>824</x>
-          <y>440</y>
+          <y>448</y>
         </floorplancoordinates>
       </userdata>
       <floorplans/>
@@ -1238,8 +1282,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-180.14</pan>
-            <tilt>-5.17</tilt>
+            <pan>-193.99</pan>
+            <tilt>-4.98</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1289,12 +1333,78 @@
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-110.96</pan>
+            <tilt>-2.07</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point04</id>
+          <title>資訊大樓</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node9}</url>
+          <target>0.0/0.0/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-301.8</pan>
+            <tilt>0.55</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point05</id>
+          <title>學生活動中心</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node16}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-240.99</pan>
+            <tilt>43.09</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node10</id>
     </panorama>
     <panorama>
@@ -1410,12 +1520,12 @@
       </input>
       <viewingparameter>
         <pan>
-          <start>-123.296</start>
+          <start>-121.216</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>0.831886</start>
+          <start>7.92969</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
@@ -1431,17 +1541,22 @@
           <tilt>14.71</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>0</pannorth>
+        <pannorth>49.9791</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
-        <defaultviewtimestamp>2026-03-20T13:52:10</defaultviewtimestamp>
+        <defaultviewtimestamp>2026-04-14T12:42:02</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <customprops/>
         <capturedatetime>2025-11-24T16:57:27</capturedatetime>
         <altitude>-10000</altitude>
         <customnodeid>mml</customnodeid>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>741</x>
+          <y>504</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
@@ -1501,8 +1616,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-232.17</pan>
-            <tilt>-2.09</tilt>
+            <pan>-236.58</pan>
+            <tilt>0.25</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1585,7 +1700,20 @@
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-179.27</pan>
+            <tilt>42.23</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node12</id>
     </panorama>
     <panorama>
@@ -1610,12 +1738,12 @@
       </input>
       <viewingparameter>
         <pan>
-          <start>0</start>
+          <start>92.2517</start>
           <min>0</min>
           <max>360</max>
         </pan>
         <tilt>
-          <start>0</start>
+          <start>1.91023</start>
           <min>-90</min>
           <max>90</max>
         </tilt>
@@ -1631,16 +1759,22 @@
           <tilt>2.51</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>0</pannorth>
+        <pannorth>99.0196</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
+        <defaultviewtimestamp>2026-04-08T13:56:26</defaultviewtimestamp>
       </viewingparameter>
       <userdata>
         <customprops/>
         <capturedatetime>2025-11-24T16:57:28</capturedatetime>
         <altitude>-10000</altitude>
         <customnodeid>mgl</customnodeid>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>703</x>
+          <y>202</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
@@ -1673,8 +1807,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-113.93</pan>
-            <tilt>-0.89</tilt>
+            <pan>-118.98</pan>
+            <tilt>-0.82</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1727,8 +1861,8 @@
         </hotspot>
         <hotspot>
           <position>
-            <pan>-258.59</pan>
-            <tilt>-0.27</tilt>
+            <pan>-260.39</pan>
+            <tilt>-2.09</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -1757,7 +1891,20 @@
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-148.85</pan>
+            <tilt>43.23</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node13</id>
     </panorama>
     <panorama>
@@ -1803,7 +1950,7 @@
           <tilt>2.51</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>0</pannorth>
+        <pannorth>-213.508</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
@@ -1813,6 +1960,11 @@
         <capturedatetime>2025-11-24T16:57:28</capturedatetime>
         <altitude>-10000</altitude>
         <customnodeid>mxl</customnodeid>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>748</x>
+          <y>310</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
@@ -1902,7 +2054,20 @@
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-89.51</pan>
+            <tilt>50.62</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node14</id>
     </panorama>
     <panorama>
@@ -1948,7 +2113,7 @@
           <tilt>2.51</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>0</pannorth>
+        <pannorth>-91.9128</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
@@ -1981,36 +2146,6 @@
           <linksubtype>unknown</linksubtype>
           <url>{node17}</url>
           <target>-62.6/-8.1/100.0</target>
-          <type>point</type>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
-            <pan>-4.69</pan>
-            <tilt>4.8</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <customprops/>
-          <polygon/>
-          <id>Point02</id>
-          <title>鄭朝福教官</title>
-          <description>鄭朝福 校安中心
-Email
-imagexskys@gmail.com
-電話 2322
-</description>
-          <linktype>info</linktype>
-          <linksubtype>unknown</linksubtype>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -2151,7 +2286,7 @@ imagexskys@gmail.com
           <tilt>2.51</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>0</pannorth>
+        <pannorth>204.23</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
@@ -2162,6 +2297,11 @@ imagexskys@gmail.com
         <capturedatetime>2025-11-24T16:57:28</capturedatetime>
         <altitude>-10000</altitude>
         <customnodeid>xshdzx</customnodeid>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>584</x>
+          <y>344</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
@@ -2233,6 +2373,7 @@ imagexskys@gmail.com
           <customprops/>
           <polygon/>
           <id>Point04</id>
+          <title>排球場</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node90}</url>
@@ -2252,18 +2393,18 @@ imagexskys@gmail.com
             <fov>10</fov>
           </position>
           <next>
-            <pan>115.5</pan>
-            <tilt>-7.6</tilt>
+            <pan>135.8</pan>
+            <tilt>-6.4</tilt>
             <fov>100</fov>
           </next>
           <customprops/>
           <polygon/>
           <id>Point05</id>
-          <title>足球場</title>
+          <title>操場</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node82}</url>
-          <target>115.5/-7.6/100.0</target>
+          <target>135.8/-6.4/100.0</target>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -2299,12 +2440,52 @@ imagexskys@gmail.com
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-332.47</pan>
+            <tilt>-0.08</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>179.4</pan>
+            <tilt>9.2</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point01</id>
+          <title>圖書館</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node18}</url>
+          <target>179.4/9.2/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-43.78</pan>
+            <tilt>47.03</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node16</id>
     </panorama>
     <panorama>
@@ -2350,7 +2531,7 @@ imagexskys@gmail.com
           <tilt>2.51</tilt>
           <fov>108.17</fov>
         </flyinstart>
-        <pannorth>122.785</pannorth>
+        <pannorth>112.053</pannorth>
         <scaletofit>1</scaletofit>
         <projection>rectilinear</projection>
         <flyinprojection>rectilinear</flyinprojection>
@@ -2361,6 +2542,11 @@ imagexskys@gmail.com
         <capturedatetime>2025-11-24T16:57:28</capturedatetime>
         <altitude>-10000</altitude>
         <customnodeid>xsct</customnodeid>
+        <floorplancoordinates>
+          <floorplanid>FloorPlan01</floorplanid>
+          <x>645</x>
+          <y>284</y>
+        </floorplancoordinates>
       </userdata>
       <floorplans/>
       <hotspots>
@@ -2448,7 +2634,7 @@ imagexskys@gmail.com
         <hotspot>
           <position>
             <pan>-159.91</pan>
-            <tilt>-14.74</tilt>
+            <tilt>-14.57</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2558,7 +2744,20 @@ imagexskys@gmail.com
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-34.67</pan>
+            <tilt>46.99</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node17</id>
     </panorama>
     <panorama>
@@ -2764,7 +2963,20 @@ imagexskys@gmail.com
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-51.56</pan>
+            <tilt>44.64</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node18</id>
     </panorama>
     <panorama>
@@ -2885,8 +3097,8 @@ imagexskys@gmail.com
         </hotspot>
         <hotspot>
           <position>
-            <pan>-45.39</pan>
-            <tilt>0.36</tilt>
+            <pan>-38.58</pan>
+            <tilt>0.64</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -2942,7 +3154,20 @@ imagexskys@gmail.com
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-226.56</pan>
+            <tilt>54.48</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node19</id>
     </panorama>
     <panorama>
@@ -3002,7 +3227,7 @@ imagexskys@gmail.com
         <floorplancoordinates>
           <floorplanid>FloorPlan01</floorplanid>
           <x>788</x>
-          <y>592</y>
+          <y>612</y>
         </floorplancoordinates>
       </userdata>
       <floorplans/>
@@ -3144,8 +3369,8 @@ imagexskys@gmail.com
         </hotspot>
         <hotspot>
           <position>
-            <pan>-272.96</pan>
-            <tilt>-0.1</tilt>
+            <pan>-275.82</pan>
+            <tilt>-0.58</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -3169,6 +3394,33 @@ imagexskys@gmail.com
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-103.57</pan>
+            <tilt>1.7</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>-178.5</pan>
+            <tilt>10.6</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point05</id>
+          <title>圖書館</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node18}</url>
+          <target>-178.5/10.6/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
@@ -3177,14 +3429,14 @@ imagexskys@gmail.com
       <sounds>
         <lensflare>
           <position>
-            <pan>-109.89</pan>
-            <tilt>42.28</tilt>
+            <pan>-84.98</pan>
+            <tilt>39.98</tilt>
           </position>
           <id>Lensflare01</id>
           <locked>0</locked>
           <blinding>50</blinding>
           <alpha>80</alpha>
-          <lensflaretype>simplelensflare</lensflaretype>
+          <lensflaretype>brightsun</lensflaretype>
           <color>#ffffff</color>
         </lensflare>
       </sounds>
@@ -12647,6 +12899,33 @@ cmc@must.edu.tw
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-34.29</pan>
+            <tilt>1.55</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>119.2</pan>
+            <tilt>6.4</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point05</id>
+          <title>籃球場</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node85}</url>
+          <target>119.2/6.4/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
@@ -13010,8 +13289,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-196.91</pan>
-            <tilt>-0.74</tilt>
+            <pan>-178.94</pan>
+            <tilt>-0.42</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -13027,6 +13306,33 @@ cmc@must.edu.tw
           <linksubtype>unknown</linksubtype>
           <url>{node18}</url>
           <target>58.1/1.5/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-206.71</pan>
+            <tilt>-0.06</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>-133.2</pan>
+            <tilt>12.2</tilt>
+            <fov>108.2</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point04</id>
+          <title>鴻超樓</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node19}</url>
+          <target>-133.2/12.2/108.2</target>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -13432,8 +13738,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-51.7</pan>
-            <tilt>2.67</tilt>
+            <pan>-56.1</pan>
+            <tilt>1.88</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -14074,33 +14380,6 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-61.44</pan>
-            <tilt>-3.22</tilt>
-            <fov>10</fov>
-          </position>
-          <next>
-            <pan>0</pan>
-            <tilt>0</tilt>
-            <fov>0</fov>
-          </next>
-          <customprops/>
-          <polygon/>
-          <id>Point04</id>
-          <title>雪杯菜單</title>
-          <linktype>image</linktype>
-          <linksubtype>unknown</linksubtype>
-          <url>../照片/照片集/雪杯.jpg</url>
-          <safeurl>image-1.jpg</safeurl>
-          <type>point</type>
-          <distance>0</distance>
-          <distanceauto>1</distanceauto>
-          <autoplace>0</autoplace>
-          <use3d>0</use3d>
-          <width>0</width>
-          <height>0</height>
-        </hotspot>
-        <hotspot>
-          <position>
             <pan>-280.32</pan>
             <tilt>-2.34</tilt>
             <fov>10</fov>
@@ -14251,17 +14530,17 @@ cmc@must.edu.tw
       <sounds>
         <sound>
           <position>
-            <pan>6.18</pan>
-            <tilt>-5.47</tilt>
+            <pan>6.26</pan>
+            <tilt>-1.56</tilt>
           </position>
           <videorect>
-            <rotx>-30.5</rotx>
-            <roty>-16.33</roty>
-            <rotz>-4.25</rotz>
-            <fov>22.44</fov>
+            <rotx>2.63</rotx>
+            <roty>-11.05</roty>
+            <rotz>-0.67</rotz>
+            <fov>22.53</fov>
             <stretch>50</stretch>
-            <dimx>2876</dimx>
-            <dimy>5407</dimy>
+            <dimx>2000</dimx>
+            <dimy>2000</dimy>
           </videorect>
           <type>image</type>
           <id>Element01</id>
@@ -14443,17 +14722,17 @@ cmc@must.edu.tw
       <sounds>
         <sound>
           <position>
-            <pan>-21.65</pan>
-            <tilt>-2.65</tilt>
+            <pan>-21.6229</pan>
+            <tilt>-1.69204</tilt>
           </position>
           <videorect>
-            <rotx>-12.7</rotx>
-            <roty>-5.21</roty>
-            <rotz>-1.72</rotz>
-            <fov>7.7</fov>
-            <stretch>126.39</stretch>
+            <rotx>2.76392</rotx>
+            <roty>-21.9661</roty>
+            <rotz>-0.804978</rotz>
+            <fov>8.70082</fov>
+            <stretch>125.347</stretch>
             <dimx>867</dimx>
-            <dimy>2257</dimy>
+            <dimy>2000</dimy>
           </videorect>
           <type>image</type>
           <id>Element01</id>
@@ -14703,7 +14982,20 @@ cmc@must.edu.tw
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-259.54</pan>
+            <tilt>57.38</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node113</id>
     </panorama>
     <panorama>
@@ -14760,7 +15052,7 @@ cmc@must.edu.tw
         <capturedatetime>2026-03-19T20:51:42</capturedatetime>
         <floorplancoordinates>
           <floorplanid>FloorPlan01</floorplanid>
-          <x>636</x>
+          <x>662</x>
           <y>74</y>
         </floorplancoordinates>
       </userdata>
@@ -14874,6 +15166,32 @@ cmc@must.edu.tw
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-124.53</pan>
+            <tilt>3.6</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point05</id>
+          <title>明光樓</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node14}</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
@@ -14916,6 +15234,18 @@ cmc@must.edu.tw
           <handcursor>0</handcursor>
           <permeable>0</permeable>
         </sound>
+        <lensflare>
+          <position>
+            <pan>-198.36</pan>
+            <tilt>25.5</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
       </sounds>
       <id>node99</id>
     </panorama>
@@ -15045,7 +15375,20 @@ cmc@must.edu.tw
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-248.38</pan>
+            <tilt>39.7</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node126</id>
     </panorama>
     <panorama>
@@ -15177,6 +15520,86 @@ cmc@must.edu.tw
           <linksubtype>unknown</linksubtype>
           <url>{node107}</url>
           <target>25.7/-3.1/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-85.34</pan>
+            <tilt>0.57</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>0</pan>
+            <tilt>0</tilt>
+            <fov>0</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point04</id>
+          <title>宿舍資訊</title>
+          <linktype>url</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>https://admin.must.edu.tw/index.aspx?UnitID=1243</url>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-82.27</pan>
+            <tilt>-4.25</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>22.6</pan>
+            <tilt>-2.1</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point05</id>
+          <title>雙人房</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node132}</url>
+          <target>22.6/-2.1/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-88.72</pan>
+            <tilt>-4.4</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>6.9</pan>
+            <tilt>-2.6</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point06</id>
+          <title>四人房</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node112}</url>
+          <target>6.9/-2.6/100.0</target>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -16144,7 +16567,20 @@ cmc@must.edu.tw
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-267.83</pan>
+            <tilt>44.14</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>warmsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node135</id>
     </panorama>
     <panorama>
@@ -16246,7 +16682,20 @@ cmc@must.edu.tw
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-255.94</pan>
+            <tilt>52.29</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>warmsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node134</id>
     </panorama>
     <panorama>
@@ -17123,7 +17572,20 @@ cmc@must.edu.tw
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-179.21</pan>
+            <tilt>18.97</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>warmsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node97</id>
     </panorama>
     <panorama>
@@ -17293,6 +17755,33 @@ cmc@must.edu.tw
           <linksubtype>unknown</linksubtype>
           <url>{node128}</url>
           <target>73.8/-6.9/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-335.58</pan>
+            <tilt>1.84</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>-20.3</pan>
+            <tilt>-1.8</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point06</id>
+          <title>走廊</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node101}</url>
+          <target>-20.3/-1.8/100.0</target>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -17737,6 +18226,18 @@ cmc@must.edu.tw
           <handcursor>0</handcursor>
           <permeable>0</permeable>
         </sound>
+        <lensflare>
+          <position>
+            <pan>-206.65</pan>
+            <tilt>83.98</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>warmsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
       </sounds>
       <id>node119</id>
     </panorama>
@@ -17836,8 +18337,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-306.26</pan>
-            <tilt>-2.04</tilt>
+            <pan>-317.22</pan>
+            <tilt>-20.27</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -17863,8 +18364,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-358.26</pan>
-            <tilt>-18.45</tilt>
+            <pan>-357.11</pan>
+            <tilt>-12.46</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -17934,6 +18435,33 @@ cmc@must.edu.tw
           <linksubtype>unknown</linksubtype>
           <url>{node128}</url>
           <target>79.1/-9.1/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-202.17</pan>
+            <tilt>-0.38</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>72.7</pan>
+            <tilt>-1.4</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point04</id>
+          <title>飲水區</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node128}</url>
+          <target>72.7/-1.4/100.0</target>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -18597,6 +19125,33 @@ cmc@must.edu.tw
           <width>0</width>
           <height>0</height>
         </hotspot>
+        <hotspot>
+          <position>
+            <pan>-90.49</pan>
+            <tilt>-47.61</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>47.4</pan>
+            <tilt>-1.6</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point12</id>
+          <title>廁所</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node137}</url>
+          <target>47.4/-1.6/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
       </hotspots>
       <output/>
       <streetview/>
@@ -18904,6 +19459,33 @@ cmc@must.edu.tw
           <linksubtype>unknown</linksubtype>
           <url>{node124}</url>
           <target>-69.7/-5.3/100.0</target>
+          <type>point</type>
+          <distance>0</distance>
+          <distanceauto>1</distanceauto>
+          <autoplace>0</autoplace>
+          <use3d>0</use3d>
+          <width>0</width>
+          <height>0</height>
+        </hotspot>
+        <hotspot>
+          <position>
+            <pan>-196.57</pan>
+            <tilt>-3.89</tilt>
+            <fov>10</fov>
+          </position>
+          <next>
+            <pan>47.8</pan>
+            <tilt>3.7</tilt>
+            <fov>100</fov>
+          </next>
+          <customprops/>
+          <polygon/>
+          <id>Point11</id>
+          <title>廁所</title>
+          <linktype>node</linktype>
+          <linksubtype>unknown</linksubtype>
+          <url>{node137}</url>
+          <target>47.8/3.7/100.0</target>
           <type>point</type>
           <distance>0</distance>
           <distanceauto>1</distanceauto>
@@ -19505,7 +20087,7 @@ cmc@must.edu.tw
           <customprops/>
           <polygon/>
           <id>Point10</id>
-          <title>浴室</title>
+          <title>廁所</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node137}</url>
@@ -20134,7 +20716,7 @@ cmc@must.edu.tw
           <customprops/>
           <polygon/>
           <id>Point10</id>
-          <title>浴室</title>
+          <title>廁所</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node137}</url>
@@ -20633,7 +21215,7 @@ cmc@must.edu.tw
           <customprops/>
           <polygon/>
           <id>Point07</id>
-          <title>浴室</title>
+          <title>廁所</title>
           <linktype>node</linktype>
           <linksubtype>unknown</linksubtype>
           <url>{node137}</url>
@@ -21389,8 +21971,8 @@ cmc@must.edu.tw
       <hotspots>
         <hotspot>
           <position>
-            <pan>-246.75</pan>
-            <tilt>-9.78</tilt>
+            <pan>-243.84</pan>
+            <tilt>-32.99</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -21443,8 +22025,8 @@ cmc@must.edu.tw
         </hotspot>
         <hotspot>
           <position>
-            <pan>-171.76</pan>
-            <tilt>-7.26</tilt>
+            <pan>-165.43</pan>
+            <tilt>-24.22</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -21571,8 +22153,8 @@ cmc@must.edu.tw
       <hotspots>
         <hotspot>
           <position>
-            <pan>-88.92</pan>
-            <tilt>-0.06</tilt>
+            <pan>-91.44</pan>
+            <tilt>-12.91</tilt>
             <fov>10</fov>
           </position>
           <next>
@@ -22139,7 +22721,20 @@ cmc@must.edu.tw
       <streetview/>
       <streetviewproject/>
       <ggloudproject/>
-      <sounds/>
+      <sounds>
+        <lensflare>
+          <position>
+            <pan>-3.8</pan>
+            <tilt>29.61</tilt>
+          </position>
+          <id>Lensflare01</id>
+          <locked>0</locked>
+          <blinding>50</blinding>
+          <alpha>80</alpha>
+          <lensflaretype>brightsun</lensflaretype>
+          <color>#ffffff</color>
+        </lensflare>
+      </sounds>
       <id>node133</id>
     </panorama>
   </tour>
@@ -22230,7 +22825,7 @@ cmc@must.edu.tw
         <webvr/>
         <tilesize>1520</tilesize>
         <filename>output/pano.xml</filename>
-        <skinfile>$d/皮膚.ggsk</skinfile>
+        <skinfile>feather_orb.ggsk</skinfile>
         <sensitivity>5</sensitivity>
         <locked>0</locked>
         <lockedwheel>0</lockedwheel>
@@ -22296,6 +22891,7 @@ cmc@must.edu.tw
         <webvr/>
         <tilesize>1520</tilesize>
         <filename>output-1/pano.xml</filename>
+        <skinfile>feather_box1.ggsk</skinfile>
       </htmlcss>
       <htmlcss>
         <html>
@@ -22324,6 +22920,7 @@ cmc@must.edu.tw
         <webvr/>
         <tilesize>1520</tilesize>
         <filename>output-2/pano.xml</filename>
+        <skinfile>feather_box1.ggsk</skinfile>
       </htmlcss>
     </output>
     <streetview/>
