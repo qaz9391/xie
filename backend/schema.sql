@@ -16,6 +16,7 @@ create table if not exists public.stores (
   name text not null,
   description text,
   image_url text,
+  link_url text,
   created_at timestamp with time zone default timezone('utc'::text, now())
 );
 

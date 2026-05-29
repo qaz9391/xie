@@ -663,7 +663,7 @@
                     <h2><i class="fas fa-book-open"></i> 菜單</h2>
                 </div>
 
-                <!-- Menu Tabs -->
+                <!-- Menu Tabs & Filters -->
                 <div class="menu-tabs">
                     <button class="menu-tab active" onclick="switchMenu('single')" id="tabSingle">
                         <i class="fas fa-hamburger"></i> 單點
@@ -671,6 +671,12 @@
                     <button class="menu-tab" onclick="switchMenu('combo')" id="tabCombo">
                         <i class="fas fa-box"></i> 套餐
                     </button>
+                </div>
+                <div style="margin-bottom: 20px; display: flex; align-items: center;">
+                    <label for="menuCategorySelect" style="margin-right: 10px; font-weight: 500;"><i class="fas fa-list"></i> 餐點分類：</label>
+                    <select id="menuCategorySelect" style="padding: 8px 15px; border-radius: 20px; border: 1px solid var(--border-color); outline: none; flex-grow: 1; max-width: 300px; font-size: 1rem;">
+                        <option value="all">載入中...</option>
+                    </select>
                 </div>
 
                 <!-- Menu List -->
@@ -704,7 +710,9 @@
         // Initialize
         let supabaseClient;
         let cart = [];
-        let currentMenuType = 'single';
+        let xuebeiStoreId = null;
+        let currentCategories = [];
+        let currentItems = [];
 
         document.addEventListener('DOMContentLoaded', async function () {
             // Initialize Supabase - UMD bundle exposes global 'supabase' object
@@ -732,6 +740,37 @@
                 return;
             }
 
+            // Get store ID first
+            try {
+                const { data, error } = await supabaseClient
+                    .from('stores')
+                    .select('id')
+                    .like('name', '%雪杯%')
+                    .limit(1);
+                
+                if (data && data.length > 0) {
+                    xuebeiStoreId = data[0].id;
+                } else {
+                    console.error('[Xuebei] Store not found in stores table');
+                }
+            } catch (e) {
+                console.error('[Xuebei] Exception fetching store:', e);
+            }
+
+            // Bind category change event
+            const catSelect = document.getElementById('menuCategorySelect');
+            if (catSelect) {
+                catSelect.addEventListener('change', (e) => {
+                    const selectedCatId = e.target.value;
+                    if (selectedCatId === 'all') {
+                        renderMenu(currentItems);
+                    } else {
+                        const filtered = currentItems.filter(item => item.category_id === selectedCatId);
+                        renderMenu(filtered);
+                    }
+                });
+            }
+
             // Load initial menu
             await loadMenu('single');
         });
@@ -743,23 +782,65 @@
             }
         }
 
-        // Load Menu
+        // Load Menu Categories
+        async function loadCategories(type) {
+            const catSelect = document.getElementById('menuCategorySelect');
+            if (!xuebeiStoreId) {
+                catSelect.innerHTML = '<option value="all">無法取得分類</option>';
+                return;
+            }
+
+            try {
+                const { data: categories, error } = await supabaseClient
+                    .from('categories')
+                    .select('*')
+                    .eq('store_id', xuebeiStoreId)
+                    .eq('type', type)
+                    .order('name');
+                
+                if (error) throw error;
+                
+                currentCategories = categories || [];
+                if (currentCategories.length > 0) {
+                    catSelect.innerHTML = '<option value="all">全部餐點</option>';
+                    currentCategories.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c.id;
+                        opt.textContent = c.name;
+                        catSelect.appendChild(opt);
+                    });
+                } else {
+                    catSelect.innerHTML = '<option value="all">無分類資料</option>';
+                }
+            } catch (e) {
+                console.error('[Xuebei] Fetch categories error:', e);
+                catSelect.innerHTML = '<option value="all">載入分類發生錯誤</option>';
+            }
+        }
+
+        // Load Menu Items
         async function loadMenu(type) {
             const menuList = document.getElementById('menuList');
             menuList.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>載入菜單中...</p></div>';
 
+            await loadCategories(type);
+
             try {
-                const { data: items, error } = await supabaseClient
-                    .from('xuebei_menu')
-                    .select('*')
-                    .eq('type', type)
-                    .eq('is_available', true)
-                    .order('category')
-                    .order('name');
+                let query = supabaseClient.from('menu_items').select('*');
+                
+                if (xuebeiStoreId) {
+                    // 如果已移轉到新表，使用新表的過濾條件
+                    query = query.eq('store_id', xuebeiStoreId).eq('type', type).eq('is_available', true);
+                } else {
+                    // 退回舊表，以防尚未執行 SQL 腳本
+                    query = supabaseClient.from('xuebei_menu').select('*').eq('type', type).eq('is_available', true).order('category').order('name');
+                }
+
+                const { data: items, error } = await query;
 
                 if (error) {
                     console.error('[Xuebei] Load menu error:', error);
-                    menuList.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h3>載入失敗</h3><p>錯誤代碼：${error.code || 'unknown'}<br>${error.message || '請稍後再試'}</p></div>`;
+                    menuList.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h3>載入失敗</h3><p>請確認是否已執行資料庫更新 SQL。<br>錯誤代碼：${error.code || 'unknown'}</p></div>`;
                     return;
                 }
 
@@ -768,7 +849,11 @@
                     return;
                 }
 
-                renderMenu(items);
+                currentItems = items;
+                
+                // Trigger initial filter just in case category is pre-selected (usually 'all')
+                document.getElementById('menuCategorySelect').dispatchEvent(new Event('change'));
+                
             } catch (e) {
                 console.error('[Xuebei] Exception:', e);
                 menuList.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><h3>發生錯誤</h3><p>' + e.message + '</p></div>';
@@ -778,19 +863,33 @@
         // Render Menu
         function renderMenu(items) {
             const menuList = document.getElementById('menuList');
-            menuList.innerHTML = items.map(item => `
+            if (items.length === 0) {
+                menuList.innerHTML = '<div class="empty-state" style="grid-column: 1/-1;"><i class="fas fa-search"></i><h3>沒有符合的餐點</h3></div>';
+                return;
+            }
+            
+            menuList.innerHTML = items.map(item => {
+                // Find category name if using new relational structure
+                let catName = item.category || '';
+                if (!catName && item.category_id) {
+                    const cat = currentCategories.find(c => c.id === item.category_id);
+                    if (cat) catName = cat.name;
+                }
+                
+                return `
                 <div class="menu-item">
                     <div class="menu-item-info">
                         <div class="menu-item-name">${escapeHtml(item.name)}</div>
                         <div class="menu-item-desc">${escapeHtml(item.description || '')}</div>
-                        ${item.category ? `<span class="menu-item-category">${escapeHtml(item.category)}</span>` : ''}
+                        ${catName ? \`<span class="menu-item-category">\${escapeHtml(catName)}</span>\` : ''}
                     </div>
                     <div class="menu-item-price">${item.price}</div>
                     <button class="add-btn" onclick='addToCart(${JSON.stringify(item)})'>
                         <i class="fas fa-plus"></i> 加入
                     </button>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // Switch Menu Type
@@ -802,7 +901,7 @@
             document.getElementById('tabCombo').classList.remove('active');
             document.getElementById('tab' + type.charAt(0).toUpperCase() + type.slice(1)).classList.add('active');
 
-            // Load menu
+            // Load categories and menu for this type
             loadMenu(type);
         }
 

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>專案開發過程流程圖 - 向量網頁版</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #faf6f0; /* 溫暖的淺米色背景 */
+      --text-color: #3e2723; /* 深褐文字色，搭配整體色調 */
+      
+      --color-01: #ffe8d6;
+      --color-02: #ffb5a7;
+      --color-03: #cdb4db;
+      --color-04: #f3c68f;
+      --color-05: #e5989b;
+      
+      --border-01: #e29578;
+      --border-02: #ff7f50;
+      --border-03: #a0849d;
+      --border-04: #d97706;
+      --border-05: #b70909;
+      
+      --line-color: #8d6e63;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    /* 頂部操作列 */
+    .controls {
+      position: absolute;
+      top: 20px;
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid #e2d6c5;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      background: #8d6e63;
+      color: #fff;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background: #6d4c41;
+      transform: translateY(-1px);
+    }
+
+    /* 流程圖畫布 */
+    .diagram-container {
+      position: relative;
+      width: 1000px;
+      height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    /* 連接虛線 */
+    .dashed-line {
+      position: absolute;
+      top: 50%;
+      left: 100px;
+      right: 100px;
+      height: 2px;
+      border-top: 3px dashed var(--line-color);
+      z-index: 1;
+      transform: translateY(-50%);
+      opacity: 0.8;
+    }
+
+    /* 步驟包裝器 */
+    .step-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+      width: 160px;
+    }
+
+    /* 數字圓圈 */
+    .circle {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer;
+      border: 5px solid;
+    }
+
+    .circle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 圓圈色彩定義 */
+    .step-01 .circle { border-color: var(--border-01); color: var(--border-01); }
+    .step-02 .circle { border-color: var(--border-02); color: var(--border-02); }
+    .step-03 .circle { border-color: var(--border-03); color: var(--border-03); }
+    .step-04 .circle { border-color: var(--border-04); color: var(--border-04); }
+    .step-05 .circle { border-color: var(--border-05); color: var(--border-05); }
+
+    /* 文字內容區塊 */
+    .content-box {
+      position: absolute;
+      width: 190px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 連接小指引線 */
+    .pin {
+      width: 2px;
+      height: 25px;
+      background-color: var(--line-color);
+      opacity: 0.6;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin: 4px 0 6px 0;
+      color: #3e2723;
+    }
+
+    .desc {
+      font-size: 0.78rem;
+      line-height: 1.4;
+      color: #5d4037;
+      font-weight: 400;
+    }
+
+    /* 交錯上下擺放排版 */
+    /* 下方擺放 (01, 03, 05) */
+    .pos-bottom .content-box {
+      top: 105px;
+    }
+    .pos-bottom .pin {
+      order: 1; /* 指引線在最上面 */
+      margin-bottom: 5px;
+    }
+    .pos-bottom .title {
+      order: 2;
+    }
+    .pos-bottom .desc {
+      order: 3;
+    }
+
+    /* 上方擺放 (02, 04) */
+    .pos-top .content-box {
+      bottom: 105px;
+    }
+    .pos-top .pin {
+      order: 3; /* 指引線在最下面 */
+      margin-top: 5px;
+    }
+    .pos-top .title {
+      order: 2;
+    }
+    .pos-top .desc {
+      order: 1;
+    }
+
+    /* 說明提示 */
+    .tips {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      color: #8d6e63;
+      text-align: center;
+      background: #fdfbf7;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px dashed #d7ccc8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <button class="btn" onclick="window.history.back()">返回專案首頁</button>
+    <button class="btn" onclick="window.print()">列印 / 另存 PDF</button>
+  </div>
+
+  <div class="diagram-container">
+    <!-- 背景橫向虛線 -->
+    <div class="dashed-line"></div>
+
+    <!-- 01. 選定語法&開發環境 (下) -->
+    <div class="step-wrapper pos-bottom step-01">
+      <div class="circle">01.</div>
+      <div class="content-box">
+        <div class="pin"></div>
+        <div class="title">選定語法&開發環境</div>
+        <div class="desc">挑選開發工具與前端語法，規劃核心系統功能與版面內容。</div>
+      </div>
+    </div>
+
+    <!-- 02. 設計網站架構雛形 (上) -->
+    <div class="step-wrapper pos-top step-02">
+      <div class="circle">02.</div>
+      <div class="content-box">
+        <div class="pin"></div>
+        <div class="title">設計網站架構雛形</div>
+        <div class="desc">使用Pano2VR製作360°全景導覽，並排版設計網頁基礎版塊。</div>
+      </div>
+    </div>
+
+    <!-- 03. 前端定位與資料庫串接 (下) -->
+    <div class="step-wrapper pos-bottom step-03">
+      <div class="circle">03.</div>
+      <div class="content-box">
+        <div class="pin"></div>
+        <div class="title">前端定位與資料庫串接</div>
+        <div class="desc">以JS呼叫Supabase載入菜單與宿舍資料，實作本地購物車。</div>
+      </div>
+    </div>
+
+    <!-- 04. 結帳與訂單送單處理 (上) -->
+    <div class="step-wrapper pos-top step-04">
+      <div class="circle">04.</div>
+      <div class="content-box">
+        <div class="pin"></div>
+        <div class="title">結帳與訂單送單處理</div>
+        <div class="desc">點擊結帳時，將訂單主表與明細非同步寫入Supabase。</div>
+      </div>
+    </div>
+
+    <!-- 05. 後台控管與資料更新 (下) -->
+    <div class="step-wrapper pos-bottom step-05">
+      <div class="circle">05.</div>
+      <div class="content-box">
+        <div class="pin"></div>
+        <div class="title">後台控管與資料更新</div>
+        <div class="desc">後台即時統計營收、更新訂單狀態，並提供留言置頂設定。</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tips">
+    💡 提示：您可以使用 Windows 快速鍵 <b>Win + Shift + S</b> 進行截圖，直接貼入您的 Word 報告或 PPT 簡報中！
+  </div>
+
+</body>
+</html>

@@ -47,6 +47,37 @@ window.addEventListener('DOMContentLoaded', async function () {
 
     console.log('[Cafeteria] Supabase initialized');
 
+    // 全域保存店家資料以便篩選
+    let allStores = [];
+
+    // 載入餐廳分類 (下拉選單)
+    try {
+        console.log('[Cafeteria] Fetching store categories...');
+        const { data: categories, error: catError } = await supabase
+            .from('store_categories')
+            .select('*')
+            .order('sort_order', { ascending: true });
+
+        const selectEl = document.getElementById('storeCategorySelect');
+        if (catError) {
+            console.error('[Cafeteria] Store categories fetch error:', catError);
+            selectEl.innerHTML = '<option value="all">無法載入分類</option>';
+        } else if (categories && categories.length > 0) {
+            selectEl.innerHTML = '<option value="all">全部餐廳</option>';
+            categories.forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat.id;
+                opt.textContent = cat.name;
+                selectEl.appendChild(opt);
+            });
+            console.log('[Cafeteria] Store categories loaded');
+        } else {
+            selectEl.innerHTML = '<option value="all">全部餐廳</option>';
+        }
+    } catch (e) {
+        console.error('[Cafeteria] Exception loading store categories:', e);
+    }
+
     // 載入店家
     try {
         console.log('[Cafeteria] Fetching stores...');
@@ -62,34 +93,52 @@ window.addEventListener('DOMContentLoaded', async function () {
         }
 
         console.log('[Cafeteria] Stores loaded:', stores);
-
-        if (!stores || stores.length === 0) {
-            shopList.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">目前沒有店家資料</p>';
-        } else {
-            // 渲染店家
-            shopList.innerHTML = '';
-            stores.forEach(store => {
-                const rawUrl = store.image_url || '';
-                // 如果是相對路徑（不以 http/https 開頭），使用相對路徑顯示本地圖片
-                const imgUrl = rawUrl.startsWith('http') ? rawUrl : (rawUrl || 'https://placehold.co/600x400?text=No+Image');
-                const card = document.createElement('a');
-                card.href = store.link_url || `menu.html?store_id=${store.id}`;
-                card.className = 'shop-card';
-                card.innerHTML = `
-                    <img src="${imgUrl}" alt="${store.name}" class="shop-img">
-                    <div class="shop-info">
-                        <h2>${store.name}</h2>
-                        <p>${store.description || '暫無介紹'}</p>
-                    </div>
-                `;
-                shopList.appendChild(card);
-            });
-            console.log('[Cafeteria] Stores rendered successfully');
-        }
+        allStores = stores || [];
+        renderStores(allStores);
 
     } catch (e) {
         console.error('[Cafeteria] Exception:', e);
         shopList.innerHTML = `<div style="grid-column: 1/-1; padding: 20px; text-align: center; color: red;">發生錯誤: ${e.message}</div>`;
+    }
+
+    // 綁定下拉選單篩選事件
+    const storeCategorySelect = document.getElementById('storeCategorySelect');
+    if (storeCategorySelect) {
+        storeCategorySelect.addEventListener('change', (e) => {
+            const selectedCategoryId = e.target.value;
+            if (selectedCategoryId === 'all') {
+                renderStores(allStores);
+            } else {
+                const filteredStores = allStores.filter(store => store.category_id === selectedCategoryId);
+                renderStores(filteredStores);
+            }
+        });
+    }
+
+    // 渲染店家的函數
+    function renderStores(storesToRender) {
+        if (!storesToRender || storesToRender.length === 0) {
+            shopList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 30px; color: #718096;">找不到符合的店家資料</p>';
+            return;
+        }
+        
+        shopList.innerHTML = '';
+        storesToRender.forEach(store => {
+            const rawUrl = store.image_url || '';
+            const imgUrl = rawUrl.startsWith('http') ? rawUrl : (rawUrl || 'https://placehold.co/600x400?text=No+Image');
+            const card = document.createElement('a');
+            card.href = store.link_url || `menu.html?store_id=${store.id}`;
+            card.className = 'shop-card';
+            card.innerHTML = `
+                <img src="${imgUrl}" alt="${store.name}" class="shop-img">
+                <div class="shop-info">
+                    <h2>${store.name}</h2>
+                    <p>${store.description || '暫無介紹'}</p>
+                </div>
+            `;
+            shopList.appendChild(card);
+        });
+        console.log('[Cafeteria] Stores rendered successfully');
     }
 
     // 載入留言
