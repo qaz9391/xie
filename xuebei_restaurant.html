@@ -881,7 +881,7 @@
                     <div class="menu-item-info">
                         <div class="menu-item-name">${escapeHtml(item.name)}</div>
                         <div class="menu-item-desc">${escapeHtml(item.description || '')}</div>
-                        ${catName ? \`<span class="menu-item-category">\${escapeHtml(catName)}</span>\` : ''}
+                        ${catName ? `<span class="menu-item-category">${escapeHtml(catName)}</span>` : ''}
                     </div>
                     <div class="menu-item-price">${item.price}</div>
                     <button class="add-btn" onclick='addToCart(${JSON.stringify(item)})'>

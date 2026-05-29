@@ -766,21 +766,21 @@
         .page-title-bar {
             background: var(--navy);
             color: white;
-            padding: 40px 5%;
+            padding: 15px 5%; /* 縮小 Padding 讓整體往上提 */
             text-align: center;
             border-bottom: 4px solid var(--primary);
         }
 
         .page-title-bar h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem; /* 縮小字體以節省高度 */
+            margin-bottom: 5px;
             font-weight: 800;
             letter-spacing: 2px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .page-title-bar p {
-            font-size: 1.3rem;
+            font-size: 1.1rem; /* 縮小副標題字體 */
             font-weight: 300;
             opacity: 0.9;
             letter-spacing: 1px;
@@ -917,6 +917,104 @@
         .btn-fullscreen:hover {
             background: var(--primary);
             transform: scale(1.1);
+        }
+
+        /* 新增：首頁 VR 與卡片並排佈局 */
+        .hero-and-spots-container {
+            display: flex;
+            gap: 25px;
+            max-width: 1400px;
+            margin: 20px auto 40px; /* 減小上方 margin，往上移 */
+            padding: 0 4%;
+            align-items: stretch;
+        }
+
+        .vr-left-side {
+            flex: 4; /* 加大比例讓 VR 更寬 */
+            border-radius: 16px;
+            overflow: hidden;
+            border: 4px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            min-height: 420px; /* 降低高度，讓比例變扁長不那麼方 */
+        }
+
+        .vr-left-side .vr-frame {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        .spots-right-side {
+            flex: 1; /* 右側縮小 */
+            min-width: 280px; /* 確保右側卡片不會被擠得太扁 */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .spots-right-side .spot-card {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .spots-right-side .spot-image-box {
+            height: 140px; /* 恢復圖片高度！ */
+        }
+        
+        .spots-right-side .spot-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .spots-right-side .spot-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .spots-right-side .spot-info p {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .spots-right-side .section-header {
+            margin-bottom: 5px;
+            text-align: center;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        .spots-right-side .section-header h2 {
+            font-size: 1.25rem;
+            margin: 0;
+            color: var(--navy);
+        }
+
+        @media (max-width: 992px) {
+            .hero-and-spots-container {
+                flex-direction: column;
+            }
+            .vr-left-side {
+                min-height: 400px;
+            }
+            .spots-right-side {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .spots-right-side .spot-card {
+                flex: 1 1 300px;
+            }
+            .spots-right-side .section-header {
+                width: 100%;
+            }
         }
 
         /* 景點卡片 (校園導覽) */
@@ -2135,45 +2233,37 @@
             </div>
         </div>
 
-        <!-- Hero Banner (單純作為 VR 容器) -->
-        <div class="hero-banner" style="border-top: none;">
-            <div class="vr-frame" id="panoramaFrame">
-                <div class="iframe-loader" id="vrLoader">
-                    <div class="spinner"></div>
+        <!-- 首頁並排佈局 (VR 與設施卡片) -->
+        <div class="hero-and-spots-container">
+            <!-- VR 視窗 -->
+            <div class="vr-left-side">
+                <div class="vr-frame" id="panoramaFrame">
+                    <div class="iframe-loader" id="vrLoader">
+                        <div class="spinner"></div>
+                    </div>
+                    <iframe id="vrIframe" allowfullscreen
+                        onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
+                    <script>
+                        document.getElementById('vrIframe').src = 'output/index.html?v=' + Date.now();
+                    </script>
+                    <button class="btn-fullscreen" onclick="toggleFullscreen()" title="全螢幕">
+                        <i class="fas fa-expand"></i>
+                    </button>
                 </div>
-                <iframe id="vrIframe" allowfullscreen
-                    onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
-                <script>
-                    document.getElementById('vrIframe').src = 'output/index.html?v=' + Date.now();
-                </script>
-                <button class="btn-fullscreen" onclick="toggleFullscreen()" title="全螢幕">
-                    <i class="fas fa-expand"></i>
-                </button>
             </div>
-        </div>
 
-        <div class="spots-section">
-            <div class="section-header">
-                <h2 data-i18n="spots-title">校園環境與生活設施</h2>
-            </div>
-            <div class="spots-grid">
-                <div class="spot-card">
-                    <div class="spot-image-box">
-                        <span class="spot-tag" data-i18n="tag-hot">必訪熱點</span>
-                        <img src="images/library.jpg?v=2" alt="圖書館實景">
-                    </div>
-                    <div class="spot-info">
-                        <h3 data-i18n="spot-library">圖書館</h3>
-                        <p data-i18n="spot-library-desc">擁有豐富藏書與現代化的自習空間，是學生做報告與閱讀的最佳去處。</p>
-                        <a href="#" class="btn-link" data-i18n="view-location">查看位置 →</a>
-                    </div>
+            <!-- 設施卡片直列 -->
+            <div class="spots-right-side">
+                <div class="section-header">
+                    <h2 data-i18n="spots-title">校園環境與生活設施</h2>
                 </div>
+                
+
                 <a href="index1.html" class="spot-card special-interactive"
-                    style="display:block; text-decoration:none; color:inherit;">
+                    style="display:flex; text-decoration:none; color:inherit;">
                     <div class="spot-image-box">
                         <span class="spot-tag" data-i18n="tag-life">生活起居</span>
                         <img src="images/mingxin_dorm.jpg?v=2" alt="宿舍實景">
-                        <!-- Add an overlay text for better CTA -->
                         <div class="card-overlay"><i class="fas fa-search"></i> 點擊進入查看</div>
                     </div>
                     <div class="spot-info">
@@ -2182,13 +2272,12 @@
                         <span class="action-btn" data-i18n="view-room">查看房型 →</span>
                     </div>
                 </a>
-                <!-- 交互設計優化：整張卡片都可點擊 (Whole Card Clickable) -->
+
                 <a href="cafeteria.html" class="spot-card special-interactive"
-                    style="display:block; text-decoration:none; color:inherit;">
+                    style="display:flex; text-decoration:none; color:inherit;">
                     <div class="spot-image-box">
                         <span class="spot-tag" data-i18n="tag-food">飲食便利</span>
                         <img src="images/cafeteria.jpg?v=2" alt="學生餐廳實景">
-                        <!-- Add an overlay text for better CTA -->
                         <div class="card-overlay"><i class="fas fa-utensils"></i> 點擊進入點餐</div>
                     </div>
                     <div class="spot-info">
