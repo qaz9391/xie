@@ -50,30 +50,17 @@ window.addEventListener('DOMContentLoaded', async function () {
     // 全域保存店家資料以便篩選
     let allStores = [];
 
-    // 載入餐廳分類 (下拉選單)
+    // 載入餐廳分類 (下拉選單) - 改為固定選項以符合客製化需求
     try {
-        console.log('[Cafeteria] Fetching store categories...');
-        const { data: categories, error: catError } = await supabase
-            .from('store_categories')
-            .select('*')
-            .order('sort_order', { ascending: true });
-
         const selectEl = document.getElementById('storeCategorySelect');
-        if (catError) {
-            console.error('[Cafeteria] Store categories fetch error:', catError);
-            selectEl.innerHTML = '<option value="all">無法載入分類</option>';
-        } else if (categories && categories.length > 0) {
-            selectEl.innerHTML = '<option value="all">全部餐廳</option>';
-            categories.forEach(cat => {
-                const opt = document.createElement('option');
-                opt.value = cat.id;
-                opt.textContent = cat.name;
-                selectEl.appendChild(opt);
-            });
-            console.log('[Cafeteria] Store categories loaded');
-        } else {
-            selectEl.innerHTML = '<option value="all">全部餐廳</option>';
-        }
+        selectEl.innerHTML = `
+            <option value="all">全部餐廳</option>
+            <option value="breakfast">早餐</option>
+            <option value="lunch">中餐</option>
+            <option value="dinner">晚餐</option>
+            <option value="drinks">飲料</option>
+        `;
+        console.log('[Cafeteria] Store categories hardcoded loaded');
     } catch (e) {
         console.error('[Cafeteria] Exception loading store categories:', e);
     }
@@ -109,7 +96,21 @@ window.addEventListener('DOMContentLoaded', async function () {
             if (selectedCategoryId === 'all') {
                 renderStores(allStores);
             } else {
-                const filteredStores = allStores.filter(store => store.category_id === selectedCategoryId);
+                const filteredStores = allStores.filter(store => {
+                    if (selectedCategoryId === 'breakfast') {
+                        return store.name.includes('雪杯') || store.name.includes('奇奇');
+                    }
+                    if (selectedCategoryId === 'lunch') {
+                        return true;
+                    }
+                    if (selectedCategoryId === 'dinner') {
+                        return false;
+                    }
+                    if (selectedCategoryId === 'drinks') {
+                        return store.name.includes('雪杯');
+                    }
+                    return false;
+                });
                 renderStores(filteredStores);
             }
         });
