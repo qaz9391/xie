@@ -2244,7 +2244,24 @@
                     <iframe id="vrIframe" allowfullscreen
                         onload="document.getElementById('vrLoader').style.opacity='0'; setTimeout(()=>{document.getElementById('vrLoader').style.display='none'}, 500)"></iframe>
                     <script>
-                        document.getElementById('vrIframe').src = 'output/index.html?v=' + Date.now();
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const vrNode = urlParams.get('vrnode');
+                        let iframeSrc = 'output/index.html?v=' + Date.now();
+                        if (vrNode) {
+                            iframeSrc += '#' + vrNode;
+                        }
+                        document.getElementById('vrIframe').src = iframeSrc;
+                        
+                        if (vrNode) {
+                            window.addEventListener('load', () => {
+                                setTimeout(() => {
+                                    const scrollTarget = document.querySelector('.page-title-bar') || document.querySelector('.hero-banner');
+                                    if (scrollTarget) {
+                                        scrollTarget.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }, 500);
+                            });
+                        }
                     </script>
                     <button class="btn-fullscreen" onclick="toggleFullscreen()" title="全螢幕">
                         <i class="fas fa-expand"></i>
@@ -2834,7 +2851,7 @@
             { id: 202, name: "帥嘉珍 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R322\njjshuai@must.edu.tw\n分機 3451", img: "images/帥嘉珍.jpg" },
             { id: 203, name: "應大中 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R323\ntcying@must.edu.tw\n分機 3452", img: "images/應大中.jpg" },
             { id: 204, name: "陳玉專 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R327\ncardy@must.edu.tw\n分機 3456", img: "images/陳玉專.jpg" },
-            { id: 205, name: "李政穎 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R320\nalvin@must.edu.tw\n分機 3449", img: "images/李政穎.jpg" },
+            { id: 205, name: "李政穎 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R320\nalvin@must.edu.tw\n分機 3449", img: "images/李政穎.jpg", vrNode: "node22" },
             { id: 206, name: "陳建志 老師 (資管)", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R319\nchencc@must.edu.tw\n分機 3448", img: "images/陳建志.jpg" },
             { id: 207, name: "邱川峰 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 3 樓 R326\ncfchiu@must.edu.tw\n分機 3455", img: "images/邱川峰.jpg" },
             { id: 208, name: "詹森仁 老師", type: "teacher", typeName: "教師", desc: "資訊管理系\n管院 4 樓 R418\nsrchan@must.edu.tw\n分機 3586", img: "images/詹森仁.jpg" },
