@@ -2247,9 +2247,16 @@
                         const urlParams = new URLSearchParams(window.location.search);
                         const vrNode = urlParams.get('vrnode');
                         let iframeSrc = 'output/index.html?v=' + Date.now();
+                        
                         if (vrNode) {
                             iframeSrc += '#' + vrNode;
+                            // 載入後清除網址參數，這樣使用者按F5重新整理就會回到初始校門口畫面
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                        } else {
+                            // 確保預設永遠載入校門口 (node1)
+                            iframeSrc += '#node1';
                         }
+                        
                         document.getElementById('vrIframe').src = iframeSrc;
                         
                         if (vrNode) {
